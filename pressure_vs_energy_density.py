@@ -1,3 +1,5 @@
+#!/home/eliot.finch/eos/env/bin/python
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -57,7 +59,7 @@ collated_eos = pd.read_csv(collated_eos_path)
 nonzero_collated_eos = collated_eos[collated_eos.logweight_total > -np.inf]
 
 # The pre-computed weights of these EoSs
-weights = np.exp(nonzero_collated_eos.logweight_total[:2000].values)
+weights = np.exp(nonzero_collated_eos.logweight_total.values)
 
 # Load the full EoS data from the GP draws, and interpolate onto a consistent
 # energy density grid
@@ -66,7 +68,7 @@ energy_density_grid = np.linspace(1e-10, 5, 1000)
 pressure_interp = []
 number_density_interp = []
 
-for eos in nonzero_collated_eos.eos[:2000]:
+for eos in nonzero_collated_eos.eos:
 
     eos = int(eos)
 
@@ -93,7 +95,7 @@ weighted_quantiles = np.array(weighted_quantiles).T
 
 # Compute the QCD weights at a particular matching density
 
-matching_density = 10*0.15
+matching_density = 5*0.15
 
 qcd_weights = []
 
