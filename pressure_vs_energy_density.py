@@ -95,7 +95,7 @@ weighted_quantiles = np.array(weighted_quantiles).T
 
 # Compute the QCD weights at a particular matching density
 
-matching_density = 5*0.15
+matching_density = 7*0.15
 
 qcd_weights = []
 
@@ -122,5 +122,5 @@ for i in range(len(energy_density_grid)):
 weighted_quantiles_combined = np.array(weighted_quantiles_combined).T
 
 # Save the weighted quantiles to disk
-np.savetxt('weighted_quantiles.dat', weighted_quantiles)
-np.savetxt('weighted_quantiles_combined.dat', weighted_quantiles_combined)
+# np.savetxt('weighted_quantiles/weighted_quantiles.dat', weighted_quantiles)
+np.savetxt('weighted_quantiles/weighted_quantiles_combined_07.dat', weighted_quantiles_combined)
