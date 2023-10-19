@@ -45,7 +45,7 @@ for eos in nonzero_collated_eos.eos:
     radius = df.R.values
     mass = df.M.values
 
-    radius_interp.append(interp1d(mass, radius)(mass_grid))
+    radius_interp.append(interp1d(mass, radius, fill_value='extrapolate')(mass_grid))
 
 radius_interp = np.array(radius_interp)
 
