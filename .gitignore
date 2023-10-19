@@ -1,6 +1,5 @@
 eos-draws/*
 weights/*
-weighted_quantiles/*
 collated_np_all_post.csv
 
 condor/*
