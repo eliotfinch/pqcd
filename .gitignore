@@ -1,7 +1,9 @@
 eos-draws/*
 weighted_quantiles/*
 collated_np_all_post.csv
-condor.sub
+
+condor/*
+*.sub
 
 .DS_Store
 
