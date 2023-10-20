@@ -5,7 +5,6 @@ import pandas as pd
 
 from scipy.constants import c, e, m_u
 from scipy.interpolate import interp1d
-from pQCD import pQCD
 
 collated_eos_path = '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv'
 eos_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn'
