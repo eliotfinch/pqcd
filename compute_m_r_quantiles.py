@@ -3,22 +3,11 @@
 import numpy as np
 import pandas as pd
 
-from scipy.constants import c, e, m_u
 from scipy.interpolate import interp1d
+from utils import weighted_quantile
 
 collated_eos_path = '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv'
 eos_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn'
-
-def weighted_quantile(values, quantiles, weights):
-
-    sorter = np.argsort(values)
-    values = values[sorter]
-    weights = weights[sorter]
-
-    weighted_quantiles = np.cumsum(weights)
-    weighted_quantiles /= np.sum(weights)
-    
-    return np.interp(quantiles, weighted_quantiles, values)
 
 # -----------------------------------------------------------------------------
 
@@ -32,7 +21,7 @@ weights = np.exp(nonzero_collated_eos.logweight_total.values)
 # Load the full EoS data from the GP draws, and interpolate onto a consistent
 # mass grid
 
-mass_grid = np.linspace(0.8, 2.2, 1000)
+mass_grid = np.linspace(0.8, 1.8, 1000)
 radius_interp = []
 
 for eos in nonzero_collated_eos.eos:
@@ -41,10 +30,14 @@ for eos in nonzero_collated_eos.eos:
 
     df = pd.read_csv(f'{eos_dir}/DRAWmod1000-{int(eos/1000):06}/macro-draw-{eos:06}.csv')
 
-    radius = df.R.values
-    mass = df.M.values
+    turning_index = np.argmax(mass)
+    mass = mass[:turning_index]
+    radius = radius[:turning_index]
 
-    radius_interp.append(interp1d(mass, radius, fill_value='extrapolate')(mass_grid))
+    try:
+        radius_interp.append(interp1d(mass, radius)(mass_grid))
+    except:
+        pass
 
 radius_interp = np.array(radius_interp)
 
@@ -73,5 +66,5 @@ for i in range(len(mass_grid)):
 weighted_quantiles_combined = np.array(weighted_quantiles_combined).T
 
 # Save the weighted quantiles to disk
-np.savetxt('weighted_quantiles/weighted_quantiles_mass_radius.dat', weighted_quantiles)
-np.savetxt('weighted_quantiles/weighted_quantiles_combined_mass_radius_10.dat', weighted_quantiles_combined)
+np.savetxt('weighted_quantiles/weighted_quantiles_m_r.dat', weighted_quantiles)
+np.savetxt('weighted_quantiles/weighted_quantiles_combined_m_r_10.dat', weighted_quantiles_combined)
