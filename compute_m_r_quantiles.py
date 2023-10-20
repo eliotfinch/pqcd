@@ -30,6 +30,9 @@ for eos in nonzero_collated_eos.eos:
 
     df = pd.read_csv(f'{eos_dir}/DRAWmod1000-{int(eos/1000):06}/macro-draw-{eos:06}.csv')
 
+    mass = df.M.values
+    radius = df.R.values
+
     turning_index = np.argmax(mass)
     mass = mass[:turning_index]
     radius = radius[:turning_index]
