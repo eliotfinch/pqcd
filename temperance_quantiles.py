@@ -1,3 +1,5 @@
+#!/home/eliot.finch/eos/env/bin/python
+
 import temperance.core.result as result
 import temperance.plotting.get_quantiles as get_quantiles
 
