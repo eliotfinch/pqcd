@@ -2,55 +2,16 @@
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
-from scipy.constants import c, e, m_u
 from scipy.interpolate import interp1d
-from pQCD import pQCD
+from utils import (
+    to_GeV_per_cubic_femtometre, 
+    to_nucleons_per_cubic_femtometre, 
+    weighted_quantile
+)
 
 collated_eos_path = '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv'
 eos_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn'
-
-def to_GeV_per_cubic_femtometre(x):
-
-    # Convert to J/cm^3
-    x = x*c**2/1000
-
-    # Convert to GeV/fm^3
-    return x*(1/(1e9*e))*((1e-15)**3/(0.01**3))
-
-def to_nucleons_per_cubic_femtometre(x):
-
-    # Convert to kg/fm^3
-    x = (x/1000)*((1e-15)**3/(0.01**3))
-
-    # Divide by the atomic mass constant to get nucleons/fm^3
-    return x/m_u
-
-def weighted_quantile(values, quantiles, weights):
-
-    sorter = np.argsort(values)
-    values = values[sorter]
-    weights = weights[sorter]
-
-    weighted_quantiles = np.cumsum(weights)
-    weighted_quantiles /= np.sum(weights)
-    
-    return np.interp(quantiles, weighted_quantiles, values)
-
-def qcd_likelihood(e, p, n, N=1000):
-
-    weight = np.zeros(N)
-
-    for i in range(N):
-        
-        X = np.random.uniform(np.log(1/2), np.log(2)) # Log-linear distribution
-        pQCDX = pQCD(np.exp(X)) # Redefine class with new X
-        
-        # For each X assign 0 or 1 for given point
-        weight[i] = int(pQCDX.constraints(e0=e,p0=p,n0=n))
-
-    return weight.mean()
 
 # -----------------------------------------------------------------------------
 
@@ -93,22 +54,9 @@ for i in range(len(energy_density_grid)):
 
 weighted_quantiles = np.array(weighted_quantiles).T
 
-# Compute the QCD weights at a particular matching density
+# Load the QCD weights at a particular matching density
 
-matching_density = 7*0.15
-
-qcd_weights = []
-
-for p_grid, n_grid in zip(pressure_interp, number_density_interp):
-
-    # Find the pressure and energy density at the chosen matching density
-    index = np.argmin(np.abs(n_grid - matching_density))
-    e = energy_density_grid[index]
-    p = p_grid[index]
-
-    qcd_weights.append(qcd_likelihood(e, p, matching_density))
-
-qcd_weights = np.array(qcd_weights)
+qcd_weights = np.loadtxt('weights/qcd_weights_10.dat')
 
 # Compute the weighted quantiles of the pressure at each energy density, using
 # the combined weights
@@ -122,5 +70,5 @@ for i in range(len(energy_density_grid)):
 weighted_quantiles_combined = np.array(weighted_quantiles_combined).T
 
 # Save the weighted quantiles to disk
-# np.savetxt('weighted_quantiles/weighted_quantiles.dat', weighted_quantiles)
-np.savetxt('weighted_quantiles/weighted_quantiles_combined_07.dat', weighted_quantiles_combined)
+np.savetxt('weighted_quantiles/weighted_quantiles_p_e.dat', weighted_quantiles)
+np.savetxt('weighted_quantiles/weighted_quantiles_combined_p_e_10.dat', weighted_quantiles_combined)
