@@ -11,7 +11,7 @@ from pQCD import pQCD
 
 from utils import (
     to_GeV_per_cubic_femtometre,
-    to_nucleons_per_cubic_femtometre
+    to_nucleons_per_cubic_femtometre,
     weighted_quantile
 )
 
