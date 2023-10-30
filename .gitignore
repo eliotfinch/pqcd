@@ -1,6 +1,7 @@
 eos-draws/*
 weights/*
 collated_np_all_post.csv
+collated_eos.csv
 
 condor/*
 *.sub
