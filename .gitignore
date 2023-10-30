@@ -3,7 +3,7 @@ weights/*
 collated_np_all_post.csv
 collated_eos.csv
 
-condor/*
+condor_output/*
 *.sub
 
 .DS_Store
