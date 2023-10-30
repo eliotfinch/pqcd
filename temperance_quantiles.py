@@ -11,14 +11,54 @@ eos_posterior = EoSPosterior.from_csv('collated_eos.csv', label='astro')
 # astro_weight_columns = [
 #     result.WeightColumn(name='logweight_total', is_log=True, is_inverted=False)
 #     ]
-astro_weight_columns = [
-    result.WeightColumn(name='weight_ns10_Xmarg', is_log=False, is_inverted=False)
-    ]
 
-posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-    eos_posterior, 
-    weight_columns=astro_weight_columns, 
-    verbose=True, 
-    max_num_samples=80000,
-    save_path='quantiles/p_of_eps_quantiles_ns10_Xmarg.csv'
-    )
+for ns in [5, 6, 7, 8, 9, 10]:
+
+    astro_weight_columns = [
+        result.WeightColumn(name=f'weight_ns{ns:02}_Xmarg', is_log=False, is_inverted=False)
+        ]
+
+    # Pressure vs energy density
+    posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+        eos_posterior, 
+        weight_columns=astro_weight_columns, 
+        verbose=True, 
+        max_num_samples=80000,
+        save_path=f'quantiles/p_of_eps_quantiles_ns{ns:02}_Xmarg.csv'
+        )
+
+    # Pressure vs baryon density
+    posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
+        eos_posterior, 
+        weight_columns=astro_weight_columns, 
+        verbose=True, 
+        max_num_samples=80000,
+        save_path=f'quantiles/p_of_rho_quantiles_ns{ns:02}_Xmarg.csv'
+        )
+
+    # Speed of sound vs baryon density
+    posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+        eos_posterior, 
+        weight_columns=astro_weight_columns, 
+        verbose=True, 
+        max_num_samples=80000,
+        save_path=f'quantiles/cs2_of_rho_quantiles_ns{ns:02}_Xmarg.csv'
+        )
+
+    # Mass vs radius
+    posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+        eos_posterior, 
+        weight_columns=astro_weight_columns, 
+        verbose=True, 
+        max_num_samples=80000,
+        save_path=f'quantiles/r_of_m_quantiles_ns{ns:02}_Xmarg.csv'
+        )
+
+    # Lambda vs mass
+    posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
+        eos_posterior, 
+        weight_columns=astro_weight_columns, 
+        verbose=True, 
+        max_num_samples=80000,
+        save_path=f'quantiles/lambda_of_m_quantiles_ns{ns:02}_Xmarg.csv'
+        )
