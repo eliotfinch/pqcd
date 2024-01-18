@@ -24,14 +24,18 @@ qcd_likelihood = eos_marg_cond.marg_QCD_likelihood()
 collated_eos = pd.read_csv(collated_eos_path)
 nonzero_collated_eos = collated_eos[collated_eos.logweight_total > -np.inf]
 
-# The pre-computed weights of these EoSs
+# The pre-computed weights of these EOSs
 weights = np.exp(nonzero_collated_eos.logweight_total.values)
 
-# Load the full EoS data from the GP draws, and get the energy density and 
-# pressure at the final numebr density (which is the termination density?).
-# Then evaliuate the new QCD likelihood at these values.
+# The central density for which the mass reaches a maximum Mmax. Use this as nterm?
+ntov = to_nucleons_per_cubic_femtometre(nonzero_collated_eos['rhoc(M@Mmax)'])
 
-qcd_weights = []
+# Load the full EoS data from the GP draws, and interpolate onto a consistent
+# energy density grid
+
+energy_density_grid = np.linspace(1e-10, 5, 1000)
+pressure_interp = []
+number_density_interp = []
 
 for eos in nonzero_collated_eos.eos:
 
@@ -39,13 +43,37 @@ for eos in nonzero_collated_eos.eos:
 
     df = pd.read_csv(f'{eos_dir}/DRAWmod1000-{int(eos/1000):06}/eos-draw-{eos:06}.csv')
 
-    pressure = to_GeV_per_cubic_femtometre(df.pressurec2).values[-1]
-    energy_density = to_GeV_per_cubic_femtometre(df.energy_densityc2).values[-1]
-    number_density = to_nucleons_per_cubic_femtometre(df.baryon_density).values[-1]
+    pressure = to_GeV_per_cubic_femtometre(df.pressurec2).values
+    energy_density = to_GeV_per_cubic_femtometre(df.energy_densityc2).values
+    number_density = to_nucleons_per_cubic_femtometre(df.baryon_density).values
 
-    qcd_weights.append(qcd_likelihood(energy_density, pressure, number_density))
+    pressure_interp.append(interp1d(energy_density, pressure)(energy_density_grid))
+    number_density_interp.append(interp1d(energy_density, number_density)(energy_density_grid))
+
+pressure_interp = np.array(pressure_interp)
+number_density_interp = np.array(number_density_interp)
+
+# Compute the QCD weights at a particular nterm
+
+qcd_weights = []
+
+for p_grid, n_grid, nterm in zip(pressure_interp, number_density_interp, ntov):
+
+    # Requirement of the marginalized QCD likelihood
+    if nterm < 35*0.16:
+
+        # Find the pressure and energy density at the chosen nterm
+        index = np.argmin(np.abs(n_grid - nterm))
+        e = energy_density_grid[index]
+        p = p_grid[index]
+
+        qcd_weights.append(qcd_likelihood(e, p, nterm))
+
+    else:
+            
+        qcd_weights.append(0)
 
 qcd_weights = np.array(qcd_weights)
 
 # Save the weights to disk
-np.savetxt(f'weights/qcd_weights_marg.dat', qcd_weights)
+np.savetxt('weights/qcd_weights_marg.dat', qcd_weights)
