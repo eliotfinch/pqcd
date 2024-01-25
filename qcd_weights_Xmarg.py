@@ -3,8 +3,6 @@
 import numpy as np
 import pandas as pd
 
-import sys
-
 from scipy.constants import c, e, m_u
 from scipy.interpolate import interp1d
 from pQCD import pQCD
@@ -12,7 +10,6 @@ from pQCD import pQCD
 from utils import (
     to_GeV_per_cubic_femtometre,
     to_nucleons_per_cubic_femtometre,
-    weighted_quantile
 )
 
 # matching_density = float(sys.argv[1])*0.15
@@ -36,14 +33,17 @@ def qcd_likelihood(e, p, n, N=1000):
 
 # -----------------------------------------------------------------------------
 
-# Load the collated EoSs and filter out the ones with zero weight
+# Load the collated EOSs and filter out the ones with zero weight
 collated_eos = pd.read_csv(collated_eos_path)
 nonzero_collated_eos = collated_eos[collated_eos.logweight_total > -np.inf]
 
-# The pre-computed weights of these EoSs
+# The pre-computed weights of these EOSs
 weights = np.exp(nonzero_collated_eos.logweight_total.values)
 
-# Load the full EoS data from the GP draws, and interpolate onto a consistent
+# The central density for which the mass reaches a maximum Mmax
+ntov = to_nucleons_per_cubic_femtometre(nonzero_collated_eos['rhoc(M@Mmax)'])
+
+# Load the full EOS data from the GP draws, and interpolate onto a consistent
 # energy density grid
 
 energy_density_grid = np.linspace(1e-10, 5, 1000)
@@ -68,20 +68,36 @@ number_density_interp = np.array(number_density_interp)
 
 # Compute the QCD weights at a particular matching density
 
-for matching_density in 0.15*np.array([5,6,7,8,9,10]):
+# for matching_density in 0.15*np.array([5,6,7,8,9,10]):
 
-    qcd_weights = []
+#     qcd_weights = []
 
-    for p_grid, n_grid in zip(pressure_interp, number_density_interp):
+#     for p_grid, n_grid in zip(pressure_interp, number_density_interp):
 
-        # Find the pressure and energy density at the chosen matching density
-        index = np.argmin(np.abs(n_grid - matching_density))
-        e = energy_density_grid[index]
-        p = p_grid[index]
+#         # Find the pressure and energy density at the chosen matching density
+#         index = np.argmin(np.abs(n_grid - matching_density))
+#         e = energy_density_grid[index]
+#         p = p_grid[index]
 
-        qcd_weights.append(qcd_likelihood(e, p, matching_density))
+#         qcd_weights.append(qcd_likelihood(e, p, matching_density))
 
-    qcd_weights = np.array(qcd_weights)
+#     qcd_weights = np.array(qcd_weights)
 
-    # Save the weights to disk
-    np.savetxt(f'weights/qcd_weights_ns{matching_density/0.15:02}_Xmarg.dat', qcd_weights)
+#     # Save the weights to disk
+#     np.savetxt(f'weights/qcd_weights_ns{matching_density/0.15:02}_Xmarg.dat', qcd_weights)
+
+qcd_weights = []
+
+for p_grid, n_grid, matching_density in zip(pressure_interp, number_density_interp, ntov):
+
+    # Find the pressure and energy density at the chosen nterm
+    index = np.argmin(np.abs(n_grid - matching_density))
+    e = energy_density_grid[index]
+    p = p_grid[index]
+
+    qcd_weights.append(qcd_likelihood(e, p, matching_density))
+
+qcd_weights = np.array(qcd_weights)
+
+# Save the weights to disk
+np.savetxt(f'weights/qcd_weights_ntov_Xmarg.dat', qcd_weights)
