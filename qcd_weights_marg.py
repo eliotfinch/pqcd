@@ -55,12 +55,34 @@ number_density_interp = np.array(number_density_interp)
 
 # Compute the QCD weights at a particular nterm
 
-qcd_weights = []
+# qcd_weights = []
 
-for p_grid, n_grid, nterm in zip(pressure_interp, number_density_interp, ntov):
+# for p_grid, n_grid, nterm in zip(pressure_interp, number_density_interp, ntov):
 
-    # Requirement of the marginalized QCD likelihood
-    if nterm < 35*0.16:
+#     # Requirement of the marginalized QCD likelihood
+#     if nterm < 35*0.16:
+
+#         # Find the pressure and energy density at the chosen nterm
+#         index = np.argmin(np.abs(n_grid - nterm))
+#         e = energy_density_grid[index]
+#         p = p_grid[index]
+
+#         qcd_weights.append(qcd_likelihood(e, p, nterm))
+
+#     else:
+            
+#         qcd_weights.append(0)
+
+# qcd_weights = np.array(qcd_weights)
+
+# # Save the weights to disk
+# np.savetxt('weights/qcd_weights_marg.dat', qcd_weights)
+
+for nterm in 0.15*np.array([5,6,7,8,9,10]):
+
+    qcd_weights = []
+
+    for p_grid, n_grid in zip(pressure_interp, number_density_interp):
 
         # Find the pressure and energy density at the chosen nterm
         index = np.argmin(np.abs(n_grid - nterm))
@@ -69,11 +91,7 @@ for p_grid, n_grid, nterm in zip(pressure_interp, number_density_interp, ntov):
 
         qcd_weights.append(qcd_likelihood(e, p, nterm))
 
-    else:
-            
-        qcd_weights.append(0)
+    qcd_weights = np.array(qcd_weights)
 
-qcd_weights = np.array(qcd_weights)
-
-# Save the weights to disk
-np.savetxt('weights/qcd_weights_marg.dat', qcd_weights)
+    # Save the weights to disk
+    np.savetxt(f'weights/qcd_weights_ns{nterm/0.15:02}_marg.dat', qcd_weights)
