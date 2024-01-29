@@ -68,36 +68,36 @@ number_density_interp = np.array(number_density_interp)
 
 # Compute the QCD weights at a particular matching density
 
-# for matching_density in 0.15*np.array([5,6,7,8,9,10]):
+for matching_density in 0.15*np.array([1,2,3,4]):
 
-#     qcd_weights = []
+    qcd_weights = []
 
-#     for p_grid, n_grid in zip(pressure_interp, number_density_interp):
+    for p_grid, n_grid in zip(pressure_interp, number_density_interp):
 
-#         # Find the pressure and energy density at the chosen matching density
-#         index = np.argmin(np.abs(n_grid - matching_density))
-#         e = energy_density_grid[index]
-#         p = p_grid[index]
+        # Find the pressure and energy density at the chosen matching density
+        index = np.argmin(np.abs(n_grid - matching_density))
+        e = energy_density_grid[index]
+        p = p_grid[index]
 
-#         qcd_weights.append(qcd_likelihood(e, p, matching_density))
+        qcd_weights.append(qcd_likelihood(e, p, matching_density))
 
-#     qcd_weights = np.array(qcd_weights)
+    qcd_weights = np.array(qcd_weights)
 
-#     # Save the weights to disk
-#     np.savetxt(f'weights/qcd_weights_ns{matching_density/0.15:02}_Xmarg.dat', qcd_weights)
+    # Save the weights to disk
+    np.savetxt(f'weights/qcd_weights_ns{int(matching_density/0.15):02}_Xmarg.dat', qcd_weights)
 
-qcd_weights = []
+# qcd_weights = []
 
-for p_grid, n_grid, matching_density in zip(pressure_interp, number_density_interp, ntov):
+# for p_grid, n_grid, matching_density in zip(pressure_interp, number_density_interp, ntov):
 
-    # Find the pressure and energy density at the chosen nterm
-    index = np.argmin(np.abs(n_grid - matching_density))
-    e = energy_density_grid[index]
-    p = p_grid[index]
+#     # Find the pressure and energy density at the chosen nterm
+#     index = np.argmin(np.abs(n_grid - matching_density))
+#     e = energy_density_grid[index]
+#     p = p_grid[index]
 
-    qcd_weights.append(qcd_likelihood(e, p, matching_density))
+#     qcd_weights.append(qcd_likelihood(e, p, matching_density))
 
-qcd_weights = np.array(qcd_weights)
+# qcd_weights = np.array(qcd_weights)
 
-# Save the weights to disk
-np.savetxt(f'weights/qcd_weights_ntov_Xmarg.dat', qcd_weights)
+# # Save the weights to disk
+# np.savetxt(f'weights/qcd_weights_ntov_Xmarg.dat', qcd_weights)
