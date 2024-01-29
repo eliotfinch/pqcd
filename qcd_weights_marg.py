@@ -78,7 +78,7 @@ number_density_interp = np.array(number_density_interp)
 # # Save the weights to disk
 # np.savetxt('weights/qcd_weights_marg.dat', qcd_weights)
 
-for nterm in 0.15*np.array([1,2,3,4]):
+for nterm in 0.15*np.array([1.1,2,3,4]):
 
     qcd_weights = []
 
