@@ -45,24 +45,49 @@ number_density_interp = np.array(number_density_interp)
 
 # Get the energy density and pressure at ntov
 
-e_list = []
-p_list = []
+# e_list = []
+# p_list = []
 
-for p_grid, n_grid, ntov in zip(pressure_interp, number_density_interp, ntov_array):
+# for p_grid, n_grid, ntov in zip(pressure_interp, number_density_interp, ntov_array):
 
-    # Requirement of the marginalized QCD likelihood
-    if ntov < 35*0.16:
+#     # Requirement of the marginalized QCD likelihood
+#     if ntov < 35*0.16:
 
-        index = np.argmin(np.abs(n_grid - ntov))
+#         index = np.argmin(np.abs(n_grid - ntov))
+#         e = energy_density_grid[index]
+#         p = p_grid[index]
+
+#         e_list.append(e)
+#         p_list.append(p)
+
+# e_list = np.array(e_list)
+# p_list = np.array(p_list)
+
+# # Save to disk
+# np.savetxt('ntov_quantities/energy_density.dat', e_list)
+# np.savetxt('ntov_quantities/pressure.dat', p_list)
+
+# Get the energy density and pressure at a fixed number density
+
+n0_list = 0.16*np.array([2,4,6,8])
+
+for n0 in n0_list:
+
+    e_list = []
+    p_list = []
+
+    for p_grid, n_grid in zip(pressure_interp, number_density_interp):
+
+        index = np.argmin(np.abs(n_grid - n0))
         e = energy_density_grid[index]
         p = p_grid[index]
 
         e_list.append(e)
         p_list.append(p)
 
-e_list = np.array(e_list)
-p_list = np.array(p_list)
+    e_list = np.array(e_list)
+    p_list = np.array(p_list)
 
-# Save to disk
-np.savetxt('ntov_quantities/energy_density.dat', e_list)
-np.savetxt('ntov_quantities/pressure.dat', p_list)
+    # Save to disk
+    np.savetxt(f'fixed_n_quantities/energy_density_{int(n0/0.16):02}nsat.dat', e_list)
+    np.savetxt(f'fixed_n_quantities/pressure_{int(n0/0.16):02}nsat.dat', p_list)
