@@ -78,7 +78,7 @@ qcd_weights = np.array(qcd_weights)
 print(f'{n_skipped} EOSs skipped')
 
 # Save the weights to disk
-np.savetxt('test_weights/qcd_weights_marg.dat', qcd_weights)
+np.savetxt('weights/qcd_weights_ntov_marg.dat', qcd_weights)
 
 for nterm in 0.15*np.array([2,4,6,8,10]):
 
@@ -96,4 +96,4 @@ for nterm in 0.15*np.array([2,4,6,8,10]):
     qcd_weights = np.array(qcd_weights)
 
     # Save the weights to disk
-    np.savetxt(f'test_weights/qcd_weights_ns{int(nterm/0.15):02}_marg.dat', qcd_weights)
+    np.savetxt(f'weights/qcd_weights_ns{int(nterm/0.15):02}_marg.dat', qcd_weights)
