@@ -21,17 +21,17 @@ def qcd_likelihood(e, p, n, X):
 
 # -----------------------------------------------------------------------------
 
-# Load the collated EoSs and filter out the ones with zero weight
+# Load the collated EOSs and filter out the ones with zero weight
 collated_eos = pd.read_csv(collated_eos_path)
 nonzero_collated_eos = collated_eos[collated_eos.logweight_total > -np.inf]
 
-# The pre-computed weights of these EoSs
+# The pre-computed weights of these EOSs
 weights = np.exp(nonzero_collated_eos.logweight_total.values)
 
 # The central density for which the mass reaches a maximum Mmax
 ntov = to_nucleons_per_cubic_femtometre(nonzero_collated_eos['rhoc(M@Mmax)'])
 
-# Load the full EoS data from the GP draws, and interpolate onto a consistent
+# Load the full EOS data from the GP draws, and interpolate onto a consistent
 # energy density grid
 
 energy_density_grid = np.linspace(1e-10, 5, 1000)
@@ -56,6 +56,9 @@ number_density_interp = np.array(number_density_interp)
 
 # Compute the QCD weights at a particular matching density and X
 
+# Use a fixed matching density
+# ============================
+
 # for matching_density in 0.15*np.array([5,6,7,8,9,10]):
 
 #     for X in [0.5, 2]:
@@ -75,6 +78,9 @@ number_density_interp = np.array(number_density_interp)
 
 #         # Save the weights to disk
 #         np.savetxt(f'weights/qcd_weights_ns{matching_density/0.15:02}_X{X}.dat', qcd_weights)
+
+# Use nTOV
+# ========
 
 for X in [0.5, 2]:
 
