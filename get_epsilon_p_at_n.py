@@ -20,6 +20,9 @@ nonzero_collated_eos = collated_eos[collated_eos.logweight_total > -np.inf]
 # The central density for which the mass reaches a maximum Mmax
 ntov_array = to_nucleons_per_cubic_femtometre(nonzero_collated_eos['rhoc(M@Mmax)'])
 
+# Nuclear saturation density in fm^-3
+nsat = 0.16
+
 # Load the full EoS data from the GP draws, and interpolate onto a consistent
 # energy density grid
 
@@ -69,7 +72,7 @@ number_density_interp = np.array(number_density_interp)
 
 # Get the energy density and pressure at a fixed number density
 
-n0_list = 0.16*np.array([2,4,6,8])
+n0_list = np.array([1,3,5,7,9,10])*nsat
 
 for n0 in n0_list:
 
@@ -89,5 +92,5 @@ for n0 in n0_list:
     p_list = np.array(p_list)
 
     # Save to disk
-    np.savetxt(f'fixed_n_quantities/energy_density_{int(n0/0.16):02}nsat.dat', e_list)
-    np.savetxt(f'fixed_n_quantities/pressure_{int(n0/0.16):02}nsat.dat', p_list)
+    np.savetxt(f'fixed_n_quantities/energy_density_{int(n0/nsat):02}nsat.dat', e_list)
+    np.savetxt(f'fixed_n_quantities/pressure_{int(n0/nsat):02}nsat.dat', p_list)
