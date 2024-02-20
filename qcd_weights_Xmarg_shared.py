@@ -91,3 +91,6 @@ qcd_weights = np.array(qcd_weights)
 # Save the fixed-density weights to disk
 for i, n in enumerate(fixed_matching_densities):
     np.savetxt(f'weights/qcd_weights_ns{int(n/nsat):02}_Xmarg_shared.dat', qcd_weights[:,i])
+
+# Save the nTOV weights to disk
+np.savetxt('weights/qcd_weights_ntov_Xmarg_shared.dat', qcd_weights[:,-1])
