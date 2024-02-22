@@ -2,6 +2,8 @@ import numpy as np
 
 from scipy.constants import c, e, m_u
 
+nsat = 0.16
+
 rcparams = {
     'font.size': 14,
     'axes.titlesize': 14,
