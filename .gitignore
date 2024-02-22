@@ -1,6 +1,8 @@
 eos-draws/*
 weights/*
 fixed_n_quantities/*
+presentation_figures/*
+
 collated_np_all_post.csv
 collated_eos.csv
 
