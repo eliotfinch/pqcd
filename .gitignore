@@ -1,8 +1,12 @@
-eos-draws/*
+eos_extensions/*
+eos_draws/*
+
 weights/*
-fixed_n_quantities/*
+
+quantities_at_fixed_n/*
+quantities_at_ntov/*
+
 figures/*
-presentation_figures/*
 
 collated_np_all_post.csv
 collated_eos.csv
