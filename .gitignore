@@ -1,6 +1,8 @@
 eos-extensions/*
 eos-draws/*
 
+nterm_errors/*
+
 weights/*
 
 quantities_at_fixed_n/*
