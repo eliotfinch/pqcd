@@ -126,7 +126,7 @@ class pQCD:
 
 # The "marginalised" pQCD likelihood, https://zenodo.org/records/10592568
 # -----------------------------------------------------------------------
-	
+
 class eos_marginalization:
     def __init__(self, flag='conditioned'):
         if flag == 'conditioned':
@@ -152,24 +152,26 @@ class eos_marginalization:
         values = np.array([eps_s, p_s])
 
         return gaussian_kde(values)
-
+    
     def marg_QCD_likelihood(self): 
+         
+        nL_tab = np.linspace(0,40,99*10+1)*0.16
+        dn = nL_tab[1]-nL_tab[0]
+        nL_tab = nL_tab[int(1.*0.16/dn):int(35.*0.16/dn)]
         
-        eosn = self.eos_extensions.n
-
-        nL_tab = np.linspace(1,35,100)*0.16
         kernel_tab = [self.weight_kernel_fixed_n(nL) for nL in nL_tab]
 
-        def interp_kernels(e0, p0, n0, nLTAB = nL_tab, kernelTAB = kernel_tab):
+        def interp_kernels(n0, e0, p0, nLTAB = nL_tab, kernelTAB = kernel_tab):
             if n0 > 35.*0.16:
-                raise ValueError('n0 must be < 35*0.16')
+                raise ValueError('nL must be < 35*0.16')
             if n0 < 1.*0.16:
-                raise ValueError('n0 must be > 1*0.16')
+                raise ValueError('nL must be > 1*0.16')
 
-            cnt = bisect(nLTAB, n0) - 1 # now nLTAB[cnt] < N and nLTAB[cnt-1] > N
-
+            cnt = int((n0-nL_tab[0])/dn)
+            # now nLTAB[cnt] < N and nLTAB[cnt+1] > N
+            
             return np.interp(n0, 
-                             kernelTAB[cnt]([e0, p0]), 
-                             kernelTAB[cnt+1]([e0, p0]))
-
+                             [nL_tab[cnt], nL_tab[cnt+1]],
+                             [kernelTAB[cnt]([e0, p0])[0], kernelTAB[cnt+1]([e0, p0])[0]]
+                            )
         return interp_kernels
