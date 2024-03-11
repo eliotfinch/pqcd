@@ -60,7 +60,7 @@ for nterm in nterm_list:
 
 # Save the weights to disk
 for nterm in nterm_list:
-    np.savetxt(f'weights/qcd_weights_ns{nterm:02}_Xmarg.dat', qcd_weights[nterm])
+    np.savetxt(f'weights/qcd_weights_{nterm:02}nsat_Xmarg.dat', qcd_weights[nterm])
 
 # Compute the pQCD weights at nTOV
 qcd_weights_ntov = []
