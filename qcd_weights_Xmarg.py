@@ -3,14 +3,9 @@
 import numpy as np
 import pandas as pd
 
-from scipy.interpolate import interp1d
 from qcd_likelihood import pQCD
 
-from utils import (
-    to_GeV_per_cubic_femtometre,
-    to_nucleons_per_cubic_femtometre,
-    nsat
-)
+from utils import to_nucleons_per_cubic_femtometre, nsat
 
 collated_eos_path = [
     '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv',
