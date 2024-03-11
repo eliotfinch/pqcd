@@ -43,8 +43,8 @@ for nterm in nterm_list:
 
     # Load the pre-computed pressure and energy density for each EOS at this
     # density
-    pressure = np.loadtxt(f'fixed_n_quantities/pressure_{nterm:02}nsat.dat')
-    energy_density = np.loadtxt(f'fixed_n_quantities/energy_density_{nterm:02}nsat.dat')
+    pressure = np.loadtxt(f'quantities_at_fixed_n/pressure_{nterm:02}nsat.dat')
+    energy_density = np.loadtxt(f'quantities_at_fixed_n/energy_density_{nterm:02}nsat.dat')
 
     # Compute the pQCD likelihood at this density
     for p, e in zip(pressure, energy_density):
