@@ -11,7 +11,6 @@ collated_eos_path = [
     '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv',
     'collated_eos.csv'
     ][1]
-eos_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn'
 
 def pQCD_likelihood(e, p, n, N=1000):
 
