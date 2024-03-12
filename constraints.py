@@ -10,9 +10,9 @@ def pQCD_likelihood(e, p, n, X):
     return int(pQCDX.constraints(e0=e,p0=p,n0=n))
 
 # The "marginalised" pQCD likelihood
-from qcd_likelihood import eos_marginalization
-eos_marginalization_conditioned = eos_marginalization(flag='conditioned')
-pQCD_likelihood_marg = eos_marginalization_conditioned.marg_QCD_likelihood()
+# from qcd_likelihood import eos_marginalization
+# eos_marginalization_conditioned = eos_marginalization(flag='conditioned')
+# pQCD_likelihood_marg = eos_marginalization_conditioned.marg_QCD_likelihood()
 
 def epsilon(mu, n, p):
     return -p + mu*n
