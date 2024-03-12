@@ -8,9 +8,10 @@ from qcd_likelihood import pQCD
 from utils import to_nucleons_per_cubic_femtometre, nsat
 
 collated_eos_path = [
+    'collated_eos.csv',
     'collated_np_all_post.csv', 
     '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv'
-    ][1]
+    ][0]
 
 def pQCD_likelihood(e_list, p_list, n_list, N=1000):
     """
