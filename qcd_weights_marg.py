@@ -8,9 +8,10 @@ from qcd_likelihood import eos_marginalization
 from utils import to_nucleons_per_cubic_femtometre, nsat
 
 collated_eos_path = [
-    '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv',
-    'collated_eos.csv'
-    ][1]
+    'collated_eos.csv',
+    'collated_np_all_post.csv', 
+    '/home/isaac.legred/PTAnalysis/Analysis/collated_np_all_post.csv'
+    ][0]
 
 eos_marg_cond = eos_marginalization()
 pQCD_likelihood = eos_marg_cond.marg_QCD_likelihood()
