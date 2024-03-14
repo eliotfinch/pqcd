@@ -2,17 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from scipy.integrate import cumulative_trapezoid
-
-# The "maximised" pQCD likelihood
 from qcd_likelihood import pQCD
-def pQCD_likelihood(e, p, n, X):
-    pQCDX = pQCD(X)
-    return int(pQCDX.constraints(e0=e,p0=p,n0=n))
-
-# The "marginalised" pQCD likelihood
-# from qcd_likelihood import eos_marginalization
-# eos_marginalization_conditioned = eos_marginalization(flag='conditioned')
-# pQCD_likelihood_marg = eos_marginalization_conditioned.marg_QCD_likelihood()
 
 def epsilon(mu, n, p):
     return -p + mu*n
@@ -23,10 +13,12 @@ def p(mu, n, pL):
 
 class pQCD_constraints:
 
-    def __init__(self, muL, nL, pL, muH, nH, pH):
+    def __init__(self, muL, nL, pL, muH, X):
         """
         Initialize the pQCD_constraints class. Functions taken from Komoltsev 
-        & Kurkela 2022, arXiv:2111.05350.
+        & Kurkela 2022, arXiv:2111.05350. We use their pQCD class to compute
+        the pressure and number density at a given baryon chemical potential
+        and renormalization scale parameter.
         
         Parameters
         ----------
@@ -34,24 +26,29 @@ class pQCD_constraints:
             Predicted values of the baryon chemical potential [GeV], baryon 
             number density [1/fm^3], and pressure [GeV/fm^3] at low density.
         
-        muH, nH, pH : float
-            Predicted values of the baryon chemical potential [GeV], baryon 
-            number density [1/fm^3], and pressure [GeV/fm^3] at high density.
+        muH : float
+            Predicted values of the baryon chemical potential [GeV] at high 
+            density.
+
+        X : float
+            The renormalization scale parameter.
         """
         self.muL = muL
         self.nL = nL
         self.pL = pL
         self.muH = muH
-        self.nH = nH
-        self.pH = pH
+        
+        self.pQCD = pQCD(X)
+        self.nH = self.pQCD.number_density(muH)
+        self.pH = self.pQCD.pressure(muH)
 
-        self.Deltap = pH - pL
+        self.Deltap = self.pH - pL
         self.muc = np.sqrt(
-            (muL*muH*(muH*nH - muL*nL - 2*self.Deltap))/(muL*nH - muH*nL)
+            (muL*muH*(muH*self.nH - muL*nL - 2*self.Deltap))/(muL*self.nH - muH*nL)
             )
         
         self.epsilonL = epsilon(muL, nL, pL)
-        self.epsilonH = epsilon(muH, nH, pH)
+        self.epsilonH = epsilon(muH, self.nH, self.pH)
         
         self.nmax = np.vectorize(self.nmax_scalar)
         self.nmin = np.vectorize(self.nmin_scalar)
