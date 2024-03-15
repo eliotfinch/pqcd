@@ -25,7 +25,7 @@ collated_eos = pd.read_csv(collated_eos_path)
 collated_ntov = to_nucleons_per_cubic_femtometre(collated_eos['rhoc(M@Mmax)'])
 
 # Compute the pQCD weights at a particular nterm
-nterm_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
+nterm_list = [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
 qcd_weights = {nterm: [] for nterm in nterm_list}
 
 for nterm in nterm_list:
