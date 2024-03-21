@@ -8,7 +8,7 @@ from temperance.core.result import EoSPosterior
 # eos_posterior = EoSPosterior.from_csv("collated_np_all_post.csv", label="astro")
 eos_posterior = EoSPosterior.from_csv('collated_eos.csv', label='astro')
 
-for nterm in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]:
+for nterm in [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]:
 
     astro_weight_columns = [
         result.WeightColumn(name=f'weight_{nterm:02}nsat_marg', is_log=False, is_inverted=False)
