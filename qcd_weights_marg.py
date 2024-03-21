@@ -40,7 +40,7 @@ for nterm in nterm_list:
         if np.isnan(p) or np.isnan(e):
             qcd_weights[nterm].append(0)
         else:
-            qcd_weights[nterm].append(pQCD_likelihood(e, p, nterm*nsat))
+            qcd_weights[nterm].append(pQCD_likelihood(n0=nterm*nsat, e0=e, p0=p))
 
 # Save the weights to disk
 for nterm in nterm_list:
@@ -56,7 +56,7 @@ for ntov, p, e in zip(collated_ntov, pressure_tov, energy_density_tov):
     
     # Requirement of the marginalized pQCD likelihood
     if ntov < 35*nsat:
-        qcd_weights_ntov.append(pQCD_likelihood(e, p, ntov))
+        qcd_weights_ntov.append(pQCD_likelihood(n0=ntov, e0=e, p0=p))
     else:
         qcd_weights_ntov.append(0)
 
