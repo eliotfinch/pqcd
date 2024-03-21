@@ -6,6 +6,9 @@ nterm_errors/*
 weights/*
 weights_Xmarg_shared/*
 
+quantiles/*
+quantiles.old/*
+
 quantities_at_fixed_n/*
 quantities_at_ntov/*
 
