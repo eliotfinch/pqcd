@@ -2,6 +2,8 @@ import numpy as np
 
 from scipy.constants import c, e, m_u
 
+# The value we use for the nuclear saturation density, in 1/fm^3. This follows,
+# e.g., Komoltsev et al. arXiv:2312.14127
 nsat = 0.16
 
 rcparams = {
@@ -15,6 +17,9 @@ rcparams = {
     'font.sans-serif': ['Computer Modern Roman'],
     'text.usetex': True,
     }
+
+# Our EOSs have pressure, energy density, and baryon density in units of 
+# g/cm^3. These fucntions convert to units used by others for comparison.
 
 def to_GeV_per_cubic_femtometre(x):
 
