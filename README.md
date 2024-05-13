@@ -1,14 +1,28 @@
-# qcd_likelihood
+# pqcd
 
 Investigations into the pQCD constraints proposed in [Komoltsev & Kurkela 2022](http://arxiv.org/abs/2111.05350).
 
-The `qcd_likelihood.py` file contains both the "maximised" likelihood (as used in [Gorda et al. 2023](https://arxiv.org/abs/2204.11877)) and "marginalised" likelihood (as used in [Komoltsev et al. 2024](https://arxiv.org/abs/2312.14127)).
+## The `pqcd` package
 
-The file `collated_np_all_post.csv` is a copy of the file found at 
+The `pqcd.pQCD` class is initialised with a value for the renormalization scale X, and gives you the predicted pQCD energy density, pressure, and number density. The code is taken from the [data release](https://zenodo.org/records/7781233) associated with [Gorda et al. 2023](https://arxiv.org/abs/2204.11877).
 
-`ldas-grid:/home/isaac.legred/PTAnalysis/Analysis`, 
+The "maximised" pQCD likelihood (from the same data release) is found in `pqcd.likelihood`. The "marginalised" pQCD likelihood (as used in [Komoltsev et al. 2024](https://arxiv.org/abs/2312.14127), and available in this [data release](https://zenodo.org/records/10592568)) is also available.
 
-and is a summary of the EOS draws found at 
+The file `pqcd.constraints` contains a re-implementation of the functions described in [Komoltsev & Kurkela 2022](http://arxiv.org/abs/2111.05350), with some additional functions for visualisation of the constraints.
 
-`ldas-grid:/home/philippe.landry/nseos/eos/gp/mrgagn`. 
+## Data
+
+The file `data/collated_np_all_post.csv` is a copy of the file found at
+
+`ldas-grid:/home/isaac.legred/PTAnalysis/Analysis`,
+
+and is a summary of the EOS draws found at
+
+`ldas-grid:/home/philippe.landry/nseos/eos/gp/mrgagn`.
+
+The file `data/eos-draws-default.csv` contains the subset of EOSs from `collated_np_all_post.csv` that have non-zero astrophysical weight (which we usually want to work with). Additionally, the pQCD weights (from both the maximised and marginalised likelihoods) are included in `data/eos-draws-default.csv`. The file `data/eos-draws-default.csv` is created by the notebook `notebooks/edit_collated_eos.ipynb`, and loads in pQCD weights that are created by:
+
+ - `scripts/qcd_weights.py`: Evaulation of the maximised pQCD likelihood at specified number density and renormalisation scale X.
+ - `scripts/qcd_weights_Xmarg.py`: Evaulation of the maximised pQCD likelihood at specified number density, but marginalised over the renormalisation scale X.
+ - `scripts/qcd_weights_marg.py`: Evaulation of the marginalised pQCD likelihood at specified number density.
 

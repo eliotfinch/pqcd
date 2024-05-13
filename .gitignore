@@ -1,26 +1,12 @@
-eos-extensions/*
-eos-draws/*
-eos-draws-modified/*
-
-nterm_errors/*
-
-weights/*
-weights_Xmarg_shared/*
-
-quantiles/*
-
-quantities_at_fixed_n/*
-quantities_at_ntov/*
-
-figures/*
-
-collated_eos_nterm.dat
-collated_np_all_post.csv
-collated_eos.csv
+data/*
+notebooks/figures/*
+make-agnostic-processes/*agn/*
+make-agnostic-processes/ingo-bps-with-cs2c2.csv
 
 condor_output/*
 *.sub
 
+# macOS
 .DS_Store
 
 # Byte-compiled / optimized / DLL files

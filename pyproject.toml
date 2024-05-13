@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pqcd"
+version = "0.0.1"
+authors = [
+  { name="Eliot Finch", email="efinch@caltech.edu" },
+]
+description = "Investigations into the EOS constraints from pQCD"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/eliotfinch/pqcd"
