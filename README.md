@@ -22,7 +22,6 @@ and is a summary of the EOS draws found at
 
 The file `data/eos-draws-default.csv` contains the subset of EOSs from `collated_np_all_post.csv` that have non-zero astrophysical weight (which we usually want to work with). Additionally, the pQCD weights (from both the maximised and marginalised likelihoods) are included in `data/eos-draws-default.csv`. The file `data/eos-draws-default.csv` is created by the notebook `notebooks/edit_collated_eos.ipynb`, and loads in pQCD weights that are created by:
 
- - `scripts/qcd_weights.py`: Evaulation of the maximised pQCD likelihood at specified number density and renormalisation scale X.
- - `scripts/qcd_weights_Xmarg.py`: Evaulation of the maximised pQCD likelihood at specified number density, but marginalised over the renormalisation scale X.
- - `scripts/qcd_weights_marg.py`: Evaulation of the marginalised pQCD likelihood at specified number density.
-
+- `scripts/qcd_weights.py`: Evaulation of the maximised pQCD likelihood at specified number density and renormalisation scale X.
+- `scripts/qcd_weights_Xmarg.py`: Evaulation of the maximised pQCD likelihood at specified number density, but marginalised over the renormalisation scale X.
+- `scripts/qcd_weights_marg.py`: Evaulation of the marginalised pQCD likelihood at specified number density.
