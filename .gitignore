@@ -1,3 +1,4 @@
+astro/*
 data/*
 notebooks/figures/*
 make-agnostic-processes/*agn/*
