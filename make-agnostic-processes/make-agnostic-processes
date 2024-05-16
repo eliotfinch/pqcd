@@ -102,8 +102,8 @@ max_stitch_pressurec2="1e16"
 # For cs^2/c^2 = 1/3, we require phi = log(3 - 1) = log(2) ~ 0.69
 stitch_mean=0.6931471805599453 
 stitch_pressurec2="1e16"
-stitch_index=-4.0
-stitch_sigma=0.1
+stitch_index=-3.0
+stitch_sigma=0.5
 
 stitch_num_points=100
 
