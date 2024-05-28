@@ -1,6 +1,7 @@
 import numpy as np
 
 from scipy.integrate import cumulative_trapezoid
+from .utils import to_GeV_per_cubic_femtometre, to_nucleons_per_cubic_femtometre
 
 def epsilon_func(mu, n, p):
     return -p + mu*n
@@ -86,3 +87,173 @@ class pQCD:
 		dn_dmu2 = 2.*dp_das(a_s,self.X)*das_dmu(mu,self.X)*dpFD(mu) + p_as * d2pFD(mu)
 
 		return self.nH(mu)/(mu*GeV3_to_fm3*(dn_dmu1+dn_dmu2))
+	
+# =============================================================================
+
+# Functions for testing if an EOS passes through the pQCD region
+
+def get_pqcd_region(X_low=0.5, X_high=2, mu_low=2.4, mu_high=2.6, res=100):
+
+    X_array = np.linspace(X_low, X_high, res)
+    mu_array = np.linspace(mu_low, mu_high, res)
+
+    p_boundary_arrays = []
+    n_boundary_arrays = []
+    mu_boundary_arrays = []
+
+    # Get the fixed-mu arrays first
+    for mu in [mu_low, mu_high]:
+        p_boundary_arrays.append(np.zeros(res))
+        n_boundary_arrays.append(np.zeros(res))
+        mu_boundary_arrays.append(np.zeros(res))
+        for i, X in enumerate(X_array):
+            pQCDX = pQCD(X)
+            p_boundary_arrays[-1][i] = pQCDX.pH(mu)
+            n_boundary_arrays[-1][i] = pQCDX.nH(mu)
+            mu_boundary_arrays[-1][i] = mu
+
+    # Get the fixed-X arrays next
+    for X in [X_low, X_high]:
+        p_boundary_arrays.append(np.zeros(res))
+        n_boundary_arrays.append(np.zeros(res))
+        mu_boundary_arrays.append(np.zeros(res))
+        for i, mu in enumerate(mu_array):
+            pQCDX = pQCD(X)
+            p_boundary_arrays[-1][i] = pQCDX.pH(mu)
+            n_boundary_arrays[-1][i] = pQCDX.nH(mu)
+            mu_boundary_arrays[-1][i] = mu
+
+    left_n_boundary = np.hstack([n_boundary_arrays[0], n_boundary_arrays[3]])
+    right_n_boundary = np.hstack([n_boundary_arrays[2], n_boundary_arrays[1]])
+
+    left_p_boundary = np.hstack([p_boundary_arrays[0], p_boundary_arrays[3]])
+    right_p_boundary = np.hstack([p_boundary_arrays[2], p_boundary_arrays[1]])
+
+    n_boundary_min = min(left_n_boundary)
+    n_boundary_max = max(right_n_boundary)
+
+    p_boundary_min = min(left_p_boundary)
+    p_boundary_max = max(right_p_boundary)
+
+    # Generate a dense grid of fixed-X arrays
+    dense_arrays = {}
+    for mu in mu_array:
+        dense_p_array = []
+        dense_n_array = []
+        for X in X_array:
+            pQCDX = pQCD(X)
+            dense_p_array.append(pQCDX.pH(mu))
+            dense_n_array.append(pQCDX.nH(mu))
+        dense_arrays[mu] = (dense_p_array, dense_n_array)
+
+    return {
+        'X_array': X_array,
+        'mu_array': mu_array,
+
+        'p_boundary_arrays': p_boundary_arrays,
+        'n_boundary_arrays': n_boundary_arrays,
+        'mu_boundary_arrays': mu_boundary_arrays,
+
+        'left_n_boundary': left_n_boundary,
+        'right_n_boundary': right_n_boundary,
+        'left_p_boundary': left_p_boundary,
+        'right_p_boundary': right_p_boundary,
+
+        'n_boundary_min': n_boundary_min,
+        'n_boundary_max': n_boundary_max,
+        'p_boundary_min': p_boundary_min,
+        'p_boundary_max': p_boundary_max,
+        
+        'dense_arrays': dense_arrays
+    }
+
+def consistent_with_pqcd(eos, pqcd_region_dict):
+
+    pressure = to_GeV_per_cubic_femtometre(eos.pressurec2)
+    energy_density = to_GeV_per_cubic_femtometre(eos.energy_densityc2)
+    number_density = to_nucleons_per_cubic_femtometre(eos.baryon_density)
+
+    chemical_potential = (energy_density+pressure)/number_density
+
+    # Interpolate over chemical potential
+    pressure_interp = np.interp(pqcd_region_dict['mu_array'], chemical_potential, pressure)
+    number_density_interp = np.interp(pqcd_region_dict['mu_array'], chemical_potential, number_density)
+
+    # Perform a quick filter to remove EOSs that don't cross the min and max number densities
+    if max(number_density_interp) < pqcd_region_dict['n_boundary_min'] or min(number_density_interp) > pqcd_region_dict['n_boundary_max']:
+        return False
+    
+    # Perform a quick filter to remove EOSs that don't cross the min and max pressures
+    if max(pressure_interp) < pqcd_region_dict['p_boundary_min'] or min(pressure_interp) > pqcd_region_dict['p_boundary_max']:
+        return False
+    
+    inside_region_n = []
+    inside_region_p = []
+    inside_region_mu = []
+
+    for n, p, mu in zip(number_density_interp, pressure_interp, pqcd_region_dict['mu_array']):
+        if pqcd_region_dict['p_boundary_min'] < p < pqcd_region_dict['p_boundary_max']:
+            min_n = pqcd_region_dict['left_n_boundary'][np.argmin(np.abs(pqcd_region_dict['left_p_boundary']-p))]
+            max_n = pqcd_region_dict['right_n_boundary'][np.argmin(np.abs(pqcd_region_dict['right_p_boundary']-p))]
+            if min_n < n < max_n:
+                inside_region_n.append(n)
+                inside_region_p.append(p)
+                inside_region_mu.append(mu)
+
+    if len(inside_region_n) > 0:
+
+        inside_region_n = np.array(inside_region_n)
+        inside_region_p = np.array(inside_region_p)
+        inside_region_mu = np.array(inside_region_mu)
+
+        mu_start = min(inside_region_mu)
+        mu_end = max(inside_region_mu)
+
+        # Given the start and end values of mu for the EOS inside the region,
+        # we want to see if the EOS passes through the surface defined by the
+        # region. Assuming the EOS only crosses the surface once, we can simply
+        # check if the EOS starts above the surface and ends below it, or vice
+        # versa.
+
+        # We want to "project" the start of the EOS onto the pQCD surface to
+        # find the value of mu on the surface. This may be less than the EOS
+        # value (in which case the EOS is "above" the surface) or greater than
+        # the EOS value (in which case the EOS is "below" the surface).
+
+        # To do this we use the dense arrays defined above. These are arrays of
+        # p and n values for fixed mu. We find the closest (p,n) pair to the EOS
+        # start point and use the corresponding mu value as the "projected" mu
+        # value.
+
+        n_start = inside_region_n[np.argmin(inside_region_mu)]
+        p_start = inside_region_p[np.argmin(inside_region_mu)]
+
+        min_delta = 1
+        for mu, (dense_p_array, dense_n_array) in pqcd_region_dict['dense_arrays'].items():
+            delta = abs(n_start - dense_n_array[np.argmin(np.abs(dense_p_array-p_start))])
+            if delta < min_delta:
+                min_delta = delta
+                mu_start_projected = mu
+
+        n_end = inside_region_n[np.argmax(inside_region_mu)]
+        p_end = inside_region_p[np.argmax(inside_region_mu)]
+
+        min_delta = 1
+        for mu, (dense_p_array, dense_n_array) in pqcd_region_dict['dense_arrays'].items():
+            delta = abs(n_end - dense_n_array[np.argmin(np.abs(dense_p_array-p_end))])
+            if delta < min_delta:
+                min_delta = delta
+                mu_end_projected = mu
+
+        # EOS starts above the surface and ends below it
+        if (mu_start > mu_start_projected) and (mu_end < mu_end_projected):
+            return True
+        
+        # EOS starts below the surface and ends above it
+        elif (mu_start < mu_start_projected) and (mu_end > mu_end_projected):
+            return True
+        
+        # The above does not consider the case of the EOS crossing the surface
+        # an even number of times...
+
+    return False
