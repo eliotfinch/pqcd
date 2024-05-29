@@ -22,7 +22,7 @@ rcparams = {
     }
 
 # Our EOSs have pressure, energy density, and baryon density in units of 
-# g/cm^3. These fucntions convert to units used by others for comparison.
+# g/cm^3. These functions convert to units used by others for comparison.
 
 def to_GeV_per_cubic_femtometre(x):
 
