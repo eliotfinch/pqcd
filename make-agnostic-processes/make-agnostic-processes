@@ -55,8 +55,8 @@ selectparampath['hyp']="${dir}/hyperparams-mc_hyperonic-agnostic.csv"
 dir="${basedir}/qrkagn"
 
 hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/alf/gpr_gpr_quark-alf.hdf5"
-# hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/ddq/gpr_gpr_quark-ddq.hdf5"
-# hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/hqc/gpr_gpr_quark-hqc.hdf5"
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/ddq/gpr_gpr_quark-ddq.hdf5"
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/hqc/gpr_gpr_quark-hqc.hdf5"
 
 selectparampath['qrk']="${dir}/hyperparams-mc_quark-agnostic.csv"
 
@@ -66,13 +66,10 @@ selectparampath['qrk']="${dir}/hyperparams-mc_quark-agnostic.csv"
 #
 #-------------------------------------------------
 
-# ?
-num_proc=50
-
 # Resolution of the GP
 num_points=500
 
-# ?
+# The number of hyperparameter sets to use (out of ~ 300)
 num_models=50
 
 # pQCD predictions give pH ~ 1e16
@@ -128,13 +125,13 @@ CRUST="$PWD/ingo-bps-with-cs2c2.csv"
 #-------------------------------------------------
 
 # Number of EoS realizations we want
-NUM_EOS=1000
+NUM_EOS=2000
 
 #------------------------
 
 COMPS=""
-# COMPS="$COMPS had"
-# COMPS="$COMPS hyp"
+COMPS="$COMPS had"
+COMPS="$COMPS hyp"
 COMPS="$COMPS qrk"
 
 #------------------------
