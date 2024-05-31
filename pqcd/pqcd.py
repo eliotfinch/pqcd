@@ -144,7 +144,7 @@ def get_pqcd_region(X_low=0.5, X_high=2, mu_low=2.4, mu_high=2.6, res=100):
             pQCDX = pQCD(X)
             dense_p_array.append(pQCDX.pH(mu))
             dense_n_array.append(pQCDX.nH(mu))
-        dense_arrays[mu] = (dense_p_array, dense_n_array)
+        dense_arrays[mu] = (np.array(dense_p_array), np.array(dense_n_array))
 
     return {
         'X_array': X_array,
