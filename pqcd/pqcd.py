@@ -176,8 +176,13 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
     chemical_potential = (energy_density+pressure)/number_density
 
     # Interpolate over chemical potential
-    pressure_interp = np.interp(pqcd_region_dict['mu_array'], chemical_potential, pressure)
-    number_density_interp = np.interp(pqcd_region_dict['mu_array'], chemical_potential, number_density)
+    interp_array = pqcd_region_dict['mu_array'][
+		(min(chemical_potential) < pqcd_region_dict['mu_array']) & (max(chemical_potential) > pqcd_region_dict['mu_array'])]
+    pressure_interp = np.interp(interp_array, chemical_potential, pressure)
+    number_density_interp = np.interp(interp_array, chemical_potential, number_density)
+
+    if len(pressure_interp) == 0:
+        return False
 
     # Perform a quick filter to remove EOSs that don't cross the min and max number densities
     if max(number_density_interp) < pqcd_region_dict['n_boundary_min'] or min(number_density_interp) > pqcd_region_dict['n_boundary_max']:
@@ -228,7 +233,7 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
         n_start = inside_region_n[np.argmin(inside_region_mu)]
         p_start = inside_region_p[np.argmin(inside_region_mu)]
 
-        min_delta = 1
+        min_delta = 10
         for mu, (dense_p_array, dense_n_array) in pqcd_region_dict['dense_arrays'].items():
             delta = abs(n_start - dense_n_array[np.argmin(np.abs(dense_p_array-p_start))])
             if delta < min_delta:
@@ -238,7 +243,7 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
         n_end = inside_region_n[np.argmax(inside_region_mu)]
         p_end = inside_region_p[np.argmax(inside_region_mu)]
 
-        min_delta = 1
+        min_delta = 10
         for mu, (dense_p_array, dense_n_array) in pqcd_region_dict['dense_arrays'].items():
             delta = abs(n_end - dense_n_array[np.argmin(np.abs(dense_p_array-p_end))])
             if delta < min_delta:
