@@ -7,7 +7,7 @@ def epsilon_func(mu, n, p):
     return -p + mu*n
 
 def pressure_integral(mu, n, pL):
-    return pL + cumulative_trapezoid(n, mu)
+    return np.concatenate(([pL], pL + cumulative_trapezoid(n, mu)))
 
 # The following functions are taken from 
 # https://zenodo.org/records/7781233
