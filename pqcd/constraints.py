@@ -6,7 +6,7 @@ from .pqcd import pQCD, epsilon_func, pressure_integral
 
 class constraints:
 
-    def __init__(self, muL, nL, pL, muH, X):
+    def __init__(self, muL, nL, pL, muH, nH, pH):
         """
         Initialize the constraints class. Functions taken from Komoltsev &
         Kurkela 2022, arXiv:2111.05350. We use their pQCD class to compute the
@@ -29,18 +29,17 @@ class constraints:
         self.muL = muL
         self.nL = nL
         self.pL = pL
+
         self.muH = muH
+        self.nH = nH
+        self.pH = pH
         
         self.epsilonL = epsilon_func(muL, nL, pL)
-        
-        self.pQCD = pQCD(X)
-        self.nH = self.pQCD.nH(muH)
-        self.pH = self.pQCD.pH(muH)
-        self.epsilonH = self.pQCD.epsilonH(muH)
+        self.epsilonH = epsilon_func(muH, nH, pH)
 
-        self.Deltap = self.pH - pL
+        self.Deltap = pH - pL
         self.muc = np.sqrt(
-            (muL*muH*(muH*self.nH - muL*nL - 2*self.Deltap))/(muL*self.nH - muH*nL)
+            (muL*muH*(muH*nH - muL*nL - 2*self.Deltap))/(muL*nH - muH*nL)
             )
         
         self.nmax = np.vectorize(self.nmax_scalar)
