@@ -130,8 +130,8 @@ NUM_EOS=50000
 #------------------------
 
 COMPS=""
-# COMPS="$COMPS had"
-# COMPS="$COMPS hyp"
+COMPS="$COMPS had"
+COMPS="$COMPS hyp"
 COMPS="$COMPS qrk"
 
 #------------------------
