@@ -17,11 +17,14 @@ def run_bash_script(eos, eos_dir=".", numerical_args=("1e10", "1e16"), outpath_s
     # Run the command
     subprocess.run(command)
 
-sets = [0,1,2,3,4]
-N_samples = 1000
+sets = [11]
+N_samples = 50000
 
 for s in sets:
-    for variety in ['had', 'hyp', 'qrk']:
-        eos_dir = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{s:02}/{variety}agn'
-        for i in range(N_samples):
-            run_bash_script(f'eos-draw-{i:06}.csv', eos_dir=eos_dir)
+    for variety in ['had', 'hyp']:
+        for n in range(N_samples):
+            try:
+                eos_dir = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{s:02}/{variety}agn/DRAWmod1000-{int(n/1000):06}'
+                run_bash_script(f'eos-draw-{n:06}.csv', eos_dir=eos_dir)
+            except:
+                pass
