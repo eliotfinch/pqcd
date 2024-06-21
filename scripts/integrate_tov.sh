@@ -23,15 +23,14 @@ run_bash_script() {
     "${command[@]}"
 }
 
-sets=(0 1 2 3 4)
-N_samples=1000
+sets=(11)
+N_samples=50000
 
 for s in "${sets[@]}"; do
     for variety in "had" "hyp" "qrk"; do
-        eos_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/$(printf "%02d" "$s")/${variety}agn"
+        eos_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/$(printf "%02d" "$s")/${variety}agn/$(printf "DRAWmod1000-%06d" $((n / 1000)))"
         for ((i=0; i<N_samples; i++)); do
             run_bash_script "$(printf "eos-draw-%06d.csv" "$i")" "$eos_dir"
         done
     done
 done
-
