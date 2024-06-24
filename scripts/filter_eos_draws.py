@@ -13,7 +13,7 @@ N_samp = 50000
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
-for variety in ['had', 'hyp']:
+for variety in ['qrk']:
     for n in range(N_samp):
         source_path = f'{source_dir}/{variety}agn/DRAWmod1000-{int(n/1000):06}'
         eos = pd.read_csv(f'{source_path}/eos-draw-{n:06}.csv')
