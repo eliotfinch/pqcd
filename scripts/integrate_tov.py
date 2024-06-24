@@ -1,6 +1,7 @@
 import subprocess
+from pathlib import Path
 
-def run_bash_script(eos, eos_dir=".", numerical_args=("1e10", "1e16"), outpath_suffix="macro-"):
+def run_bash_script(eos, eos_dir=".", outpath_suffix="macro-"):
     
     # Construct the command
     command = [
@@ -17,14 +18,11 @@ def run_bash_script(eos, eos_dir=".", numerical_args=("1e10", "1e16"), outpath_s
     # Run the command
     subprocess.run(command)
 
-sets = [11]
+set_number = 11
 N_samples = 50000
 
-for s in sets:
-    for variety in ['had', 'hyp']:
-        for n in range(N_samples):
-            try:
-                eos_dir = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{s:02}/{variety}agn/DRAWmod1000-{int(n/1000):06}'
-                run_bash_script(f'eos-draw-{n:06}.csv', eos_dir=eos_dir)
-            except:
-                pass
+for variety in ['had', 'hyp', 'qrk']:
+    variety_dir = Path(f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number:02}/{variety}agn')
+    for eos_dir in [f for f in variety_dir.iterdir() if f.is_dir()]:
+        for eos_path in eos_dir.iterdir():
+            run_bash_script(eos_path.name, eos_dir=eos_dir)
