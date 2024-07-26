@@ -13,12 +13,13 @@ N_samp = 50000
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
-for variety in ['qrk']:
+for variety in ['had', 'hyp', 'qrk']:
+    success_count = 0
     for n in range(N_samp):
         source_path = f'{source_dir}/{variety}agn/DRAWmod1000-{int(n/1000):06}'
         eos = pd.read_csv(f'{source_path}/eos-draw-{n:06}.csv')
         if pqcd.consistent_with_pqcd(eos, pqcd_region_dict):
-            destination_path = f'{destination_dir}/{variety}agn/DRAWmod1000-{int(n/1000):06}'
+            destination_path = f'{destination_dir}/{variety}agn/DRAWmod1000-{int(success_count/1000):06}'
             if not os.path.exists(destination_path):
                 os.makedirs(destination_path)
-            shutil.copy(f'{source_path}/eos-draw-{n:06}.csv', f'{destination_path}/eos-draw-{n:06}.csv')
+            shutil.copy(f'{source_path}/eos-draw-{n:06}.csv', f'{destination_path}/eos-draw-{success_count:06}.csv')
