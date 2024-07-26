@@ -33,12 +33,11 @@ def get_eos_file(eos_directory, properties = {"Mmax": get_mmax}, num_eoss=3000, 
 
 if __name__ == "__main__":
     for directory in [
-            "11233_maxpc2-1e11_mrgagn_01d000_00d010",
-            "11233_maxpc2-1e12_mrgagn_01d000_00d010",
-            "11233_maxpc2-1e13_mrgagn_01d000_00d010",
-            "11233_maxpc2-1e14_mrgagn_01d000_00d010"
+        "hadagn",
+        "hypagn",
+        "qrkagn"
     ]:
-        eos_file = get_eos_file(os.path.join("/home/isaac.legred/RMFGP/gp-rmf-inference/conditioned-priors/11233", 
-                                directory))
+        eos_file = get_eos_file(
+            os.path.join("/home/eliot.finch/eos/pqcd/data/eos-draws-modified/11", directory))
         eos_file.to_csv(f"{directory}.csv", index=False)
             
