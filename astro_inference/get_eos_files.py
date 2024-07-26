@@ -16,7 +16,7 @@ def get_mmax(macro_data):
     
 
 
-def get_eos_file(eos_directory, properties = {"Mmax": get_mmax}, num_eoss=3000, eos_per_dir=1000):
+def get_eos_file(eos_directory, properties = {"Mmax": get_mmax}, num_eoss=10, eos_per_dir=1000):
     """
     For each eos, get all of the properties specified in the properties (currently only can get
     properties from the "macro" file)
@@ -38,6 +38,6 @@ if __name__ == "__main__":
         "qrkagn"
     ]:
         eos_file = get_eos_file(
-            os.path.join("/home/eliot.finch/eos/pqcd/data/eos-draws-modified/11", directory))
+            os.path.join("/home/eliot.finch/eos/pqcd/make-agnostic-processes", directory))
         eos_file.to_csv(f"{directory}.csv", index=False)
             
