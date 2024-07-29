@@ -7,7 +7,7 @@ import os
 import pqcd
 
 source_dir = '/home/eliot.finch/eos/pqcd/make-agnostic-processes'
-destination_dir = '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/11'
+destination_dir = '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/12'
 
 N_samp = 50000
 
@@ -23,3 +23,5 @@ for variety in ['had', 'hyp', 'qrk']:
             if not os.path.exists(destination_path):
                 os.makedirs(destination_path)
             shutil.copy(f'{source_path}/eos-draw-{n:06}.csv', f'{destination_path}/eos-draw-{success_count:06}.csv')
+            shutil.copy(f'{source_path}/draw-gpr_{variety}agn-{n:06}.csv', f'{destination_path}/draw-gpr_{variety}agn-{success_count:06}.csv')
+            success_count += 1
