@@ -109,7 +109,7 @@ if __name__ == "__main__":
             eos_dir=eos_dir,
             eos_per_dir=eos_per_dir,
             macro_dir=eos_dir,
-            macro_path_template="macro-draw-%(draw)06d.csv",
+            macro_path_template="macro-eos-draw-%(draw)06d.csv",
             eos_column="eos",
         )
 
