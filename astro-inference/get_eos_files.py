@@ -21,6 +21,7 @@ def get_eos_file(eos_directory, properties = {"Mmax": get_mmax}, num_eoss=10, eo
         eos_column= "eos", 
         eos_per_dir=eos_per_dir, 
         macro_dir=eos_directory, 
+        macro_path_template='macro-eos-draw-%(draw)06d.csv',
         branches_data=None
         )
     eos_file = pd.DataFrame({"eos" : np.arange(num_eoss) })
