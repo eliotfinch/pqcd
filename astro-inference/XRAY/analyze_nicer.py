@@ -81,7 +81,7 @@ def weigh_eoss_by_nicer_samples(
 if __name__ == "__main__":
 
     set_number = 12
-    varieties = ['had', 'hyp', 'qrk']
+    varieties = ['marg'] # ['had', 'hyp', 'qrk']
     
     eos_base_directory = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}'
     outdir = "."
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     for variety in varieties:
 
         eos_posterior = EoSPosterior.from_csv(
-            f"{eos_base_directory}/{variety}agn.csv", 
+            f"{eos_base_directory}/{variety}agn-manifest.csv", 
             label=f'{variety}agn'
             )
         eos_dir = f"{eos_base_directory}/{variety}agn"

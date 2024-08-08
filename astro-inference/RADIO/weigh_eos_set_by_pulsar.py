@@ -18,7 +18,7 @@ def weigh_by_pulsar_data(pulsar_mass_sample_sets, eos_posterior, **kwargs):
 if __name__ == "__main__":
 
     set_number = 12
-    varieties = ['had', 'hyp', 'qrk']
+    varieties = ['marg'] # ['had', 'hyp', 'qrk']
     
     eos_base_directory = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}'
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     
     for variety in varieties:
         eos_posterior = EoSPosterior.from_csv(
-            f"{eos_base_directory}/{variety}agn.csv", 
+            f"{eos_base_directory}/{variety}agn-manifest.csv", 
             label=f'{variety}agn'
             )
         weigh_by_pulsar_data(pulsar_mass_sets, eos_posterior)

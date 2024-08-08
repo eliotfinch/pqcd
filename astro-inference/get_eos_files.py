@@ -36,14 +36,15 @@ def get_eos_file(eos_directory, properties = {"Mmax": get_mmax}, num_eoss=10, eo
 if __name__ == "__main__":
 
     set_number = 12
-    count_dict = {'had': 84, 'hyp': 338, 'qrk': 437}
-    
+    # count_dict = {'had': 305, 'hyp': 338, 'qrk': 437}
+    count_dict = {'marg': 1079}
+
     for variety, count in count_dict.items():
         eos_file = get_eos_file(
             f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}/{variety}agn', 
             num_eoss=count
             )
         eos_file.to_csv(
-            f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}/{variety}agn.csv', 
+            f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}/{variety}agn-manifest.csv', 
             index=False
             )
