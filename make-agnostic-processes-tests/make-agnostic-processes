@@ -60,6 +60,14 @@ hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/alf/gpr_gpr_quark-alf.hdf5"
 
 selectparampath['qrk']="${dir}/hyperparams-mc_quark-agnostic.csv"
 
+### add custom stuff
+
+dir="${basedir}/custom"
+
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/a/gpr_gpr_custom-a.hdf5"
+
+selectparampath['cus']="${dir}/hyperparams-mc_quark-agnostic.csv"
+
 #-------------------------------------------------
 #
 # define parameters used to construct conditioned processes
@@ -125,14 +133,15 @@ CRUST="$PWD/ingo-bps-with-cs2c2-modified.csv"
 #-------------------------------------------------
 
 # Number of EoS realizations we want
-NUM_EOS=10
+NUM_EOS=2000
 
 #------------------------
 
 COMPS=""
 # COMPS="$COMPS had"
 # COMPS="$COMPS hyp"
-COMPS="$COMPS qrk"
+# COMPS="$COMPS qrk"
+COMPS="$COMPS cus"
 
 #------------------------
 
