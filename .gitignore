@@ -3,6 +3,7 @@ astro-inference/XRAY/*.csv
 data/*
 notebooks/figures/*
 make-agnostic-processes*/*agn/*
+make-agnostic-processes*/custom/*
 make-agnostic-processes*/ingo-bps-with-cs2c2.csv
 make-agnostic-processes*/ingo-bps-with-cs2c2-modified.csv
 
