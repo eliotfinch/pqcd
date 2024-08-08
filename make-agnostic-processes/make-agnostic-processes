@@ -125,12 +125,12 @@ CRUST="$PWD/ingo-bps-with-cs2c2-modified.csv"
 #-------------------------------------------------
 
 # Number of EoS realizations we want
-NUM_EOS=1000000
+NUM_EOS=200000
 
 #------------------------
 
 COMPS=""
-COMPS="$COMPS had"
+# COMPS="$COMPS had"
 COMPS="$COMPS hyp"
 COMPS="$COMPS qrk"
 
@@ -177,7 +177,7 @@ do
 
     ### draw from resulting GP
 
-#    echo \
+    # echo \
     draw-gpr \
         -v \
         -n $NUM_EOS \
