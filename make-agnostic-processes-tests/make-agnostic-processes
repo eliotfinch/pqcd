@@ -65,6 +65,14 @@ selectparampath['qrk']="${dir}/hyperparams-mc_quark-agnostic.csv"
 dir="${basedir}/cusagn"
 
 hdf5paths['cus']="${hdf5paths['cus']} ${dir}/a/gpr_gpr_custom-a.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/b/gpr_gpr_custom-b.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/c/gpr_gpr_custom-c.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/d/gpr_gpr_custom-d.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/e/gpr_gpr_custom-e.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/f/gpr_gpr_custom-f.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/g/gpr_gpr_custom-g.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/h/gpr_gpr_custom-h.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/i/gpr_gpr_custom-i.hdf5"
 
 selectparampath['cus']="${dir}/hyperparams-mc_quark-agnostic.csv"
 
