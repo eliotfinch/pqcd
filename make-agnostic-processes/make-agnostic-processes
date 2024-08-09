@@ -125,7 +125,7 @@ CRUST="$PWD/ingo-bps-with-cs2c2-modified.csv"
 #-------------------------------------------------
 
 # Number of EoS realizations we want
-NUM_EOS=200000
+NUM_EOS=50000
 
 #------------------------
 
@@ -149,7 +149,7 @@ do
 
     ### create the conditioned GP
 
-    echo \
+    # echo \
     $(which gpr-gpr) \
         -V \
         --pressure-bounds $pressure_bounds \
