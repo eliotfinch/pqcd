@@ -55,14 +55,14 @@ selectparampath['hyp']="${dir}/hyperparams-mc_hyperonic-agnostic.csv"
 dir="${basedir}/qrkagn"
 
 hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/alf/gpr_gpr_quark-alf.hdf5"
-# hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/ddq/gpr_gpr_quark-ddq.hdf5"
-# hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/hqc/gpr_gpr_quark-hqc.hdf5"
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/ddq/gpr_gpr_quark-ddq.hdf5"
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/hqc/gpr_gpr_quark-hqc.hdf5"
 
 selectparampath['qrk']="${dir}/hyperparams-mc_quark-agnostic.csv"
 
 ### add custom stuff
 
-dir="${basedir}/custom"
+dir="${basedir}/cusagn"
 
 hdf5paths['cus']="${hdf5paths['cus']} ${dir}/a/gpr_gpr_custom-a.hdf5"
 
