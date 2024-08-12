@@ -26,9 +26,9 @@ run_bash_script() {
 }
 
 set_number=12
-N_samples=450
+N_samples=900
 
-for variety in 'had' 'hyp' 'qrk'; do
+for variety in 'hyp' 'qrk'; do
     variety_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/$(printf '%02d' $set_number)/${variety}agn"
     for eos_dir in "$variety_dir"/*/; do
         if [ -d "$eos_dir" ]; then
