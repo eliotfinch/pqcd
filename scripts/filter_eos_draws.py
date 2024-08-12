@@ -8,13 +8,14 @@ import pqcd
 
 source_dir = '/home/eliot.finch/eos/pqcd/make-agnostic-processes'
 destination_dir = '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/12'
+success_counts = {'hyp': 339, 'qrk': 438}
 
 N_samp = 50000
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
-for variety in ['had', 'hyp', 'qrk']:
-    success_count = 0
+for variety in ['hyp', 'qrk']:
+    success_count = success_counts[variety]
     for n in range(N_samp):
         source_path = f'{source_dir}/{variety}agn/DRAWmod1000-{int(n/1000):06}'
         eos = pd.read_csv(f'{source_path}/eos-draw-{n:06}.csv')
