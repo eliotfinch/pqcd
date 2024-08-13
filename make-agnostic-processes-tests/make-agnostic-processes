@@ -74,7 +74,7 @@ hdf5paths['cus']="${hdf5paths['cus']} ${dir}/g/gpr_gpr_custom-g.hdf5"
 hdf5paths['cus']="${hdf5paths['cus']} ${dir}/h/gpr_gpr_custom-h.hdf5"
 hdf5paths['cus']="${hdf5paths['cus']} ${dir}/i/gpr_gpr_custom-i.hdf5"
 
-selectparampath['cus']="${dir}/hyperparams-mc_quark-agnostic.csv"
+selectparampath['cus']="${dir}/hyperparams-mc_custom-agnostic.csv"
 
 #-------------------------------------------------
 #
@@ -115,7 +115,7 @@ max_stitch_pressurec2="1e16"
 # For cs^2/c^2 = 1/3, we require phi = log(3 - 1) = log(2) ~ 0.69
 stitch_mean=0.6931471805599453 
 stitch_pressurec2="1e16"
-stitch_index=-3.0
+stitch_index=-5.0
 stitch_sigma=0.1
 
 stitch_num_points=100
@@ -146,10 +146,10 @@ NUM_EOS=2000
 #------------------------
 
 COMPS=""
-# COMPS="$COMPS had"
-# COMPS="$COMPS hyp"
-# COMPS="$COMPS qrk"
-COMPS="$COMPS cus"
+COMPS="$COMPS had"
+COMPS="$COMPS hyp"
+COMPS="$COMPS qrk"
+# COMPS="$COMPS cus"
 
 #------------------------
 
