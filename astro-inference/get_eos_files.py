@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     set_number = 12
     # count_dict = {'had': 305, 'hyp': 338, 'qrk': 437}
-    count_dict = {'marg': 1079}
+    count_dict = {'marg': 1864}
 
     for variety, count in count_dict.items():
         eos_file = get_eos_file(

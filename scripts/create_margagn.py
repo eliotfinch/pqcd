@@ -1,16 +1,13 @@
-# %%
 import os
 import shutil
 from pathlib import Path
 
-# %%
 eos_dir = Path('../data/eos-draws-modified/12')
 
-# %%
 eos_counts = {
-    'had': 305,
-    'hyp': 338,
-    'qrk': 437
+    'had': 305+1,
+    'hyp': 680+1,
+    'qrk': 876+1
 }
 
 marg_count = 0
