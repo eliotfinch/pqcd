@@ -76,6 +76,52 @@ hdf5paths['cus']="${hdf5paths['cus']} ${dir}/i/gpr_gpr_custom-i.hdf5"
 
 selectparampath['cus']="${dir}/hyperparams-mc_custom-agnostic.csv"
 
+### add individual stuff
+
+dir="${basedir}/cusaagn"
+hdf5paths['cusa']="${hdf5paths['cusa']} ${dir}/a/gpr_gpr_custom-a.hdf5"
+selectparampath['cusa']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusbagn"
+hdf5paths['cusb']="${hdf5paths['cusb']} ${dir}/b/gpr_gpr_custom-b.hdf5"
+selectparampath['cusb']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cuscagn"
+hdf5paths['cusc']="${hdf5paths['cusc']} ${dir}/c/gpr_gpr_custom-c.hdf5"
+selectparampath['cusc']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusdagn"
+hdf5paths['cusd']="${hdf5paths['cusd']} ${dir}/d/gpr_gpr_custom-d.hdf5"
+selectparampath['cusd']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cuseagn"
+hdf5paths['cuse']="${hdf5paths['cuse']} ${dir}/e/gpr_gpr_custom-e.hdf5"
+selectparampath['cuse']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusfagn"
+hdf5paths['cusf']="${hdf5paths['cusf']} ${dir}/f/gpr_gpr_custom-f.hdf5"
+selectparampath['cusf']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusgagn"
+hdf5paths['cusg']="${hdf5paths['cusg']} ${dir}/g/gpr_gpr_custom-g.hdf5"
+selectparampath['cusg']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cushagn"
+hdf5paths['cush']="${hdf5paths['cush']} ${dir}/h/gpr_gpr_custom-h.hdf5"
+selectparampath['cush']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusiagn"
+hdf5paths['cusi']="${hdf5paths['cusi']} ${dir}/i/gpr_gpr_custom-i.hdf5"
+selectparampath['cusi']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusjagn"
+hdf5paths['cusj']="${hdf5paths['cusj']} ${dir}/j/gpr_gpr_custom-j.hdf5"
+selectparampath['cusj']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cuskagn"
+hdf5paths['cusk']="${hdf5paths['cusk']} ${dir}/k/gpr_gpr_custom-k.hdf5"
+selectparampath['cusk']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
 #-------------------------------------------------
 #
 # define parameters used to construct conditioned processes
@@ -86,7 +132,7 @@ selectparampath['cus']="${dir}/hyperparams-mc_custom-agnostic.csv"
 num_points=500
 
 # The number of hyperparameter sets to use (out of ~ 300)
-num_models=50
+num_models=10
 
 # pQCD predictions give pH ~ 1e16
 min_pressurec2="1e10"
@@ -146,10 +192,11 @@ NUM_EOS=2000
 #------------------------
 
 COMPS=""
-COMPS="$COMPS had"
-COMPS="$COMPS hyp"
-COMPS="$COMPS qrk"
+# COMPS="$COMPS had"
+# COMPS="$COMPS hyp"
+# COMPS="$COMPS qrk"
 # COMPS="$COMPS cus"
+COMPS="$COMPS cusa cusb cusc cusd cuse cusf cusg cush cusi cusj cusk"
 
 #------------------------
 
