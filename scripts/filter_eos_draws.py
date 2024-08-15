@@ -43,19 +43,19 @@ for variety in varieties:
 
 print(success_counts)
 
-# N_samp = 50000
+N_samp = 50000
 
-# pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
+pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
-# for variety in varieties:
-#     success_count = success_counts[variety]
-#     for n in range(N_samp):
-#         source_path = source_dir / f'{variety}agn/DRAWmod1000-{int(n/1000):06}'
-#         eos = pd.read_csv(source_path / f'eos-draw-{n:06}.csv')
-#         if pqcd.consistent_with_pqcd(eos, pqcd_region_dict):
-#             destination_path = destination_dir / f'{variety}agn/DRAWmod1000-{int(success_count/1000):06}'
-#             if not os.path.exists(destination_path):
-#                 os.makedirs(destination_path)
-#             shutil.copy(source_path / f'eos-draw-{n:06}.csv', destination_path / f'eos-draw-{success_count:06}.csv')
-#             shutil.copy(source_path / f'draw-gpr_{variety}agn-{n:06}.csv', destination_path / f'draw-gpr_{variety}agn-{success_count:06}.csv')
-#             success_count += 1
+for variety in varieties:
+    success_count = success_counts[variety]
+    for n in range(N_samp):
+        source_path = source_dir / f'{variety}agn/DRAWmod1000-{int(n/1000):06}'
+        eos = pd.read_csv(source_path / f'eos-draw-{n:06}.csv')
+        if pqcd.consistent_with_pqcd(eos, pqcd_region_dict):
+            destination_path = destination_dir / f'{variety}agn/DRAWmod1000-{int(success_count/1000):06}'
+            if not os.path.exists(destination_path):
+                os.makedirs(destination_path)
+            shutil.copy(source_path / f'eos-draw-{n:06}.csv', destination_path / f'eos-draw-{success_count:06}.csv')
+            shutil.copy(source_path / f'draw-gpr_{variety}agn-{n:06}.csv', destination_path / f'draw-gpr_{variety}agn-{success_count:06}.csv')
+            success_count += 1
