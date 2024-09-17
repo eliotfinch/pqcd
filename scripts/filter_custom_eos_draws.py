@@ -21,16 +21,49 @@ labels = [
     'i',
     'j',
     'k',
-    'l',
 ]
 
-success_counts = {label: 0 for label in labels}
+print('Counting number of exisiting eos-draw files in each directory...')
 
-N_samp = 2000
+success_counts = {}
+
+for label in labels:
+
+    label_dest_dir = destination_dir / f'cus{label}agn'
+
+    # Get the list of DRAWmod1000 directories
+    drawmod_dirs = [
+        f.name for f in label_dest_dir.iterdir() 
+        if f.is_dir() and f.name.startswith('DRAWmod1000')
+        ]
+
+    # We care about the largest DRAWmod1000 directory
+    drawmod_dir = sorted(drawmod_dirs)[-1]
+
+    drawmod_dest_dir = label_dest_dir / drawmod_dir
+
+    # Get the list of eos-draw files
+    eos_draw_files = [
+        f.name for f in drawmod_dest_dir.iterdir() 
+        if f.is_file() and f.name.startswith('eos-draw')
+        ]
+    
+    eos_numbers = []
+    for f in eos_draw_files:
+        eos_numbers.append(int(f.split('-')[-1].split('.')[0]))
+
+    success_counts[label] = max(eos_numbers) + 1
+
+print(success_counts)
+
+N_samp = 4000
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
+print('Copying eos-draw files consistent with pQCD region...')
+
 for label in labels:
+    print(f'Processing label {label}...')
     success_count = success_counts[label]
     for n in range(N_samp):
         source_path = f'{source_dir}/cus{label}agn/DRAWmod1000-{int(n/1000):06}'
