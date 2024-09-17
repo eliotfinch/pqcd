@@ -6,8 +6,10 @@ import shutil
 import os
 import pqcd
 
-source_dir = '/home/eliot.finch/eos/pqcd/make-agnostic-processes-tests'
-destination_dir = '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/17'
+from pathlib import Path
+
+source_dir = Path('/home/eliot.finch/eos/pqcd/make-agnostic-processes-tests')
+destination_dir = Path('/home/eliot.finch/eos/pqcd/data/eos-draws-modified/17')
 
 labels = [
     'a',
@@ -66,12 +68,12 @@ for label in labels:
     print(f'Processing label {label}...')
     success_count = success_counts[label]
     for n in range(N_samp):
-        source_path = f'{source_dir}/cus{label}agn/DRAWmod1000-{int(n/1000):06}'
-        eos = pd.read_csv(f'{source_path}/eos-draw-{n:06}.csv')
+        source_path = source_dir / f'cus{label}agn/DRAWmod1000-{int(n/1000):06}'
+        eos = pd.read_csv(source_path / f'eos-draw-{n:06}.csv')
         if pqcd.consistent_with_pqcd(eos, pqcd_region_dict):
-            destination_path = f'{destination_dir}/cus{label}agn/DRAWmod1000-{int(success_count/1000):06}'
+            destination_path = destination_dir / f'cus{label}agn/DRAWmod1000-{int(success_count/1000):06}'
             if not os.path.exists(destination_path):
                 os.makedirs(destination_path)
-            shutil.copy(f'{source_path}/eos-draw-{n:06}.csv', f'{destination_path}/eos-draw-{success_count:06}.csv')
-            shutil.copy(f'{source_path}/draw-gpr_cus{label}agn-{n:06}.csv', f'{destination_path}/draw-gpr_cus{label}agn-{success_count:06}.csv')
+            shutil.copy(source_path / f'eos-draw-{n:06}.csv', destination_path / f'eos-draw-{success_count:06}.csv')
+            shutil.copy(source_path / f'draw-gpr_cus{label}agn-{n:06}.csv', destination_path / f'draw-gpr_cus{label}agn-{success_count:06}.csv')
             success_count += 1
