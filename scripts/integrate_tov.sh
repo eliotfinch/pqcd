@@ -26,15 +26,27 @@ run_bash_script() {
 }
 
 set_number=12
-N_samples=900
 
-for variety in 'hyp' 'qrk'; do
+# Loop over each variety type ('had', 'hyp', 'qrk')
+for variety in 'had' 'hyp' 'qrk'; do
+    # Define the directory path for the current variety
+    # Using $(printf '%02d' $set_number) to format set_number as two digits (e.g., '01', '02')
     variety_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/$(printf '%02d' $set_number)/${variety}agn"
+
+    # Loop over each subdirectory in the current variety directory
     for eos_dir in "$variety_dir"/*/; do
+        # Check if the current path is a directory
         if [ -d "$eos_dir" ]; then
-            for eos_path in "$eos_dir"/*; do
-                eos=$(basename "$eos_path")
-                run_bash_script "$eos" "$eos_dir"
+            # Loop over each file in the current eos_dir directory that begins with "eos-draw"
+            for eos_path in "$eos_dir"/eos-draw*; do
+                # Check if the current path is a file
+                if [ -f "$eos_path" ]; then
+                    # Extract the filename (basename) from the path
+                    eos=$(basename "$eos_path")
+                    
+                    # Call a function or script with the current filename and directory as arguments
+                    run_bash_script "$eos" "$eos_dir"
+                fi
             done
         fi
     done
