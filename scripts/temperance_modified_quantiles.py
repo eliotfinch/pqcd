@@ -30,7 +30,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     weight_columns=astro_weight_columns,
     eos_data=default_eos_prior,
     verbose=True,
-    max_num_samples=6500,
+    max_num_samples=6300,
     save_path='../data/eos-draws-modified/12/quantiles/p_of_eps_quantiles.csv'
 )
 
@@ -40,7 +40,7 @@ posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
     weight_columns=astro_weight_columns,
     eos_data=default_eos_prior,
     verbose=True,
-    max_num_samples=6500,
+    max_num_samples=6300,
     save_path='../data/eos-draws-modified/12/quantiles/p_of_rho_quantiles.csv'
 )
 
@@ -50,7 +50,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     weight_columns=astro_weight_columns,
     eos_data=default_eos_prior,
     verbose=True,
-    max_num_samples=6500,
+    max_num_samples=6300,
     save_path=(
         '../data/eos-draws-modified/12/quantiles/cs2_of_rho_quantiles.csv'
     )
@@ -62,7 +62,7 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     weight_columns=astro_weight_columns,
     eos_data=default_eos_prior,
     verbose=True,
-    max_num_samples=6500,
+    max_num_samples=6300,
     save_path='../data/eos-draws-modified/12/quantiles/r_of_m_quantiles.csv'
 )
 
@@ -72,7 +72,7 @@ posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
     weight_columns=astro_weight_columns,
     eos_data=default_eos_prior,
     verbose=True,
-    max_num_samples=6500,
+    max_num_samples=6300,
     save_path=(
         '../data/eos-draws-modified/12/quantiles/lambda_of_m_quantiles.csv'
     )
