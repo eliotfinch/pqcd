@@ -1,6 +1,10 @@
+astro-inference/RADIO/*.csv
+astro-inference/RADIO/condor*
 astro-inference/XRAY/*.csv
+astro-inference/XRAY/condor*
 astro-inference/GW/*.csv
 astro-inference/GW/*.in
+astro-inference/GW/margagn
 data/*
 notebooks/figures/*
 make-agnostic-processes*/*agn/*
