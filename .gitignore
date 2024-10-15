@@ -1,5 +1,6 @@
-astro/*
 astro-inference/XRAY/*.csv
+astro-inference/GW/*.csv
+astro-inference/GW/*.in
 data/*
 notebooks/figures/*
 make-agnostic-processes*/*agn/*
