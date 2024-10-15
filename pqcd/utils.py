@@ -21,8 +21,9 @@ rcparams = {
     'text.usetex': True,
     }
 
-# Our EOSs have pressure, energy density, and baryon density in units of 
+# Our EOSs have pressure, energy density, and baryon density in units of
 # g/cm^3. These functions convert to units used by others for comparison.
+
 
 def to_GeV_per_cubic_femtometre(x):
 
@@ -32,6 +33,7 @@ def to_GeV_per_cubic_femtometre(x):
     # Convert to GeV/fm^3
     return x*(1/(1e9*e))*((1e-15)**3/(0.01**3))
 
+
 def to_nucleons_per_cubic_femtometre(x):
 
     # Convert to kg/fm^3
@@ -39,6 +41,24 @@ def to_nucleons_per_cubic_femtometre(x):
 
     # Divide by the atomic mass constant to get nucleons/fm^3
     return x/m_u
+
+
+# In papers cgs units are sometimes used. These functions convert to the
+# preferred "nuclear" units:
+
+
+def dyn_per_square_cm_to_GeV_per_cubic_femtometer(x):
+
+    # Convert to N/m^2
+    # x = x*1e-5/1e-4
+    x *= 0.1
+
+    # Convert to GeV/fm^3
+    # x = x*6.242e9/(1e15)^3
+    x *= 6.242e-36
+
+    return x
+
 
 def weighted_quantile(values, quantiles, weights):
 
@@ -48,5 +68,5 @@ def weighted_quantile(values, quantiles, weights):
 
     weighted_quantiles = np.cumsum(weights)
     weighted_quantiles /= np.sum(weights)
-    
+
     return np.interp(quantiles, weighted_quantiles, values)
