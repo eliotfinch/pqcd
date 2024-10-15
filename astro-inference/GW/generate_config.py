@@ -59,6 +59,7 @@ def generate_config(
     config["Output"] = {
         "save-marginalized-likelihoods": f"{outtag}_eos.csv",
         "save-likelihoods": f"{outtag}_post.csv",
+        "macro-prefix": "macro-eos-draw",
         "output-dir": os.path.join(cwd, eos_tag, outtag)
     }
 
