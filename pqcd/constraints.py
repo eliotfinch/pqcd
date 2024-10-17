@@ -9,22 +9,19 @@ class constraints:
     def __init__(self, muL, nL, pL, muH, nH, pH):
         """
         Initialize the constraints class. Functions taken from Komoltsev &
-        Kurkela 2022, arXiv:2111.05350. We use their pQCD class to compute the
-        pressure and number density at a given baryon chemical potential and
-        renormalization scale parameter.
+        Kurkela (KK) 2022, arXiv:2111.05350.
 
         Parameters
         ----------
         muL, nL, pL : float
-            Predicted values of the baryon chemical potential [GeV], baryon
-            number density [1/fm^3], and pressure [GeV/fm^3] at low density.
+            Values of the baryon chemical potential [GeV], baryon number
+            density [1/fm^3], and pressure [GeV/fm^3] at low density. This
+            could be, for example, a prediction from chiral EFT.
 
-        muH : float
-            Predicted values of the baryon chemical potential [GeV] at high
-            density.
-
-        X : float
-            The renormalization scale parameter.
+        muH, nH, pH : float
+            Values of the baryon chemical potential [GeV], baryon number
+            density [1/fm^3], and pressure [GeV/fm^3] at high density. This
+            could be, for example, a prediction from perturbative QCD.
         """
         self.muL = muL
         self.nL = nL
@@ -50,7 +47,7 @@ class constraints:
     def nmin_scalar(self, mu):
         """
         Returns the minimum allowed value of the baryon number density at a
-        given baryon chemical potential.
+        given baryon chemical potential (KK Eq. 9).
         """
         if self.muL <= mu <= self.muc:
             return self.nL*mu/self.muL
@@ -67,7 +64,7 @@ class constraints:
     def nmax_scalar(self, mu):
         """
         Returns the maximum allowed value of the baryon number density at a
-        given baryon chemical potential.
+        given baryon chemical potential (KK Eq. 6).
         """
         if self.muL <= mu < self.muc:
             numerator = mu**3*self.nL - \
@@ -84,21 +81,21 @@ class constraints:
     def nc(self, mu):
         """
         The special EOS for which the speed of sound is equal to the speed of
-        light throughout the whole region.
+        light throughout the whole region (KK Eq. 11).
         """
         return (self.nmin(self.muH)*mu)/self.muH
 
     def pmin(self, mu):
         """
         Returns the minimum allowed value of the pressure at a given baryon
-        chemical potential.
+        chemical potential (KK Eq. 12).
         """
         return self.pL + ((mu**2 - self.muL**2)/(2*mu))*self.nmin(mu)
 
     def pmax_scalar(self, mu, n):
         """
         Returns the maximum allowed value of the pressure at a given baryon
-        chemical potential and baryon number density.
+        chemical potential and baryon number density (KK Eqs. 13 and 14).
         """
         if n < self.nc(mu):
             return self.pL + ((mu**2 - self.muL**2)/(2*mu))*n
@@ -109,14 +106,14 @@ class constraints:
     def epsilon_min(self, mu):
         """
         Returns the minimum allowed value of the energy density at a given
-        baryon chemical potential.
+        baryon chemical potential (KK Eq. A2).
         """
         return -self.pmax(mu, self.nmin(mu)) + mu*self.nmin(mu)
 
     def epsilon_max(self, mu):
         """
         Returns the maximum allowed value of the energy density at a given
-        baryon chemical potential.
+        baryon chemical potential (KK Eq. A1).
         """
         return -self.pmin(mu) + mu*self.nmax(mu)
 
