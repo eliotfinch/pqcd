@@ -2,7 +2,7 @@ import numpy as np
 
 from scipy.integrate import cumulative_trapezoid
 from .utils import (
-    to_GeV_per_cubic_femtometre, 
+    to_GeV_per_cubic_femtometre,
     to_nucleons_per_cubic_femtometre
 )
 
@@ -231,7 +231,7 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
     # Perform a quick filter to remove EOSs that don't cross the min and max
     # pressures
     if (
-        max(pressure_interp) < pqcd_region_dict['p_boundary_min'] or 
+        max(pressure_interp) < pqcd_region_dict['p_boundary_min'] or
         min(pressure_interp) > pqcd_region_dict['p_boundary_max']
     ):
         return False
@@ -243,7 +243,10 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
     for n, p, mu in zip(
         number_density_interp, pressure_interp, pqcd_region_dict['mu_array']
     ):
-        if pqcd_region_dict['p_boundary_min'] < p < pqcd_region_dict['p_boundary_max']:
+        if (
+            pqcd_region_dict['p_boundary_min'] < p
+            < pqcd_region_dict['p_boundary_max']
+        ):
             min_n = pqcd_region_dict['left_n_boundary'][
                 np.argmin(np.abs(pqcd_region_dict['left_p_boundary']-p))
                 ]
@@ -276,16 +279,21 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
         # the EOS value (in which case the EOS is "below" the surface).
 
         # To do this we use the dense arrays defined above. These are arrays of
-        # p and n values for fixed mu. We find the closest (p,n) pair to the 
-        # EOS start point and use the corresponding mu value as the "projected" 
+        # p and n values for fixed mu. We find the closest (p,n) pair to the
+        # EOS start point and use the corresponding mu value as the "projected"
         # mu value.
 
         n_start = inside_region_n[np.argmin(inside_region_mu)]
         p_start = inside_region_p[np.argmin(inside_region_mu)]
 
         min_delta = 10
-        for mu, (dense_p_array, dense_n_array) in pqcd_region_dict['dense_arrays'].items():
-            delta = abs(n_start - dense_n_array[np.argmin(np.abs(dense_p_array-p_start))])
+        for mu, (dense_p_array, dense_n_array) in (
+            pqcd_region_dict['dense_arrays'].items()
+        ):
+            delta = abs(
+                n_start -
+                dense_n_array[np.argmin(np.abs(dense_p_array-p_start))]
+            )
             if delta < min_delta:
                 min_delta = delta
                 mu_start_projected = mu
@@ -294,8 +302,12 @@ def consistent_with_pqcd(eos, pqcd_region_dict):
         p_end = inside_region_p[np.argmax(inside_region_mu)]
 
         min_delta = 10
-        for mu, (dense_p_array, dense_n_array) in pqcd_region_dict['dense_arrays'].items():
-            delta = abs(n_end - dense_n_array[np.argmin(np.abs(dense_p_array-p_end))])
+        for mu, (dense_p_array, dense_n_array) in (
+            pqcd_region_dict['dense_arrays'].items()
+        ):
+            delta = abs(
+                n_end - dense_n_array[np.argmin(np.abs(dense_p_array-p_end))]
+            )
             if delta < min_delta:
                 min_delta = delta
                 mu_end_projected = mu
