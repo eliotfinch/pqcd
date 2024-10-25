@@ -43,8 +43,8 @@ def to_nucleons_per_cubic_femtometre(x):
     return x/m_u
 
 
-# In papers cgs units are sometimes used. These functions convert to the
-# preferred "nuclear" units:
+# In papers cgs units are sometimes used. These functions convert between them
+# and "nuclear" units:
 
 
 def dyn_per_square_cm_to_GeV_per_cubic_femtometer(x):
@@ -56,6 +56,17 @@ def dyn_per_square_cm_to_GeV_per_cubic_femtometer(x):
     # Convert to GeV/fm^3
     # x = x*6.242e9/(1e15)^3
     x *= 6.242e-36
+
+    return x
+
+
+def GeV_per_cubic_femtometer_to_dyn_per_square_cm(x):
+
+    # Convert to N/m^2
+    x *= 10
+
+    # Convert to dyn/cm^2
+    x /= (6.242e9/(1e15)**3)
 
     return x
 
