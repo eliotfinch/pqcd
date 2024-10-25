@@ -24,6 +24,8 @@ astro_weight_columns = [
     result.WeightColumn(name='logweight_total', is_log=True, is_inverted=False)
 ]
 
+print('\nPressure vs energy density')
+
 # Pressure vs energy density
 posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     eos_posterior,
@@ -34,6 +36,8 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     save_path='../data/eos-draws-modified/12/quantiles/p_of_eps_quantiles.csv'
 )
 
+print('\nPressure vs baryon density')
+
 # Pressure vs baryon density
 posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
     eos_posterior,
@@ -43,6 +47,8 @@ posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
     max_num_samples=6300,
     save_path='../data/eos-draws-modified/12/quantiles/p_of_rho_quantiles.csv'
 )
+
+print('\nSpeed of sound vs baryon density')
 
 # Speed of sound vs baryon density
 posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
@@ -56,6 +62,8 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     )
 )
 
+print('\nMass vs radius')
+
 # Mass vs radius
 posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     eos_posterior,
@@ -65,6 +73,8 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     max_num_samples=6300,
     save_path='../data/eos-draws-modified/12/quantiles/r_of_m_quantiles.csv'
 )
+
+print('\nLambda vs mass')
 
 # Lambda vs mass
 posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
