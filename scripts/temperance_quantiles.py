@@ -13,7 +13,7 @@ default_eos_prior.macro_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn/'
 
 # All draws
 eos_posterior = EoSPosterior.from_csv(
-    '../data/collated_np_all_post_with_prior.csv',
+    '../data/eos-draws-default/collated_np_all_post_with_prior.csv',
 )
 
 # Draws with non-zero astro weight
