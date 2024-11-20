@@ -22,7 +22,7 @@ eos_posterior = EoSPosterior.from_csv(
 # )
 
 weight_columns = [
-    result.WeightColumn(name='prior', is_log=False, is_inverted=False)
+    result.WeightColumn(name='prior_weight', is_log=False, is_inverted=False)
 ]
 
 # Pressure vs energy density
@@ -31,7 +31,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     weight_columns=weight_columns,
     verbose=True,
     max_num_samples=160000,
-    x_points=np.linspace(3e13, 5e15, 1000),
+    x_points=np.linspace(3e13, 2e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/p_of_eps_quantiles_prior.csv'
     )
