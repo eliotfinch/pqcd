@@ -13,7 +13,7 @@ default_eos_prior.macro_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn/'
 
 # All draws
 eos_posterior = EoSPosterior.from_csv(
-    '../data/collated_np_all_post.csv',
+    '../data/collated_np_all_post_with_prior.csv',
 )
 
 # Draws with non-zero astro weight
@@ -21,18 +21,20 @@ eos_posterior = EoSPosterior.from_csv(
 #     '../data/eos-draws-default.csv',
 # )
 
-astro_weight_columns = [
-    result.WeightColumn(name='logweight_total', is_log=True, is_inverted=False)
+weight_columns = [
+    result.WeightColumn(name='prior', is_log=False, is_inverted=False)
 ]
 
 # Pressure vs energy density
 posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     eos_posterior,
-    weight_columns=astro_weight_columns,
+    weight_columns=weight_columns,
     verbose=True,
     max_num_samples=160000,
-    x_points=np.linspace(3e13, 5e15, 100),
-    save_path='../data/quantiles/p_of_eps_quantiles_alt.csv'
+    x_points=np.linspace(3e13, 5e15, 1000),
+    save_path=(
+        '../data/eos-draws-default/quantiles/p_of_eps_quantiles_prior.csv'
+    )
 )
 
 # # Pressure vs baryon density
