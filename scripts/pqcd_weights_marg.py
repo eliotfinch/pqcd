@@ -65,7 +65,7 @@ pressure_tov = np.loadtxt(
 
 for e, p, ntov in zip(energy_density_tov, pressure_tov, collated_ntov):
     # Requirement of the marginalized pQCD likelihood
-    if ntov < 35*nsat:
+    if nsat < ntov < 35*nsat:
         qcd_weights_ntov.append(pQCD_likelihood(e0=e, p0=p, n0=ntov))
     else:
         qcd_weights_ntov.append(0)
