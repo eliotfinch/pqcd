@@ -65,14 +65,14 @@ for variety, count in eos_counts.items():
         source_eos = source_dir / f'eos-draw-{n:06}.csv'
         destination_eos = destination_dir / f'eos-draw-{marg_count+n:06}.csv'
 
-        source_macro = source_dir / f'macro-eos-draw-{n:06}.csv'
-        destination_macro = \
-            destination_dir / f'macro-eos-draw-{marg_count+n:06}.csv'
+        # source_macro = source_dir / f'macro-eos-draw-{n:06}.csv'
+        # destination_macro = \
+        #     destination_dir / f'macro-eos-draw-{marg_count+n:06}.csv'
 
         # Copy files
         destination_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy(source_gp, destination_gp)
         shutil.copy(source_eos, destination_eos)
-        shutil.copy(source_macro, destination_macro)
+        # shutil.copy(source_macro, destination_macro)
 
     marg_count += count
