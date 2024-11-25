@@ -3,7 +3,7 @@
 _On cluster_:
 1. Create `margagn` via `scripts/create_margagn.py`.
 2. Run `astro-inference/get_eos_files.py`
-3. Run `astro-inference/RADIO/weight_eos_by_pulsar.py`
+3. Run `astro-inference/RADIO/weight_eos_set_by_pulsar.py`
 4. Run `astro-inference/XRAY/analyze_nicer.py`
 5. Run `astro-inference/GW/generate_config.py`
 6. Run `lwp-pipe gw_170817.ini`, `lwp-pipe gw_190425.ini`
