@@ -8,21 +8,21 @@ import pqcd
 
 from pathlib import Path
 
-source_dir = Path('/home/eliot.finch/eos/pqcd/make-agnostic-processes-tests')
-destination_dir = Path('/home/eliot.finch/eos/pqcd/data/eos-draws-modified/17')
+source_dir = Path('/home/eliot.finch/eos/pqcd/make-agnostic-processes-5')
+destination_dir = Path('/home/eliot.finch/eos/pqcd/data/eos-draws-modified/24')
+destination_dir.mkdir(parents=True, exist_ok=True)
 
 labels = [
     'a',
     'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
+    # 'c',
+    # 'd',
+    # 'e',
+    # 'f',
+    # 'g',
+    # 'h',
+    # 'i',
+    # 'j',
 ]
 
 print('Counting number of exisiting eos-draw files in each directory...')
@@ -32,6 +32,7 @@ success_counts = {}
 for label in labels:
 
     label_dest_dir = destination_dir / f'cus{label}agn'
+    label_dest_dir.mkdir(parents=True, exist_ok=True)
 
     # Get the list of DRAWmod1000 directories
     drawmod_dirs = [
@@ -39,26 +40,32 @@ for label in labels:
         if f.is_dir() and f.name.startswith('DRAWmod1000')
         ]
 
-    # We care about the largest DRAWmod1000 directory
-    drawmod_dir = sorted(drawmod_dirs)[-1]
+    if len(drawmod_dirs) > 0:
 
-    drawmod_dest_dir = label_dest_dir / drawmod_dir
+        # We care about the largest DRAWmod1000 directory
+        drawmod_dir = sorted(drawmod_dirs)[-1]
 
-    # Get the list of eos-draw files
-    eos_draw_files = [
-        f.name for f in drawmod_dest_dir.iterdir() 
-        if f.is_file() and f.name.startswith('eos-draw')
+        drawmod_dest_dir = label_dest_dir / drawmod_dir
+
+        # Get the list of eos-draw files
+        eos_draw_files = [
+            f.name for f in drawmod_dest_dir.iterdir() 
+            if f.is_file() and f.name.startswith('eos-draw')
         ]
     
-    eos_numbers = []
-    for f in eos_draw_files:
-        eos_numbers.append(int(f.split('-')[-1].split('.')[0]))
+        eos_numbers = []
+        for f in eos_draw_files:
+            eos_numbers.append(int(f.split('-')[-1].split('.')[0]))
 
-    success_counts[label] = max(eos_numbers) + 1
+        success_counts[label] = max(eos_numbers) + 1
+
+    else:
+
+        success_counts[label] = 0
 
 print(success_counts)
 
-N_samp = 4000
+N_samp = 8000
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
@@ -77,3 +84,4 @@ for label in labels:
             shutil.copy(source_path / f'eos-draw-{n:06}.csv', destination_path / f'eos-draw-{success_count:06}.csv')
             shutil.copy(source_path / f'draw-gpr_cus{label}agn-{n:06}.csv', destination_path / f'draw-gpr_cus{label}agn-{success_count:06}.csv')
             success_count += 1
+    print(f'Success count = {success_count}')
