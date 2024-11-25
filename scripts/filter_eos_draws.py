@@ -8,10 +8,12 @@ import pqcd
 
 from pathlib import Path
 
+print('Filtering set 12 draws...')
+
 source_dir = Path('/home/eliot.finch/eos/pqcd/make-agnostic-processes')
 destination_dir = Path('/home/eliot.finch/eos/pqcd/data/eos-draws-modified/12')
 
-varieties = ['had', 'hyp', 'qrk']
+varieties = ['had'] # , 'hyp', 'qrk']
 success_counts = {}
 
 for variety in varieties:
@@ -43,7 +45,7 @@ for variety in varieties:
 
 print(success_counts)
 
-N_samp = 50000
+N_samp = 100000
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
@@ -59,3 +61,4 @@ for variety in varieties:
             shutil.copy(source_path / f'eos-draw-{n:06}.csv', destination_path / f'eos-draw-{success_count:06}.csv')
             shutil.copy(source_path / f'draw-gpr_{variety}agn-{n:06}.csv', destination_path / f'draw-gpr_{variety}agn-{success_count:06}.csv')
             success_count += 1
+    print(f'{variety}: {success_count}')
