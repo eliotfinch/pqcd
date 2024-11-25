@@ -25,10 +25,11 @@ run_bash_script() {
     "${command[@]}"
 }
 
-set_number=12
+set_number=24
 
 # Loop over each variety type ('had', 'hyp', 'qrk')
-for variety in 'had' 'hyp' 'qrk'; do
+# for variety in 'had' 'hyp' 'qrk'; do
+for variety in 'cusa' 'cusb' 'cusc' 'cusd' 'cuse' 'cusf' 'cusg' 'cush' 'cusi' 'cusj'; do
     # Define the directory path for the current variety
     # Using $(printf '%02d' $set_number) to format set_number as two digits (e.g., '01', '02')
     variety_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/$(printf '%02d' $set_number)/${variety}agn"
