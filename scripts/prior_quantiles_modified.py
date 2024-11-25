@@ -7,11 +7,11 @@ import temperance.plotting.get_quantiles as get_quantiles
 
 from temperance.core.result import EoSPosterior
 
-set_number = 12
-max_num_samples = 16000
+# set_number = 12
+# max_num_samples = 16000
 
-# set_number = 24
-# max_num_samples = 1900
+set_number = 24
+max_num_samples = 1900
 
 default_eos_prior = eos_prior.EoSPriorSet.get_default()
 default_eos_prior.eos_dir = (
