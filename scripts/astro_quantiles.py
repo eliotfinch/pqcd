@@ -33,7 +33,9 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     verbose=True,
     max_num_samples=16000,
     x_points=np.linspace(3e13, 2e16, 1000),
-    save_path='../data/eos-draws-modified/12/quantiles/p_of_eps_astro_quantiles.csv'
+    save_path=(
+        '../data/eos-draws-modified/12/quantiles/p_of_eps_astro_quantiles.csv'
+    )
 )
 
 # print('\nPressure vs baryon density')
@@ -59,7 +61,8 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     max_num_samples=16000,
     x_points=np.linspace(2.8e13, 2.8e15, 1000),
     save_path=(
-        '../data/eos-draws-modified/12/quantiles/cs2_of_rho_astro_quantiles.csv'
+        '../data/eos-draws-modified/12/quantiles/'
+        'cs2_of_rho_astro_quantiles.csv'
     )
 )
 
