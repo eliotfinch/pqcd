@@ -5,7 +5,7 @@ eos_dir = Path('../data/eos-draws-modified/24')
 
 # labels = ['had', 'hyp', 'qrk']
 labels = [
-    'cusa', 
+    'cusa',
     'cusb',
     'cusc',
     'cusd',
