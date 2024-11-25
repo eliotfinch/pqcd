@@ -1,21 +1,21 @@
 import shutil
 from pathlib import Path
 
-eos_dir = Path('../data/eos-draws-modified/24')
+eos_dir = Path('../data/eos-draws-modified/12')
 
-# labels = ['had', 'hyp', 'qrk']
-labels = [
-    'cusa',
-    'cusb',
-    'cusc',
-    'cusd',
-    'cuse',
-    'cusf',
-    'cusg',
-    'cush',
-    'cusi',
-    'cusj'
-]
+labels = ['had', 'hyp', 'qrk']
+# labels = [
+#     'cusa',
+#     'cusb',
+#     'cusc',
+#     'cusd',
+#     'cuse',
+#     'cusf',
+#     'cusg',
+#     'cush',
+#     'cusi',
+#     'cusj'
+# ]
 
 print('Counting number of eos draws...')
 
