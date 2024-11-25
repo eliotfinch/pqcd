@@ -11,3 +11,4 @@ _On cluster_:
 _Locally_:
 
 Copy weights to (for example) `data/eos-draws-modified/12/astro-weights` and run `combine_weights.ipynb`. We can then run `scripts/temperance_modified_quantiles.py`, but note that mass-radius and mass-lambda quantiles are not working because I need to calculate the moment of inertia.
+The relevant GW weights are `gw_170817_eos.csv` and `gw_190425_eos.csv`.
