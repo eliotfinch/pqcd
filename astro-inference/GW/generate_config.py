@@ -109,7 +109,7 @@ def generate_170817_and_190425_inis(
 
 if __name__ == "__main__":
 
-    set_number = 12
+    set_number = 24
     eos_tag = "margagn"
     eos_per_dir = 1000
     eos_directory = (

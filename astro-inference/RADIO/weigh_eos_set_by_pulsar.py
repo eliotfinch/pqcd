@@ -27,7 +27,7 @@ def weigh_by_pulsar_data(pulsar_mass_sample_sets, eos_posterior, **kwargs):
 
 if __name__ == "__main__":
 
-    set_number = 12
+    set_number = 24
     varieties = ["marg"]
 
     eos_base_directory = (

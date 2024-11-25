@@ -47,9 +47,9 @@ def get_eos_file(
 
 if __name__ == "__main__":
 
-    set_number = 12
+    set_number = 24
     # count_dict = {'had': 305, 'hyp': 338, 'qrk': 437}
-    count_dict = {'marg': 6331+1}
+    count_dict = {'marg': 1983+1}
 
     for variety, count in count_dict.items():
         eos_file = get_eos_file(
