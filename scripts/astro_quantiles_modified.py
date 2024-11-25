@@ -7,16 +7,22 @@ import temperance.sampling.eos_prior as eos_prior
 
 from temperance.core.result import EoSPosterior
 
+set_number = 24
+
 default_eos_prior = eos_prior.EoSPriorSet.get_default()
-default_eos_prior.eos_dir = \
-    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/12/margagn'
-default_eos_prior.macro_dir = \
-    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/12/margagn'
+default_eos_prior.eos_dir = (
+    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
+    f'{set_number:02}/margagn'
+)
+default_eos_prior.macro_dir = (
+    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
+    f'{set_number:02}/margagn'
+)
 default_eos_prior.macro_path_template = 'macro-eos-draw-%(draw)06d.csv'
 
 eos_posterior = EoSPosterior.from_csv(
-    '../data/eos-draws-modified/eos-draws-modified-12.csv',
-    )
+    f'../data/eos-draws-modified/eos-draws-modified-{set_number:02}.csv',
+)
 
 
 weight_columns = [
@@ -34,7 +40,8 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     max_num_samples=16000,
     x_points=np.linspace(3e13, 2e16, 1000),
     save_path=(
-        '../data/eos-draws-modified/12/quantiles/p_of_eps_astro_quantiles.csv'
+        f'../data/eos-draws-modified/{set_number:02}/quantiles/'
+        'p_of_eps_astro_quantiles.csv'
     )
 )
 
@@ -61,7 +68,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     max_num_samples=16000,
     x_points=np.linspace(2.8e13, 2.8e15, 1000),
     save_path=(
-        '../data/eos-draws-modified/12/quantiles/'
+        f'../data/eos-draws-modified/{set_number:02}/quantiles/'
         'cs2_of_rho_astro_quantiles.csv'
     )
 )
