@@ -3,72 +3,10 @@
 eval "$(conda shell.bash hook)"
 conda activate /home/eliot.finch/eos/env/
 
-### script that conditions agnostic processes on different compositions
-### NOTE, this does not include EFT predictions
-### Reed Essick (reed.essick@gmail.com)
-
-#-------------------------------------------------
-#
-# define the source of our "tabluated EoS from the literature"
-#
-#-------------------------------------------------
-
 declare -A hdf5paths
 declare -A selectparampath
 
 basedir="$PWD"
-
-### add individual stuff
-
-dir="${basedir}/cusaagn"
-hdf5paths['cusa']="${hdf5paths['cusa']} ${dir}/a/gpr_gpr_custom-a.hdf5"
-
-dir="${basedir}/cusbagn"
-hdf5paths['cusb']="${hdf5paths['cusb']} ${dir}/b/gpr_gpr_custom-b.hdf5"
-
-dir="${basedir}/cuscagn"
-hdf5paths['cusc']="${hdf5paths['cusc']} ${dir}/c/gpr_gpr_custom-c.hdf5"
-
-dir="${basedir}/cusdagn"
-hdf5paths['cusd']="${hdf5paths['cusd']} ${dir}/d/gpr_gpr_custom-d.hdf5"
-
-dir="${basedir}/cuseagn"
-hdf5paths['cuse']="${hdf5paths['cuse']} ${dir}/e/gpr_gpr_custom-e.hdf5"
-
-dir="${basedir}/cusfagn"
-hdf5paths['cusf']="${hdf5paths['cusf']} ${dir}/f/gpr_gpr_custom-f.hdf5"
-
-dir="${basedir}/cusgagn"
-hdf5paths['cusg']="${hdf5paths['cusg']} ${dir}/g/gpr_gpr_custom-g.hdf5"
-
-dir="${basedir}/cushagn"
-hdf5paths['cush']="${hdf5paths['cush']} ${dir}/h/gpr_gpr_custom-h.hdf5"
-
-dir="${basedir}/cusiagn"
-hdf5paths['cusi']="${hdf5paths['cusi']} ${dir}/i/gpr_gpr_custom-i.hdf5"
-
-dir="${basedir}/cusjagn"
-hdf5paths['cusj']="${hdf5paths['cusj']} ${dir}/j/gpr_gpr_custom-j.hdf5"
-
-#-------------------------------------------------
-#
-# define parameters used to construct conditioned processes
-#
-#-------------------------------------------------
-
-# Resolution of the GP
-num_points=500
-
-# The number of hyperparameter sets to use (out of ~ 300)
-num_models=10
-
-# pQCD predictions give pH ~ 1e16
-min_pressurec2="1e10"
-max_pressurec2="1e16"
-min_pressure=$(python -c "from universality import utils ; print(utils.c**2*${min_pressurec2})")
-max_pressure=$(python -c "from universality import utils ; print(utils.c**2*${max_pressurec2})")
-
-pressure_bounds="$min_pressure $max_pressure"
 
 #------------------------
 
@@ -82,30 +20,6 @@ integrate_phi_reference_pressure="3e11"
 
 #------------------------
 
-# We're now stitching at high pressures
-min_stitch_pressurec2="1e14"
-max_stitch_pressurec2="1e16"
-
-# For cs^2/c^2 = 1/3, we require phi = log(3 - 1) = log(2) ~ 0.69
-stitch_mean=0.6931471805599453 
-stitch_pressurec2="1e16"
-stitch_index=-5.0
-stitch_sigma=0.1
-
-stitch_num_points=100
-
-#---
-
-min_stitch_pressure=$(python -c "from universality import utils ; print(utils.c**2*${min_stitch_pressurec2})")
-max_stitch_pressure=$(python -c "from universality import utils ; print(utils.c**2*${max_stitch_pressurec2})")
-stitch_pressure=$(python -c "from universality import utils ; print(utils.c**2*${stitch_pressurec2})")
-
-stitch_pressure_bounds="$min_stitch_pressure $max_stitch_pressure"
-
-#------------------------
-
-temperature="inf"
-
 CRUST="$PWD/ingo-bps-with-cs2c2-modified.csv"
 
 #-------------------------------------------------
@@ -115,12 +29,12 @@ CRUST="$PWD/ingo-bps-with-cs2c2-modified.csv"
 #-------------------------------------------------
 
 # Number of EoS realizations we want
-NUM_EOS=8000
+NUM_EOS=10000
 
 #------------------------
 
 COMPS=""
-COMPS="$COMPS cusa cusb cusc cusd cuse cusf cusg cush cusi cusj"
+COMPS="$COMPS cusa cusb cusc cusd cuse cusf cusg cush cusi cusj cusk cusl cusm cusn cuso cusp cusq cusr cuss cust"
 
 #------------------------
 
