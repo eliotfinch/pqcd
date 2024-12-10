@@ -23,7 +23,7 @@ collated_ntov = \
 
 # The number densities (in nsat) at which to extract the energy density and
 # pressure
-n0_list = [10] # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
+n0_list = [2, 4, 6, 8]  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
 
 # Dicts to store the pressures and energy densities at the requested densities
 p0_dict = {n0: [] for n0 in n0_list}
@@ -71,5 +71,5 @@ for n0 in n0_list:
         f'{destination_dir}/energy_density_{n0:02}nsat.dat', e0_dict[n0]
     )
 
-np.savetxt(f'{destination_dir}/pressure_ntov.dat', ptov_list)
-np.savetxt(f'{destination_dir}/energy_density_ntov.dat', etov_list)
+# np.savetxt(f'{destination_dir}/pressure_ntov.dat', ptov_list)
+# np.savetxt(f'{destination_dir}/energy_density_ntov.dat', etov_list)
