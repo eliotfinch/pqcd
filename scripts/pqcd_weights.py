@@ -19,7 +19,7 @@ collated_ntov = to_nucleons_per_cubic_femtometre(collated_eos['rhoc(M@Mmax)'])
 
 # Compute the pQCD weights at a particular nterm and X
 X_list = [0.5, 2]
-nterm_list = [10]  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
+nterm_list = [2, 4, 6, 8]  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
 qcd_weights = {nterm: {X: [] for X in X_list} for nterm in nterm_list}
 
 for nterm in nterm_list:
@@ -55,24 +55,24 @@ for nterm in nterm_list:
         )
 
 # Compute the pQCD weights at nTOV
-qcd_weights_ntov = {X: [] for X in X_list}
+# qcd_weights_ntov = {X: [] for X in X_list}
 
-energy_density_tov = np.loadtxt(
-    '../data/eos-draws-default/quantities_at_n/energy_density_ntov.dat'
-)
-pressure_tov = np.loadtxt(
-    '../data/eos-draws-default/quantities_at_n/pressure_ntov.dat'
-)
+# energy_density_tov = np.loadtxt(
+#     '../data/eos-draws-default/quantities_at_n/energy_density_ntov.dat'
+# )
+# pressure_tov = np.loadtxt(
+#     '../data/eos-draws-default/quantities_at_n/pressure_ntov.dat'
+# )
 
-for e, p, ntov in zip(energy_density_tov, pressure_tov, collated_ntov):
-    for X in X_list:
-        qcd_weights_ntov[X].append(
-            pqcd.maximised_likelihood(e0=e, p0=p, n0=ntov, X=X)
-        )
+# for e, p, ntov in zip(energy_density_tov, pressure_tov, collated_ntov):
+#     for X in X_list:
+#         qcd_weights_ntov[X].append(
+#             pqcd.maximised_likelihood(e0=e, p0=p, n0=ntov, X=X)
+#         )
 
-for X in X_list:
-    np.savetxt(
-        '../data/eos-draws-default/pqcd-weights/'
-        f'pqcd_weights_ntov_X{X}_mu2.6.dat',
-        qcd_weights_ntov[X]
-    )
+# for X in X_list:
+#     np.savetxt(
+#         '../data/eos-draws-default/pqcd-weights/'
+#         f'pqcd_weights_ntov_X{X}_mu2.6.dat',
+#         qcd_weights_ntov[X]
+#     )
