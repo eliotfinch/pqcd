@@ -112,30 +112,28 @@ if __name__ == "__main__":
         "Choudhury_J0437": {"m_min": 1.2, "m_max": 1.6}
         }
 
-    for variety in varieties:
+    eos_posterior = EoSPosterior.from_csv(
+        f"{eos_base_directory}/margagn-manifest.csv",
+        label="margagn"
+    )
+    eos_dir = "/home/philippe.landry/nseos/eos/gp/mrgagn"
+    eos_per_dir = 1000
 
-        eos_posterior = EoSPosterior.from_csv(
-            f"{eos_base_directory}/{variety}agn-manifest.csv",
-            label=f"{variety}agn"
+    eos_prior_set = eos_prior.EoSPriorSet(
+        eos_dir=eos_dir,
+        eos_per_dir=eos_per_dir,
+        macro_dir=eos_dir,
+        macro_path_template="macro-draw-%(draw)06d.csv",
+        eos_column="eos",
+    )
+
+    for nicer_tag in nicer_mr_sets:
+        nicer_data = nicer_mr_sets[nicer_tag]
+        weigh_eoss_by_nicer_samples(
+            eos_posterior,
+            eos_prior_set,
+            nicer_data,
+            mass_prior_kwargs_set,
+            nicer_tag,
+            outdir
         )
-        eos_dir = f"{eos_base_directory}/{variety}agn"
-        eos_per_dir = 1000
-
-        eos_prior_set = eos_prior.EoSPriorSet(
-            eos_dir=eos_dir,
-            eos_per_dir=eos_per_dir,
-            macro_dir=eos_dir,
-            macro_path_template="macro-eos-draw-%(draw)06d.csv",
-            eos_column="eos",
-        )
-
-        for nicer_tag in nicer_mr_sets:
-            nicer_data = nicer_mr_sets[nicer_tag]
-            weigh_eoss_by_nicer_samples(
-                eos_posterior,
-                eos_prior_set,
-                nicer_data,
-                mass_prior_kwargs_set,
-                nicer_tag,
-                outdir
-            )
