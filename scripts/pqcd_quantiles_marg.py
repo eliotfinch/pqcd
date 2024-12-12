@@ -16,7 +16,7 @@ eos_posterior = EoSPosterior.from_csv(
     '../data/eos-draws-default/collated_np_all_post_edit.csv',
 )
 
-for nterm in [10]:  # [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]:
+for nterm in [6, 10]:  # [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]:
 
     weight_columns = [
         result.WeightColumn(
@@ -26,19 +26,19 @@ for nterm in [10]:  # [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]:
         )
     ]
 
-    # # Pressure vs energy density
-    # posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-    #     eos_posterior,
-    #     eos_data=default_eos_prior,
-    #     weight_columns=weight_columns,
-    #     verbose=True,
-    #     max_num_samples=160000,
-    #     x_points=np.linspace(3e13, 2e16, 1000),
-    #     save_path=(
-    #         '../data/eos-draws-default/quantiles/'
-    #         f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
-    #     )
-    # )
+    # Pressure vs energy density
+    posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+        eos_posterior,
+        eos_data=default_eos_prior,
+        weight_columns=weight_columns,
+        verbose=True,
+        max_num_samples=160000,
+        x_points=np.linspace(5e13, 3e16, 1000),
+        save_path=(
+            '../data/eos-draws-default/quantiles/'
+            f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+        )
+    )
 
     # # Pressure vs baryon density
     # posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
@@ -63,19 +63,19 @@ for nterm in [10]:  # [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]:
     #     )
     # )
 
-    # Mass vs radius
-    posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=160000,
-        x_points=np.linspace(0.5, 2.5, 1000),
-        save_path=(
-            '../data/eos-draws-default/quantiles/'
-            f'r_of_m_quantiles_pqcd_{nterm:02}nsat_marg.csv'
-        )
-    )
+    # # Mass vs radius
+    # posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+    #     eos_posterior,
+    #     eos_data=default_eos_prior,
+    #     weight_columns=weight_columns,
+    #     verbose=True,
+    #     max_num_samples=160000,
+    #     x_points=np.linspace(0.5, 2.5, 1000),
+    #     save_path=(
+    #         '../data/eos-draws-default/quantiles/'
+    #         f'r_of_m_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+    #     )
+    # )
 
     # # Lambda vs mass
     # posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
@@ -96,19 +96,19 @@ weight_columns = [
     )
 ]
 
-# # Pressure vs energy density
-# posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-#     eos_posterior,
-#     eos_data=default_eos_prior,
-#     weight_columns=weight_columns,
-#     verbose=True,
-#     max_num_samples=160000,
-#     x_points=np.linspace(3e13, 2e16, 1000),
-#     save_path=(
-#         '../data/eos-draws-default/quantiles/'
-#         'p_of_eps_quantiles_pqcd_ntov_marg.csv'
-#     )
-# )
+# Pressure vs energy density
+posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+    eos_posterior,
+    eos_data=default_eos_prior,
+    weight_columns=weight_columns,
+    verbose=True,
+    max_num_samples=160000,
+    x_points=np.linspace(5e13, 3e16, 1000),
+    save_path=(
+        '../data/eos-draws-default/quantiles/'
+        'p_of_eps_quantiles_pqcd_ntov_marg.csv'
+    )
+)
 
 # # Pressure vs baryon density
 # posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
@@ -133,19 +133,19 @@ weight_columns = [
 #     )
 # )
 
-# Mass vs radius
-posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
-    eos_posterior,
-    eos_data=default_eos_prior,
-    weight_columns=weight_columns,
-    verbose=True,
-    max_num_samples=160000,
-    x_points=np.linspace(0.5, 2.5, 1000),
-    save_path=(
-        '../data/eos-draws-default/quantiles/'
-        'r_of_m_quantiles_pqcd_ntov_marg.csv'
-    )
-)
+# # Mass vs radius
+# posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+#     eos_posterior,
+#     eos_data=default_eos_prior,
+#     weight_columns=weight_columns,
+#     verbose=True,
+#     max_num_samples=160000,
+#     x_points=np.linspace(0.5, 2.5, 1000),
+#     save_path=(
+#         '../data/eos-draws-default/quantiles/'
+#         'r_of_m_quantiles_pqcd_ntov_marg.csv'
+#     )
+# )
 
 # # Lambda vs mass
 # posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
