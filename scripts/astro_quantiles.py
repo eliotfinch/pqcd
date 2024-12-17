@@ -7,7 +7,7 @@ import temperance.sampling.eos_prior as eos_prior
 
 from temperance.core.result import EoSPosterior
 
-max_num_samples = 160000
+max_num_samples = 70000
 
 default_eos_prior = eos_prior.EoSPriorSet.get_default()
 default_eos_prior.eos_dir = '/home/isaac.legred/local_mrgagn_big_with_cs2c2'
