@@ -14,7 +14,7 @@ default_eos_prior.eos_dir = '/home/isaac.legred/local_mrgagn_big_with_cs2c2'
 default_eos_prior.macro_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn/'
 
 eos_posterior = EoSPosterior.from_csv(
-    '../data/eos-draws-default/eos-draws-default-with-J0437-nonzero-astro.csv',
+    '../data/eos-draws-default/eos-draws-default-with-J0437-nonzero-astro-alt-xray.csv',
 )
 
 # Astro only
@@ -38,7 +38,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'p_of_eps_quantiles_astro.csv'
+        'p_of_eps_quantiles_astro-alt-xray.csv'
     )
 )
 
@@ -54,7 +54,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_astro.csv'
+        'cs2_of_rho_quantiles_astro-alt-xray.csv'
     )
 )
 
@@ -68,7 +68,7 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     verbose=True,
     max_num_samples=max_num_samples,
     x_points=np.linspace(0.5, 2.5, 1000),
-    save_path='../data/eos-draws-default/quantiles/r_of_m_quantiles_astro.csv'
+    save_path='../data/eos-draws-default/quantiles/r_of_m_quantiles_astro-alt-xray.csv'
 )
 
 # Astro + pQCD (max)
@@ -103,7 +103,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'p_of_eps_quantiles_astro_pqcd_10nsat_Xmarg_mu2.6.csv'
+        'p_of_eps_quantiles_astro_pqcd_10nsat_Xmarg_mu2.6-alt-xray.csv'
     )
 )
 
@@ -119,7 +119,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_astro_pqcd_10nsat_Xmarg_mu2.6.csv'
+        'cs2_of_rho_quantiles_astro_pqcd_10nsat_Xmarg_mu2.6-alt-xray.csv'
     )
 )
 
@@ -135,7 +135,7 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     x_points=np.linspace(0.5, 2.5, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'r_of_m_quantiles_astro_pqcd_10nsat_Xmarg_mu2.6.csv'
+        'r_of_m_quantiles_astro_pqcd_10nsat_Xmarg_mu2.6-alt-xray.csv'
     )
 )
 
@@ -168,7 +168,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'p_of_eps_quantiles_astro_pqcd_ntov_Xmarg_mu2.6.csv'
+        'p_of_eps_quantiles_astro_pqcd_ntov_Xmarg_mu2.6-alt-xray.csv'
     )
 )
 
@@ -184,7 +184,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_astro_pqcd_ntov_Xmarg_mu2.6.csv'
+        'cs2_of_rho_quantiles_astro_pqcd_ntov_Xmarg_mu2.6-alt-xray.csv'
     )
 )
 
@@ -200,7 +200,7 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     x_points=np.linspace(0.5, 2.5, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'r_of_m_quantiles_astro_pqcd_ntov_Xmarg_mu2.6.csv'
+        'r_of_m_quantiles_astro_pqcd_ntov_Xmarg_mu2.6-alt-xray.csv'
     )
 )
 
@@ -236,7 +236,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'p_of_eps_quantiles_astro_pqcd_10nsat_marg.csv'
+        'p_of_eps_quantiles_astro_pqcd_10nsat_marg-alt-xray.csv'
     )
 )
 
@@ -252,7 +252,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_astro_pqcd_10nsat_marg.csv'
+        'cs2_of_rho_quantiles_astro_pqcd_10nsat_marg-alt-xray.csv'
     )
 )
 
@@ -268,7 +268,7 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     x_points=np.linspace(0.5, 2.5, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'r_of_m_quantiles_astro_pqcd_10nsat_marg.csv'
+        'r_of_m_quantiles_astro_pqcd_10nsat_marg-alt-xray.csv'
     )
 )
 
@@ -301,7 +301,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'p_of_eps_quantiles_astro_pqcd_ntov_marg.csv'
+        'p_of_eps_quantiles_astro_pqcd_ntov_marg-alt-xray.csv'
     )
 )
 
@@ -317,7 +317,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_astro_pqcd_ntov_marg.csv'
+        'cs2_of_rho_quantiles_astro_pqcd_ntov_marg-alt-xray.csv'
     )
 )
 
@@ -333,6 +333,6 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     x_points=np.linspace(0.5, 2.5, 1000),
     save_path=(
         '../data/eos-draws-default/quantiles/'
-        'r_of_m_quantiles_astro_pqcd_ntov_marg.csv'
+        'r_of_m_quantiles_astro_pqcd_ntov_marg-alt-xray.csv'
     )
 )
