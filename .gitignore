@@ -12,6 +12,7 @@ notebooks/figures/*
 
 scripts/eos-draw/*/*agn/*
 scripts/eos-draw/*/ingo-bps-with-cs2c2*
+scripts/eos-draw/*-parallel/*
 
 */condor_output/*
 *.sub
