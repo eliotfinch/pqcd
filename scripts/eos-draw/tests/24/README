@@ -1,0 +1,1 @@
+Random pQCD-consistent means from set 12, and SE kernels with scaling applied. See custom_gp.ipynb. Now only split into 10 letters for convinience (this is essentally 100 random independent kernels and means).

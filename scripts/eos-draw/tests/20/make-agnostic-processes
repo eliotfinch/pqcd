@@ -1,0 +1,279 @@
+#!/usr/bin/bash
+
+eval "$(conda shell.bash hook)"
+conda activate /home/eliot.finch/eos/env/
+
+### script that conditions agnostic processes on different compositions
+### NOTE, this does not include EFT predictions
+### Reed Essick (reed.essick@gmail.com)
+
+#-------------------------------------------------
+#
+# define the source of our "tabluated EoS from the literature"
+#
+#-------------------------------------------------
+
+declare -A hdf5paths
+declare -A selectparampath
+
+basedir="$PWD"
+
+### add hadagn stuff
+
+dir="${basedir}/hadagn"
+
+hdf5paths['had']="${hdf5paths['had']} ${dir}/bsk/gpr_gpr_hadronic-bsk.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/bsr/gpr_gpr_hadronic-bsr.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/dd/gpr_gpr_hadronic-dd.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/eng/gpr_gpr_hadronic-eng.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/gm/gpr_gpr_hadronic-gm.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/kde/gpr_gpr_hadronic-kde.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/mpa/gpr_gpr_hadronic-mpa.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/nl/gpr_gpr_hadronic-nl.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/r/gpr_gpr_hadronic-r.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/sk/gpr_gpr_hadronic-sk.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/sly/gpr_gpr_hadronic-sly.hdf5"
+hdf5paths['had']="${hdf5paths['had']} ${dir}/tm/gpr_gpr_hadronic-tm.hdf5"
+
+selectparampath['had']="${dir}/hyperparams-mc_hadronic-agnostic.csv"
+
+### add hypagn stuff
+
+dir="${basedir}/hypagn"
+
+hdf5paths['hyp']="${hdf5paths['hyp']} ${dir}/bsr/gpr_gpr_hyperonic-bsr.hdf5"
+hdf5paths['hyp']="${hdf5paths['hyp']} ${dir}/dd/gpr_gpr_hyperonic-dd.hdf5"
+hdf5paths['hyp']="${hdf5paths['hyp']} ${dir}/gm/gpr_gpr_hyperonic-gm.hdf5"
+hdf5paths['hyp']="${hdf5paths['hyp']} ${dir}/h/gpr_gpr_hyperonic-h.hdf5"
+hdf5paths['hyp']="${hdf5paths['hyp']} ${dir}/nl/gpr_gpr_hyperonic-nl.hdf5"
+hdf5paths['hyp']="${hdf5paths['hyp']} ${dir}/tm/gpr_gpr_hyperonic-tm.hdf5"
+
+selectparampath['hyp']="${dir}/hyperparams-mc_hyperonic-agnostic.csv"
+
+### add qrkagn stuff
+
+dir="${basedir}/qrkagn"
+
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/alf/gpr_gpr_quark-alf.hdf5"
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/ddq/gpr_gpr_quark-ddq.hdf5"
+hdf5paths['qrk']="${hdf5paths['qrk']} ${dir}/hqc/gpr_gpr_quark-hqc.hdf5"
+
+selectparampath['qrk']="${dir}/hyperparams-mc_quark-agnostic.csv"
+
+### add custom stuff
+
+dir="${basedir}/cusagn"
+
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/a/gpr_gpr_custom-a.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/b/gpr_gpr_custom-b.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/c/gpr_gpr_custom-c.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/d/gpr_gpr_custom-d.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/e/gpr_gpr_custom-e.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/f/gpr_gpr_custom-f.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/g/gpr_gpr_custom-g.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/h/gpr_gpr_custom-h.hdf5"
+hdf5paths['cus']="${hdf5paths['cus']} ${dir}/i/gpr_gpr_custom-i.hdf5"
+
+selectparampath['cus']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+### add individual stuff
+
+dir="${basedir}/cusaagn"
+hdf5paths['cusa']="${hdf5paths['cusa']} ${dir}/a/gpr_gpr_custom-a.hdf5"
+selectparampath['cusa']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusbagn"
+hdf5paths['cusb']="${hdf5paths['cusb']} ${dir}/b/gpr_gpr_custom-b.hdf5"
+selectparampath['cusb']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cuscagn"
+hdf5paths['cusc']="${hdf5paths['cusc']} ${dir}/c/gpr_gpr_custom-c.hdf5"
+selectparampath['cusc']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusdagn"
+hdf5paths['cusd']="${hdf5paths['cusd']} ${dir}/d/gpr_gpr_custom-d.hdf5"
+selectparampath['cusd']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cuseagn"
+hdf5paths['cuse']="${hdf5paths['cuse']} ${dir}/e/gpr_gpr_custom-e.hdf5"
+selectparampath['cuse']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusfagn"
+hdf5paths['cusf']="${hdf5paths['cusf']} ${dir}/f/gpr_gpr_custom-f.hdf5"
+selectparampath['cusf']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusgagn"
+hdf5paths['cusg']="${hdf5paths['cusg']} ${dir}/g/gpr_gpr_custom-g.hdf5"
+selectparampath['cusg']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cushagn"
+hdf5paths['cush']="${hdf5paths['cush']} ${dir}/h/gpr_gpr_custom-h.hdf5"
+selectparampath['cush']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusiagn"
+hdf5paths['cusi']="${hdf5paths['cusi']} ${dir}/i/gpr_gpr_custom-i.hdf5"
+selectparampath['cusi']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+dir="${basedir}/cusjagn"
+hdf5paths['cusj']="${hdf5paths['cusj']} ${dir}/j/gpr_gpr_custom-j.hdf5"
+selectparampath['cusj']="${dir}/hyperparams-mc_custom-agnostic.csv"
+
+#-------------------------------------------------
+#
+# define parameters used to construct conditioned processes
+#
+#-------------------------------------------------
+
+# Resolution of the GP
+num_points=500
+
+# The number of hyperparameter sets to use (out of ~ 300)
+num_models=10
+
+# pQCD predictions give pH ~ 1e16
+min_pressurec2="1e10"
+max_pressurec2="1e16"
+min_pressure=$(python -c "from universality import utils ; print(utils.c**2*${min_pressurec2})")
+max_pressure=$(python -c "from universality import utils ; print(utils.c**2*${max_pressurec2})")
+
+pressure_bounds="$min_pressure $max_pressure"
+
+#------------------------
+
+# To try and control the low density behaviour (now that we're not using the
+# stitch there) we use a higher reference pressure (which controls where its 
+# attached to the crust)
+integrate_phi_reference_pressure="3e11"
+
+# Old value (I guess?)
+# integrate_phi_reference_pressure="3e10"
+
+#------------------------
+
+# We're now stitching at high pressures
+min_stitch_pressurec2="1e14"
+max_stitch_pressurec2="1e16"
+
+# For cs^2/c^2 = 1/3, we require phi = log(3 - 1) = log(2) ~ 0.69
+stitch_mean=0.6931471805599453 
+stitch_pressurec2="1e16"
+stitch_index=-5.0
+stitch_sigma=0.1
+
+stitch_num_points=100
+
+#---
+
+min_stitch_pressure=$(python -c "from universality import utils ; print(utils.c**2*${min_stitch_pressurec2})")
+max_stitch_pressure=$(python -c "from universality import utils ; print(utils.c**2*${max_stitch_pressurec2})")
+stitch_pressure=$(python -c "from universality import utils ; print(utils.c**2*${stitch_pressurec2})")
+
+stitch_pressure_bounds="$min_stitch_pressure $max_stitch_pressure"
+
+#------------------------
+
+temperature="inf"
+
+CRUST="$PWD/ingo-bps-with-cs2c2-modified.csv"
+
+#-------------------------------------------------
+#
+# actually construct the conditioned processes
+#
+#-------------------------------------------------
+
+# Number of EoS realizations we want
+NUM_EOS=4000
+
+#------------------------
+
+COMPS=""
+# COMPS="$COMPS had"
+# COMPS="$COMPS hyp"
+# COMPS="$COMPS qrk"
+# COMPS="$COMPS cus"
+COMPS="$COMPS cusa cusb cusc cusd cuse cusf cusg cush cusi cusj"
+
+#------------------------
+
+for COMP in $COMPS
+do
+
+    tag="${COMP}agn"
+    outdir="${PWD}/${tag}"
+
+    echo "--------------------------------------------------"
+    echo "PROCESSING $tag"
+
+    #-------------------------------------
+
+    ### create the conditioned GP
+
+    echo \
+    $(which gpr-gpr) \
+        -V \
+        --pressure-bounds $pressure_bounds \
+        --num-points $num_points \
+        --output-dir $outdir \
+        --tag $tag \
+        --temperature $temperature \
+        --hyperparampath ${selectparampath[$COMP]} \
+        --max-num-models $num_models \
+        --diagonal-external-process \
+        --truncate-models \
+        ${hdf5paths[$COMP]} \
+        --stitch \
+        --stitch-pressure-bounds $stitch_pressure_bounds \
+        --stitch-num-points $stitch_num_points \
+        --stitch-mean $stitch_mean \
+        --stitch-pressure $stitch_pressure \
+        --stitch-index $stitch_index \
+        --stitch-sigma $stitch_sigma \
+    || exit 1
+
+    hdf5model=${outdir}/gpr_gpr_${tag}.hdf5
+
+    #-------------------------------------
+
+    ### draw from resulting GP
+
+    # echo \
+    draw-gpr \
+        -v \
+        -n $NUM_EOS \
+        --output-dir $outdir \
+        --tag $tag \
+        $hdf5model \
+    || exit 1
+
+    process="${outdir}/manifest-${experiment}$tag.csv"
+    echo "EoS" > $process
+
+    ### integrate the samples
+
+    for i in $(seq 0 $(($NUM_EOS-1)))
+    do
+
+        I=$(python -c "print('%06d'%$i)")
+        M=$(python -c "print('%06d'%($i//1000))")
+        phipath="${outdir}/DRAWmod1000-$M/draw-gpr_${tag}-${I}.csv"
+        outpath="${outdir}/DRAWmod1000-$M/eos-draw-${I}.csv"
+
+#        echo \
+        integrate-phi \
+            -v \
+            -o $outpath \
+            --sigma-logpressurec2 0.0 \
+            --stitch-below-reference-pressure \
+            --crust $CRUST \
+            --include-cs2c2 \
+            $phipath $integrate_phi_reference_pressure \
+        || exit 1
+
+        echo $i >> $process ### add this EoS realization to manifest
+
+    done
+
+    #-------------------------------------
+
+done
