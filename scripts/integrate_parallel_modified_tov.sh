@@ -31,8 +31,11 @@ set_number=25
 # Using $(printf '%02d' $set_number) to format set_number as two digits (e.g., '01', '02')
 variety_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/$(printf '%02d' $set_number)/margagn"
 
+folders=(DRAWmod1000-0000{12..20})
+
 # Loop over each subdirectory in the variety directory
-for eos_dir in "$variety_dir"/*/; do
+for folder in "${folders[@]}"; do
+    eos_dir="$variety_dir/$folder"
     # Check if the current path is a directory
     if [ -d "$eos_dir" ]; then
         # Loop over each file in the current eos_dir directory that begins with "eos-draw"
