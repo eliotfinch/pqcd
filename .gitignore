@@ -17,6 +17,9 @@ scripts/eos-draw/*-parallel/*
 scripts/eos-draw/tests/*/*agn/*
 scripts/eos-draw/tests/*/ingo-bps-with-cs2c2*
 
+*hyperparameters.csv
+means.dat
+
 condor_output/
 *.sub
 
