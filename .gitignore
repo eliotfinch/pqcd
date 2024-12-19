@@ -17,7 +17,7 @@ scripts/eos-draw/*-parallel/*
 scripts/eos-draw/tests/*/*agn/*
 scripts/eos-draw/tests/*/ingo-bps-with-cs2c2*
 
-*/condor_output/*
+condor_output/
 *.sub
 
 # macOS
