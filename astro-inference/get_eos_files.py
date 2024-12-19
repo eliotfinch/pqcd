@@ -47,7 +47,7 @@ def get_eos_file(
 
 if __name__ == "__main__":
 
-    set_number = 24
+    set_number = 25
     # count_dict = {'had': 305, 'hyp': 338, 'qrk': 437}
     count_dict = {'marg': 1983+1}
 
