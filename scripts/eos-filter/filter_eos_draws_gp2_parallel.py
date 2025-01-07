@@ -19,28 +19,8 @@ n_runs = 10
 # Number of EOS draws in each run
 n_samp = 10000
 
-labels = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't'
-]
+# You can loop over a string to take each character in turn
+labels = 'abcdefghijklmnopqrst'
 
 # Count exisiting draws
 # ---------------------
