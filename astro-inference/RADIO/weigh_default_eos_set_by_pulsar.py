@@ -27,6 +27,13 @@ def weigh_by_pulsar_data(pulsar_mass_sample_sets, eos_posterior, **kwargs):
 
 if __name__ == "__main__":
 
+    collated_eos = pd.read_csv(
+        '../data/eos-draws-default/collated_np_all_post.csv'
+    )
+    blank_manifest = collated_eos[['eos', 'Mmax']]
+    blank_manifest = blank_manifest.set_index('eos')
+    blank_manifest.to_csv('../data/eos-draws-default/margagn-manifest.csv')
+
     eos_base_directory = (
         "/home/eliot.finch/eos/pqcd/data/eos-draws-default"
     )
