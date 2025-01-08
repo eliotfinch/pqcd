@@ -27,11 +27,11 @@ def weigh_by_pulsar_data(pulsar_mass_sample_sets, eos_posterior, **kwargs):
 
 if __name__ == "__main__":
 
-    set_number = 24
+    gp_number = 1
     varieties = ["marg"]
 
     eos_base_directory = (
-        f"/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}"
+        f"/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp{gp_number}"
     )
 
     pulsar_mass_sets = {
