@@ -95,11 +95,11 @@ def weigh_eoss_by_nicer_samples(
 
 if __name__ == "__main__":
 
-    set_number = 24
+    gp_number = 1
     varieties = ["marg"]
 
     eos_base_directory = (
-        f"/home/eliot.finch/eos/pqcd/data/eos-draws-modified/{set_number}"
+        f"/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp{gp_number}"
     )
     outdir = "."
 
@@ -111,8 +111,8 @@ if __name__ == "__main__":
 
     mass_prior_kwargs_set = {
         "Miller_J0740": {"m_min": 1.0},
-        "Miller_J0030": {"m_min": 1.0, "m_max": 1.8},
-        "Choudhury_J0437": {"m_min": 1.2, "m_max": 1.6}
+        "Miller_J0030": {"m_min": 1.0},
+        "Choudhury_J0437": {"m_min": 1.0}
         }
 
     for variety in varieties:
