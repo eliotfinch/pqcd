@@ -47,18 +47,17 @@ def get_eos_file(
 
 if __name__ == "__main__":
 
-    set_number = 25
-    # count_dict = {'had': 305, 'hyp': 338, 'qrk': 437}
-    count_dict = {'marg': 1983+1}
+    gp_number = 1
+    count_dict = {'marg': 33841+1}
 
     for variety, count in count_dict.items():
         eos_file = get_eos_file(
             '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
-            f'{set_number}/{variety}agn',
+            f'gp{gp_number}/{variety}agn',
             num_eoss=count
             )
         eos_file.to_csv(
             '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
-            f'{set_number}/{variety}agn-manifest.csv',
+            f'gp{gp_number}/{variety}agn-manifest.csv',
             index=False
             )
