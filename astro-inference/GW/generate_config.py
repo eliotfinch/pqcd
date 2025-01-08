@@ -109,16 +109,16 @@ def generate_170817_and_190425_inis(
 
 if __name__ == "__main__":
 
-    set_number = 24
+    gp_number = 1
     eos_tag = "margagn"
     eos_per_dir = 1000
     eos_directory = (
         "/home/eliot.finch/eos/pqcd/data/eos-draws-modified/"
-        f"{set_number}/{eos_tag}"
+        f"gp{gp_number}/{eos_tag}"
     )
     eos_indices_file = (
         "/home/eliot.finch/eos/pqcd/data/eos-draws-modified/"
-        f"{set_number}/{eos_tag}-manifest.csv"
+        f"gp{gp_number}/{eos_tag}-manifest.csv"
     )
 
     if not os.path.exists(eos_tag):
