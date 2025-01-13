@@ -7,25 +7,23 @@ import temperance.plotting.get_quantiles as get_quantiles
 
 from temperance.core.result import EoSPosterior
 
-# set_number = 12
-# max_num_samples = 16000
-
-set_number = 24
-max_num_samples = 1900
+gp_number = 1
+max_num_samples = 33000
 
 default_eos_prior = eos_prior.EoSPriorSet.get_default()
 default_eos_prior.eos_dir = (
     '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
-    f'{set_number:02}/margagn'
+    f'gp{gp_number}/margagn'
 )
 default_eos_prior.macro_dir = (
     '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
-    f'{set_number:02}/margagn'
+    f'gp{gp_number}/margagn'
 )
 default_eos_prior.macro_path_template = 'macro-eos-draw-%(draw)06d.csv'
 
 eos_posterior = EoSPosterior.from_csv(
-    f'../data/eos-draws-modified/eos-draws-modified-{set_number:02}.csv',
+    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
+    f'gp{gp_number}/eos-draws-modified-gp{gp_number}.csv',
 )
 
 weight_columns = [
@@ -41,10 +39,10 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     weight_columns=weight_columns,
     verbose=True,
     max_num_samples=max_num_samples,
-    x_points=np.linspace(3e13, 2e16, 1000),
+    x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
-        f'../data/eos-draws-modified/{set_number:02}/quantiles/'
-        'p_of_eps_prior_quantiles.csv'
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
+        f'gp{gp_number}/quantiles/p_of_eps_quantiles_prior.csv'
     )
 )
 
@@ -66,10 +64,10 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     weight_columns=weight_columns,
     verbose=True,
     max_num_samples=max_num_samples,
-    x_points=np.linspace(2.8e13, 2.8e15, 1000),
+    x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
-        f'../data/eos-draws-modified/{set_number:02}/quantiles/'
-        'cs2_of_rho_prior_quantiles.csv'
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/'
+        f'gp{gp_number}/quantiles/cs2_of_rho_quantiles_prior.csv'
     )
 )
 
