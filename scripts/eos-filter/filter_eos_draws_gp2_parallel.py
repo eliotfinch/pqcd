@@ -7,9 +7,9 @@ import pqcd
 
 from pathlib import Path
 
-source_dir = Path('/home/eliot.finch/eos/pqcd/gp2-parallel')
+source_dir = Path('/home/eliot.finch/eos/pqcd/scripts/eos-draw/gp2-parallel')
 destination_dir = Path(
-    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/25/margagn'
+    '/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp2/margagn'
 )
 destination_dir.mkdir(parents=True, exist_ok=True)
 
@@ -56,7 +56,7 @@ else:
 
     success_counts = 0
 
-print(success_counts)
+print(f'Old success count = {success_counts}')
 
 # Filter
 # ------
@@ -92,4 +92,4 @@ for n_run in range(n_runs):
                 )
                 success_counts += 1
 
-print(f'Success count = {success_counts}')
+print(f'New success count = {success_counts}')
