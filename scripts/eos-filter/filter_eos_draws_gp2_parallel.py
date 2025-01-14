@@ -25,7 +25,7 @@ labels = 'abcdefghijklmnopqrst'
 # Count exisiting draws
 # ---------------------
 
-print('Counting number of exisiting eos draws...')
+print('Counting number of exisiting eos draws...', flush=True)
 
 # Get the list of DRAWmod1000 directories
 drawmod_dirs = [
@@ -56,19 +56,19 @@ else:
 
     success_counts = 0
 
-print(f'Old success count = {success_counts}')
+print(f'Old success count = {success_counts}', flush=True)
 
 # Filter
 # ------
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
-print('Copying eos files consistent with pQCD region...')
+print('Copying eos files consistent with pQCD region...', flush=True)
 
 for n_run in range(n_runs):
-    print(f'Processing run {n_run}...')
+    print(f'Processing run {n_run}...', flush=True)
     for label in labels:
-        print(f'Processing label {label}...')
+        print(f'Processing label {label}...', flush=True)
         for n in range(n_samp):
             source_path = (
                 source_dir / f'{n_run}'
@@ -92,4 +92,4 @@ for n_run in range(n_runs):
                 )
                 success_counts += 1
 
-print(f'New success count = {success_counts}')
+print(f'New success count = {success_counts}', flush=True)
