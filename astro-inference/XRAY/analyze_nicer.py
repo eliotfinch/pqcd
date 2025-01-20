@@ -95,7 +95,7 @@ def weigh_eoss_by_nicer_samples(
 
 if __name__ == "__main__":
 
-    gp_number = 1
+    gp_number = 2
     varieties = ["marg"]
 
     eos_base_directory = (
