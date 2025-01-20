@@ -9,6 +9,7 @@ astro-inference/GW/margagn
 data/*
 
 notebooks/figures/*
+notebooks/isaac_weights
 
 scripts/eos-draw/*/*agn/*
 scripts/eos-draw/*/ingo-bps-with-cs2c2*
