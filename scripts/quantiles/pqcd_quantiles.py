@@ -18,7 +18,7 @@ eos_posterior = EoSPosterior.from_csv(
 # Marginalised over X
 # -------------------
 
-for nterm in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
 
     weight_columns = [
         result.WeightColumn(
@@ -169,7 +169,7 @@ posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
 # Fixed X
 # -------
 
-for nterm in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
 
     for X in [0.5, 2]:
 
