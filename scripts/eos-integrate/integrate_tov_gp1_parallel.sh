@@ -28,7 +28,7 @@ run_bash_script() {
 target_dir="/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp1/margagn"
 
 # Specify which DRAWmod1000 dirs to integrate (to avoid re-integrating everything)
-folders=(DRAWmod1000-0000{16..33})
+folders=(DRAWmod1000-0000{33..51})
 for folder in "${folders[@]}"; do
     eos_dir="$target_dir/$folder"
     # Loop over each file in the current eos_dir directory that begins with "eos-draw"
