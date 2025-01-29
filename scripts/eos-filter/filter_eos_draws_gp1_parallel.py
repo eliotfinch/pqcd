@@ -1,5 +1,7 @@
 #!/home/eliot.finch/eos/env/bin/python
 
+print('filter_eos_draws_gp1_parallel.py', flush=True)
+
 import pandas as pd
 
 import shutil
@@ -24,7 +26,7 @@ labels = ['had', 'hyp', 'qrk']
 # Count exisiting draws
 # ---------------------
 
-print('Counting number of exisiting eos draws...')
+print('Counting number of exisiting eos draws...', flush=True)
 
 # Get the list of DRAWmod1000 directories
 drawmod_dirs = [
@@ -55,14 +57,14 @@ else:
 
     success_counts = 0
 
-print(f'Old success count = {success_counts}')
+print(f'Old success count = {success_counts}', flush=True)
 
 # Filter
 # ------
 
 pqcd_region_dict = pqcd.get_pqcd_region(mu_high=3, res=200)
 
-print('Copying eos files consistent with pQCD region...')
+print('Copying eos files consistent with pQCD region...', flush=True)
 
 for n_run in range(n_runs):
     print(f'Processing run {n_run}...')
@@ -90,4 +92,4 @@ for n_run in range(n_runs):
                 )
                 success_counts += 1
 
-print(f'New success count = {success_counts}')
+print(f'New success count = {success_counts}', flush=True)

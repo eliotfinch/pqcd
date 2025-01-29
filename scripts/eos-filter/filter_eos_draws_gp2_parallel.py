@@ -1,5 +1,7 @@
 #!/home/eliot.finch/eos/env/bin/python
 
+print('filter_eos_draws_gp2_parallel.py', flush=True)
+
 import pandas as pd
 
 import shutil
