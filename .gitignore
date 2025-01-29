@@ -1,8 +1,12 @@
 astro-inference/RADIO/*.csv
 astro-inference/RADIO/condor*
 astro-inference/XRAY/*.csv
+astro-inference/XRAY/miller*
+astro-inference/XRAY/choudhury*
 astro-inference/XRAY/condor*
 astro-inference/GW/*.csv
+astro-inference/GW/*.dat
+astro-inference/GW/*.h5
 astro-inference/GW/*.in
 astro-inference/GW/margagn
 
