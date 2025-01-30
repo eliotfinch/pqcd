@@ -7,9 +7,9 @@ import temperance.plotting.get_quantiles as get_quantiles
 
 from temperance.core.result import EoSPosterior
 
-gp_number = 2
-# max_num_samples = 33000
-max_num_samples = 37000
+gp_number = 1
+max_num_samples = 51100
+# max_num_samples = 37000
 
 default_eos_prior = eos_prior.EoSPriorSet.get_default()
 default_eos_prior.eos_dir = (
@@ -31,7 +31,7 @@ weight_columns = [
     result.WeightColumn(name='prior_weight', is_log=False, is_inverted=False)
 ]
 
-print('\nPressure vs energy density')
+print('\nPressure vs energy density', flush=True)
 
 # Pressure vs energy density
 posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
@@ -56,7 +56,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
 #     save_path='../data/quantiles/p_of_rho_quantiles.csv'
 #     )
 
-print('\nSpeed of sound vs baryon density')
+print('\nSpeed of sound vs baryon density', flush=True)
 
 # Speed of sound vs baryon density
 posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
