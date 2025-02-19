@@ -25,60 +25,60 @@ for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
         )
     ]
 
-    # # Pressure vs energy density
-    # posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+    # Pressure vs energy density
+    posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+        eos_posterior,
+        eos_data=default_eos_prior,
+        weight_columns=weight_columns,
+        verbose=True,
+        max_num_samples=160000,
+        x_points=np.linspace(5e13, 3e16, 1000),
+        save_path=(
+            '../data/eos-draws-default/quantiles/'
+            f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+        )
+    )
+
+    # # Speed of sound vs baryon density
+    # posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     #     eos_posterior,
     #     eos_data=default_eos_prior,
     #     weight_columns=weight_columns,
     #     verbose=True,
     #     max_num_samples=160000,
-    #     x_points=np.linspace(5e13, 3e16, 1000),
+    #     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     #     save_path=(
-    #         '../data/eos-draws-default/quantiles/'
-    #         f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+    #         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+    #         f'cs2_of_rho_quantiles_pqcd_{nterm:02}nsat_marg.csv'
     #     )
     # )
 
-    # Speed of sound vs baryon density
-    posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=160000,
-        x_points=np.linspace(2.8e13, 1.5e16, 1000),
-        save_path=(
-            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-            f'cs2_of_rho_quantiles_pqcd_{nterm:02}nsat_marg.csv'
-        )
-    )
+    # # Mass vs radius
+    # posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+    #     eos_posterior,
+    #     eos_data=default_eos_prior,
+    #     weight_columns=weight_columns,
+    #     verbose=True,
+    #     max_num_samples=160000,
+    #     x_points=np.linspace(0.5, 2.5, 1000),
+    #     save_path=(
+    #         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+    #         f'r_of_m_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+    #     )
+    # )
 
-    # Mass vs radius
-    posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=160000,
-        x_points=np.linspace(0.5, 2.5, 1000),
-        save_path=(
-            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-            f'r_of_m_quantiles_pqcd_{nterm:02}nsat_marg.csv'
-        )
-    )
-
-    # Lambda vs mass
-    posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=160000,
-        save_path=(
-            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-            f'lambda_of_m_quantiles_pqcd_{nterm:02}nsat_marg.csv'
-        )
-    )
+    # # Lambda vs mass
+    # posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
+    #     eos_posterior,
+    #     eos_data=default_eos_prior,
+    #     weight_columns=weight_columns,
+    #     verbose=True,
+    #     max_num_samples=160000,
+    #     save_path=(
+    #         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+    #         f'lambda_of_m_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+    #     )
+    # )
 
     # # Pressure vs baryon density
     # posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
@@ -91,13 +91,13 @@ for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
 
 # nterm = nTOV
 
-weight_columns = [
-    result.WeightColumn(
-        name='pqcd_weight_ntov_marg',
-        is_log=False,
-        is_inverted=False
-    )
-]
+# weight_columns = [
+#     result.WeightColumn(
+#         name='pqcd_weight_ntov_marg',
+#         is_log=False,
+#         is_inverted=False
+#     )
+# ]
 
 # # Pressure vs energy density
 # posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
@@ -113,46 +113,46 @@ weight_columns = [
 #     )
 # )
 
-# Speed of sound vs baryon density
-posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-    eos_posterior,
-    eos_data=default_eos_prior,
-    weight_columns=weight_columns,
-    verbose=True,
-    max_num_samples=160000,
-    x_points=np.linspace(2.8e13, 1.5e16, 1000),
-    save_path=(
-        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_pqcd_ntov_marg.csv'
-    )
-)
+# # Speed of sound vs baryon density
+# posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+#     eos_posterior,
+#     eos_data=default_eos_prior,
+#     weight_columns=weight_columns,
+#     verbose=True,
+#     max_num_samples=160000,
+#     x_points=np.linspace(2.8e13, 1.5e16, 1000),
+#     save_path=(
+#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#         'cs2_of_rho_quantiles_pqcd_ntov_marg.csv'
+#     )
+# )
 
-# Mass vs radius
-posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
-    eos_posterior,
-    eos_data=default_eos_prior,
-    weight_columns=weight_columns,
-    verbose=True,
-    max_num_samples=160000,
-    x_points=np.linspace(0.5, 2.5, 1000),
-    save_path=(
-        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-        'r_of_m_quantiles_pqcd_ntov_marg.csv'
-    )
-)
+# # Mass vs radius
+# posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+#     eos_posterior,
+#     eos_data=default_eos_prior,
+#     weight_columns=weight_columns,
+#     verbose=True,
+#     max_num_samples=160000,
+#     x_points=np.linspace(0.5, 2.5, 1000),
+#     save_path=(
+#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#         'r_of_m_quantiles_pqcd_ntov_marg.csv'
+#     )
+# )
 
-# Lambda vs mass
-posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
-    eos_posterior,
-    eos_data=default_eos_prior,
-    weight_columns=weight_columns,
-    verbose=True,
-    max_num_samples=160000,
-    save_path=(
-        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-        'lambda_of_m_quantiles_pqcd_ntov_marg.csv'
-    )
-)
+# # Lambda vs mass
+# posterior_quantiles = get_quantiles.get_lambda_of_m_quantiles(
+#     eos_posterior,
+#     eos_data=default_eos_prior,
+#     weight_columns=weight_columns,
+#     verbose=True,
+#     max_num_samples=160000,
+#     save_path=(
+#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#         'lambda_of_m_quantiles_pqcd_ntov_marg.csv'
+#     )
+# )
 
 # # Pressure vs baryon density
 # posterior_quantiles = get_quantiles.get_p_of_rho_quantiles(
