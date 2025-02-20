@@ -34,7 +34,7 @@ for nterm in [10]:
     #     max_num_samples=160000,
     #     x_points=np.linspace(5e13, 3e16, 1000),
     #     save_path=(
-    #         '../data/eos-draws-default/quantiles/'
+    #         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
     #         f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
     #     )
     # )
