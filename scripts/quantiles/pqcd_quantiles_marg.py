@@ -15,7 +15,7 @@ eos_posterior = EoSPosterior.from_csv(
     '/home/eliot.finch/eos/pqcd/data/eos-draws-default/eos-draws-default.csv',
 )
 
-for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
+for nterm in [10]:
 
     weight_columns = [
         result.WeightColumn(
@@ -25,33 +25,33 @@ for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
         )
     ]
 
-    # Pressure vs energy density
-    posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=160000,
-        x_points=np.linspace(5e13, 3e16, 1000),
-        save_path=(
-            '../data/eos-draws-default/quantiles/'
-            f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
-        )
-    )
-
-    # # Speed of sound vs baryon density
-    # posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+    # # Pressure vs energy density
+    # posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     #     eos_posterior,
     #     eos_data=default_eos_prior,
     #     weight_columns=weight_columns,
     #     verbose=True,
     #     max_num_samples=160000,
-    #     x_points=np.linspace(2.8e13, 1.5e16, 1000),
+    #     x_points=np.linspace(5e13, 3e16, 1000),
     #     save_path=(
-    #         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-    #         f'cs2_of_rho_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+    #         '../data/eos-draws-default/quantiles/'
+    #         f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
     #     )
     # )
+
+    # Speed of sound vs baryon density
+    posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+        eos_posterior,
+        eos_data=default_eos_prior,
+        weight_columns=weight_columns,
+        verbose=True,
+        max_num_samples=160000,
+        x_points=np.linspace(2.8e13, 1.5e16, 1000),
+        save_path=(
+            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+            f'cs2_of_rho_quantiles_pqcd_{nterm:02}nsat_marg.csv'
+        )
+    )
 
     # # Mass vs radius
     # posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
