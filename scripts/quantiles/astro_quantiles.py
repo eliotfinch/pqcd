@@ -119,7 +119,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_astro_pqcd_ntov_Xmarg_mu2.6-alt-xray.csv'
+        'cs2_of_rho_quantiles_radio_pqcd_ntov_Xmarg_mu2.6.csv'
     )
 )
 
