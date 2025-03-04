@@ -23,21 +23,57 @@ def pressure_integral(mu, n, pL):
 
 GeV3_to_fm3 = 1.0e3/1.9732705**3
 
+# Some chatGPT references for the constants (I haven't checked these)
+
+# pQCD Pressure Expansion Constants
+# -----------------------------------
+#
+# Constant:    C_A
+# Definition:  Casimir of the adjoint representation (for SU(N_c))
+# QCD Value:   3  (for N_c = 3)
+#
+# Constant:    N_f
+# Definition:  Number of quark flavors included in the calculation.
+# QCD Value:   3 (for light quarks: up, down, strange)
+#              (or higher if including heavier quarks)
+#
+# Constant:    d_A
+# Definition:  Dimension of the adjoint representation, given by N_c^2 - 1.
+# QCD Value:   8  (for N_c = 3, corresponding to the eight gluons)
+#
+# Constant:    C_F
+# Definition:  Casimir of the fundamental representation, given by
+#              (N_c^2 - 1) / (2 * N_c)
+# QCD Value:   4/3  (for N_c = 3)
+#
+# Constant:    gamma_E
+# Definition:  Euler-Mascheroni constant, commonly appearing in dimensional
+#              regularization.
+# QCD Value:   ~0.5772
+
 
 def PNLO(a_s):
+    # Eqs. 12 and 13 of https://arxiv.org/abs/2303.02175.
+    # 1 - (2/pi).
     return 1. - 0.637*a_s
 
 
 def PNNLO(a_s, X):
+    # I think Eqs. 15 and 16 of https://arxiv.org/abs/2303.02175, but I haven't
+    # checked
     return -a_s**2*(-1.831 + 0.304*np.log(a_s)) + \
         a_s**2*(-2.706 - 0.912*np.log(X))
 
 
 def PN3LO(a_s):
+    # Eq. 17 of https://arxiv.org/abs/2303.02175 (also haven't checked)
     return 0.484816*a_s**3
 
 
 def alpha_s(mu, X):
+    # Eq. 9 in http://arxiv.org/abs/0912.1856. Note that
+    # ((1/3)**2)/(0.378**2) = 0.777632, where 0.378 is the value used for
+    # Lambda_MS (see page 8 in http://arxiv.org/abs/0912.1856).
     numerator = 4*np.pi*(1. - (64.*np.log(np.log(0.777632*mu**2*X**2))) /
                          (81.*np.log(0.777632*mu**2*X**2)))
     denominator = (9.*np.log(0.777632*mu**2*X**2))
