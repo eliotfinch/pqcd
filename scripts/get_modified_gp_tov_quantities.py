@@ -33,7 +33,7 @@ for n, eos in collated_eos.iterrows():
         f'{eos_dir}/margagn/DRAWmod1000-{n//1000:06}/macro-eos-draw-{n:06}.csv'
         )
 
-    nc = to_nucleons_per_cubic_femtometre(macro.rhoc.values)
+    nc = to_nucleons_per_cubic_femtometre(macro.central_baryon_density.values)
     mass = macro.M.values
     radius = macro.R.values
 
