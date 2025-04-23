@@ -8,7 +8,8 @@ from scipy.interpolate import interp1d
 from pqcd.utils import (
     to_nucleons_per_cubic_femtometre,
     to_GeV_per_cubic_femtometre,
-    rcparams
+    rcparams,
+    eos_dir
 )
 plt.rcParams.update(rcparams)
 
@@ -16,7 +17,6 @@ collated_eos_gp0 = pd.read_csv(
     '../data/eos-draws-default/eos-draws-default.csv',
     index_col='eos'
 )
-eos_dir = '../data/eos-draws-default/mrgagn'
 
 Mstar = 0.5
 
