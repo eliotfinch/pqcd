@@ -24,7 +24,7 @@ Rstar = []
 pc = []
 epsilonc = []
 
-for eos, entry in collated_eos_gp0.iloc.iterrows():
+for eos, entry in collated_eos_gp0.iterrows():
 
     eos = int(eos)
 
