@@ -10,7 +10,7 @@ from pqcd.utils import weighted_quantile
 # Mass values
 y_mr = np.linspace(0.5, 2.5, 1000)
 
-gp_number = 1
+gp_number = 2
 
 eos_dir = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp{gp_number}'
 dest_dir = (
