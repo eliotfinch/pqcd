@@ -19,20 +19,23 @@ collated_eos = pd.read_csv(
 Mstar_list = [0.5, 1.0, 1.4, 2.0]
 for Mstar in Mstar_list:
 
-    Rstar = []
-    pc = []
-    epsilonc = []
+    Lambdastar = []
+    # Rstar = []
+    # pc = []
+    # epsilonc = []
 
     for eos, entry in collated_eos.iterrows():
 
         eos = int(eos)
 
         macro = pd.read_csv(
-            f'{eos_dir}/margagn/DRAWmod1000-{eos//1000:06}/macro-eos-draw-{eos:06}.csv'
+            f'{eos_dir}/margagn/DRAWmod1000-{eos//1000:06}/'
+            f'macro-eos-draw-{eos:06}.csv'
         )
 
         mass = macro.M
         radius = macro.R
+        Lambda = macro.Lambda
         central_density = to_nucleons_per_cubic_femtometre(
             macro.central_baryon_density
         )
@@ -41,7 +44,8 @@ for Mstar in Mstar_list:
         nc = central_density[index]
 
         df = pd.read_csv(
-            f'{eos_dir}/margagn/DRAWmod1000-{eos//1000:06}/eos-draw-{eos:06}.csv'
+            f'{eos_dir}/margagn/DRAWmod1000-{eos//1000:06}/'
+            f'eos-draw-{eos:06}.csv'
         )
 
         pressure = to_GeV_per_cubic_femtometre(df.pressurec2)
@@ -58,18 +62,22 @@ for Mstar in Mstar_list:
 
         # Extract quantities at nTOV. If outside the range of the EOS, a nan is
         # returned.
-        Rstar.append(radius[index])
-        pc.append(pressure_interp(nc))
-        epsilonc.append(energy_density_interp(nc))
+        # Rstar.append(radius[index])
+        Lambdastar.append(Lambda[index])
+        # pc.append(pressure_interp(nc))
+        # epsilonc.append(energy_density_interp(nc))
 
     # Save to disk
     np.savetxt(
-        f'{eos_dir}/quantities_at_M/radius_{Mstar}.dat', Rstar
+        f'{eos_dir}/quantities_at_M/Lambda_{Mstar}.dat', Lambdastar
     )
-    np.savetxt(
-        f'{eos_dir}/quantities_at_M/central_pressure_{Mstar}.dat', pc
-    )
-    np.savetxt(
-        f'{eos_dir}/quantities_at_M/central_energy_density_{Mstar}.dat',
-        epsilonc
-    )
+    # np.savetxt(
+    #     f'{eos_dir}/quantities_at_M/radius_{Mstar}.dat', Rstar
+    # )
+    # np.savetxt(
+    #     f'{eos_dir}/quantities_at_M/central_pressure_{Mstar}.dat', pc
+    # )
+    # np.savetxt(
+    #     f'{eos_dir}/quantities_at_M/central_energy_density_{Mstar}.dat',
+    #     epsilonc
+    # )
