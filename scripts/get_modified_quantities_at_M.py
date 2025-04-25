@@ -28,7 +28,7 @@ for Mstar in Mstar_list:
         eos = int(eos)
 
         macro = pd.read_csv(
-            f'{eos_dir}/DRAWmod1000-{eos//1000:06}/macro-eos-draw-{eos:06}.csv'
+            f'{eos_dir}/margagn/DRAWmod1000-{eos//1000:06}/macro-eos-draw-{eos:06}.csv'
         )
 
         mass = macro.M
@@ -41,7 +41,7 @@ for Mstar in Mstar_list:
         nc = central_density[index]
 
         df = pd.read_csv(
-            f'{eos_dir}/DRAWmod1000-{eos//1000:06}/eos-draw-{eos:06}.csv'
+            f'{eos_dir}/margagn/DRAWmod1000-{eos//1000:06}/eos-draw-{eos:06}.csv'
         )
 
         pressure = to_GeV_per_cubic_femtometre(df.pressurec2)
@@ -64,15 +64,12 @@ for Mstar in Mstar_list:
 
     # Save to disk
     np.savetxt(
-        f'../data/eos-draws-default/quantities_at_M/radius_{Mstar}.dat', Rstar
+        f'{eos_dir}/quantities_at_M/radius_{Mstar}.dat', Rstar
     )
     np.savetxt(
-        '../data/eos-draws-default/quantities_at_M/'
-        f'central_pressure_{Mstar}.dat',
-        pc
+        f'{eos_dir}/quantities_at_M/central_pressure_{Mstar}.dat', pc
     )
     np.savetxt(
-        '../data/eos-draws-default/quantities_at_M/'
-        f'central_energy_density_{Mstar}.dat',
+        f'{eos_dir}/quantities_at_M/central_energy_density_{Mstar}.dat',
         epsilonc
     )
