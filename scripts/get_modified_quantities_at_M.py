@@ -9,7 +9,7 @@ from pqcd.utils import (
     to_GeV_per_cubic_femtometre,
 )
 
-gp_number = 2
+gp_number = 1
 eos_dir = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp{gp_number}'
 
 collated_eos = pd.read_csv(
@@ -20,9 +20,9 @@ Mstar_list = [0.5, 1.0, 1.4, 2.0]
 for Mstar in Mstar_list:
 
     Lambdastar = []
-    # Rstar = []
-    # pc = []
-    # epsilonc = []
+    Rstar = []
+    pc = []
+    epsilonc = []
 
     for eos, entry in collated_eos.iterrows():
 
@@ -62,22 +62,22 @@ for Mstar in Mstar_list:
 
         # Extract quantities at nTOV. If outside the range of the EOS, a nan is
         # returned.
-        # Rstar.append(radius[index])
+        Rstar.append(radius[index])
         Lambdastar.append(Lambda[index])
-        # pc.append(pressure_interp(nc))
-        # epsilonc.append(energy_density_interp(nc))
+        pc.append(pressure_interp(nc))
+        epsilonc.append(energy_density_interp(nc))
 
     # Save to disk
     np.savetxt(
+        f'{eos_dir}/quantities_at_M/radius_{Mstar}.dat', Rstar
+    )
+    np.savetxt(
         f'{eos_dir}/quantities_at_M/Lambda_{Mstar}.dat', Lambdastar
     )
-    # np.savetxt(
-    #     f'{eos_dir}/quantities_at_M/radius_{Mstar}.dat', Rstar
-    # )
-    # np.savetxt(
-    #     f'{eos_dir}/quantities_at_M/central_pressure_{Mstar}.dat', pc
-    # )
-    # np.savetxt(
-    #     f'{eos_dir}/quantities_at_M/central_energy_density_{Mstar}.dat',
-    #     epsilonc
-    # )
+    np.savetxt(
+        f'{eos_dir}/quantities_at_M/central_pressure_{Mstar}.dat', pc
+    )
+    np.savetxt(
+        f'{eos_dir}/quantities_at_M/central_energy_density_{Mstar}.dat',
+        epsilonc
+    )
