@@ -33,14 +33,14 @@ for Mstar in Mstar_list:
             f'macro-eos-draw-{eos:06}.csv'
         )
 
-        radius = macro.R
+        radius = macro.R.values
         radius_mask = radius < 30
 
-        mass = macro.M[radius_mask]
+        mass = macro.M.values[radius_mask]
         radius = radius[radius_mask]
-        Lambda = macro.Lambda[radius_mask]
+        Lambda = macro.Lambda.values[radius_mask]
         central_density = to_nucleons_per_cubic_femtometre(
-            macro.central_baryon_density[radius_mask]
+            macro.central_baryon_density.values[radius_mask]
         )
 
         if Mstar > max(mass):
