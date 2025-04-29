@@ -9,14 +9,14 @@ from pqcd.utils import (
     to_GeV_per_cubic_femtometre,
 )
 
-gp_number = 1
+gp_number = 2
 eos_dir = f'/home/eliot.finch/eos/pqcd/data/eos-draws-modified/gp{gp_number}'
 
 collated_eos = pd.read_csv(
     f'{eos_dir}/eos-draws-modified-gp{gp_number}.csv'
 )
 
-Mstar_list = [0.5, 1.0, 1.4, 2.0]
+Mstar_list = [1.4, 2.0]
 for Mstar in Mstar_list:
 
     Lambdastar = []
@@ -33,12 +33,22 @@ for Mstar in Mstar_list:
             f'macro-eos-draw-{eos:06}.csv'
         )
 
-        mass = macro.M
         radius = macro.R
-        Lambda = macro.Lambda
+        radius_mask = radius < 30
+
+        mass = macro.M[radius_mask]
+        radius = radius[radius_mask]
+        Lambda = macro.Lambda[radius_mask]
         central_density = to_nucleons_per_cubic_femtometre(
-            macro.central_baryon_density
+            macro.central_baryon_density[radius_mask]
         )
+
+        if Mstar > max(mass):
+            Rstar.append(np.nan)
+            Lambdastar.append(np.nan)
+            pc.append(np.nan)
+            epsilonc.append(np.nan)
+            continue
 
         index = np.argmin(np.abs(mass - Mstar))
         nc = central_density[index]
