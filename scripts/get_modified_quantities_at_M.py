@@ -43,6 +43,12 @@ for Mstar in Mstar_list:
             macro.central_baryon_density.values[radius_mask]
         )
 
+        turn_index = np.argmax(mass)
+        mass = mass[:turn_index]
+        radius = radius[:turn_index]
+        Lambda = Lambda[:turn_index]
+        central_density = central_density[:turn_index]
+
         if Mstar > max(mass):
             Rstar.append(np.nan)
             Lambdastar.append(np.nan)
@@ -70,8 +76,7 @@ for Mstar in Mstar_list:
             number_density, energy_density, bounds_error=False
         )
 
-        # Extract quantities at nTOV. If outside the range of the EOS, a nan is
-        # returned.
+        # Extract quantities at nTOV
         Rstar.append(radius[index])
         Lambdastar.append(Lambda[index])
         pc.append(pressure_interp(nc))
