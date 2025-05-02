@@ -20,9 +20,10 @@ collated_eos_gp0 = pd.read_csv(
 
 Mstar = 0.5
 
-Rstar = []
-pc = []
-epsilonc = []
+# Rstar = []
+# pc = []
+# epsilonc = []
+nc = []
 
 for eos, entry in collated_eos_gp0.iterrows():
 
@@ -53,22 +54,27 @@ for eos, entry in collated_eos_gp0.iterrows():
         number_density, energy_density, bounds_error=False
     )
 
-    # Extract quantities at nTOV. If outside the range of the EOS, a nan is
-    # returned.
-    Rstar.append(radius[index])
-    pc.append(pressure_interp(nc))
-    epsilonc.append(energy_density_interp(nc))
+    # Extract quantities at nc
+    # Rstar.append(radius[index])
+    # pc.append(pressure_interp(nc))
+    # epsilonc.append(energy_density_interp(nc))
+    nc.append(nc)
 
 # Save to disk
-np.savetxt(
-    f'../data/eos-draws-default/quantities_at_M/radius_{Mstar}.dat', Rstar
-)
-np.savetxt(
-    f'../data/eos-draws-default/quantities_at_M/central_pressure_{Mstar}.dat',
-    pc
-)
+# np.savetxt(
+#     f'../data/eos-draws-default/quantities_at_M/radius_{Mstar}.dat', Rstar
+# )
+# np.savetxt(
+#     f'../data/eos-draws-default/quantities_at_M/central_pressure_{Mstar}.dat',
+#     pc
+# )
+# np.savetxt(
+#     '../data/eos-draws-default/quantities_at_M/'
+#     f'central_energy_density_{Mstar}.dat',
+#     epsilonc
+# )
 np.savetxt(
     '../data/eos-draws-default/quantities_at_M/'
-    f'central_energy_density_{Mstar}.dat',
-    epsilonc
+    f'central_baryon_density_{Mstar}.dat',
+    nc
 )
