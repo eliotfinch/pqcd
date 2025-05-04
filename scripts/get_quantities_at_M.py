@@ -23,7 +23,7 @@ Mstar = 0.5
 # Rstar = []
 # pc = []
 # epsilonc = []
-nc = []
+nc_list = []
 
 for eos, entry in collated_eos_gp0.iterrows():
 
@@ -58,7 +58,7 @@ for eos, entry in collated_eos_gp0.iterrows():
     # Rstar.append(radius[index])
     # pc.append(pressure_interp(nc))
     # epsilonc.append(energy_density_interp(nc))
-    nc.append(nc)
+    nc_list.append(nc)
 
 # Save to disk
 # np.savetxt(
@@ -76,5 +76,5 @@ for eos, entry in collated_eos_gp0.iterrows():
 np.savetxt(
     '../data/eos-draws-default/quantities_at_M/'
     f'central_baryon_density_{Mstar}.dat',
-    nc
+    nc_list
 )
