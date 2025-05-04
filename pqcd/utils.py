@@ -9,18 +9,6 @@ eos_dir = '/home/philippe.landry/nseos/eos/gp/mrgagn'
 # e.g., Komoltsev et al. arXiv:2312.14127
 nsat = 0.16
 
-rcparams = {
-    'font.size': 14,
-    'axes.titlesize': 14,
-    'axes.labelsize': 14,
-    'xtick.labelsize': 12,
-    'ytick.labelsize': 12,
-    'legend.fontsize': 12,
-    'font.family': 'serif',
-    'font.sans-serif': ['Computer Modern Roman'],
-    'text.usetex': True,
-    }
-
 # Our EOSs have pressure, energy density, and baryon density in units of
 # g/cm^3. These functions convert to units used by others for comparison.
 
