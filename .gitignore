@@ -9,11 +9,11 @@ astro-inference/GW/*.dat
 astro-inference/GW/*.h5
 astro-inference/GW/*.in
 astro-inference/GW/margagn
+astro-inference/isaac_weights
 
 data/*
 
 notebooks/figures/*
-notebooks/isaac_weights
 
 scripts/eos-draw/*/*agn/*
 scripts/eos-draw/*/ingo-bps-with-cs2c2*
