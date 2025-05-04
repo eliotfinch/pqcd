@@ -35,9 +35,18 @@ for eos in collated_eos.eos:
     else:
         print(f'eos {eos} not equal length!')
 
-np.savetxt('../data/eos-draws-default/eos-draws-default-pterm.dat', pterm)
 np.savetxt(
-    '../data/eos-draws-default/eos-draws-default-epsilon_term.dat',
+    '../data/eos-draws-default/quantities_at_termination/'
+    'eos-draws-default-pterm.dat',
+    pterm
+)
+np.savetxt(
+    '../data/eos-draws-default/quantities_at_termination/'
+    'eos-draws-default-epsilon_term.dat',
     epsilon_term
 )
-np.savetxt('../data/eos-draws-default/eos-draws-default-nterm.dat', nterm)
+np.savetxt(
+    '../data/eos-draws-default/quantities_at_termination/'
+    'eos-draws-default-nterm.dat',
+    nterm
+)
