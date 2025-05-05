@@ -2,7 +2,6 @@
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 from scipy.interpolate import interp1d
 from pqcd.utils import (
