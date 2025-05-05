@@ -62,7 +62,7 @@ for eos, entry in collated_eos_gp0.iterrows():
 
 # Save to disk
 np.savetxt(
-    f'../data/eos-draws-default/quantities_at_M/radius_{Mstar}.dat', 
+    f'../data/eos-draws-default/quantities_at_M/radius_{Mstar}.dat',
     Rstar
 )
 np.savetxt(
