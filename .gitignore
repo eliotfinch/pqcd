@@ -11,7 +11,10 @@ astro-inference/GW/*.in
 astro-inference/GW/margagn
 astro-inference/isaac_weights
 
-data/*
+data/data_release
+data/eos-draws-default
+data/eos-draws-modified
+data/eos-extensions
 
 notebooks/figures/*
 

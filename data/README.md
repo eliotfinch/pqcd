@@ -1,0 +1,2 @@
+The data for `bps_eos.csv`, `soft_eos.csv`, `intermediate_eos.csv`, and `stiff_eos.csv` are from Hebeler et al. 2013 ([ApJ 773 11](https://doi.org/10.1088/0004-637X/773/1/11), [arXiv:1303.4662
+](https://arxiv.org/abs/1303.4662)). The mass density rho times c2, pressure p, and energy density epsilon are given in MeV/fm3. The energy per nucleon e is given in MeV. We also list the neutron star radius R in km and mass M in units of solar masses at the central density rho.
