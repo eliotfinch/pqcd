@@ -70,7 +70,7 @@ See [`notebooks/plot_pqcd_window.ipynb`](notebooks/plot_pqcd_window.ipynb). All 
 See [`notebooks/gp_summary_plots.ipynb`](notebooks/gp_summary_plots.ipynb). This depends on the "GP2" EOS draws (referred to as the "unified" GP in the paper). These are generated with the following process:
 
  - The GP is created via [`notebooks/custom_gp.ipynb`](notebooks/custom_gp.ipynb) (see also the README inside [`scripts/eos-draw`](scripts/eos-draw)).
- - Draws from the GP are generated via scripts in [`scripts/eos-draw/gp2-parallel`](scripts/eos-draw/gp2-parallel) (note that currently these scripts only exist on the LIGO-Caltech computing cluster).
+ - Draws from the GP are generated via scripts in `scripts/eos-draw/gp2-parallel` (note that currently these scripts only exist on the LIGO-Caltech computing cluster).
  - The draws that are consistent with pQCD are filtered out using [`scripts/eos-filter/filter_eos_draws_gp2_parallel.py`](scripts/eos-filter/filter_eos_draws_gp2_parallel.py). The pQCD-consistent draws are copied to `data/eos-draws-modified/gp2/margagn`.
  - Neutron-star mass-radius curves and tidal deformabilities are obtained via [`scripts/eos-integrate/integrate_tov_gp2_parallel.sh`](scripts/eos-integrate/integrate_tov_gp2_parallel.sh).
 
@@ -98,7 +98,7 @@ See [`notebooks/generate_random_walk_eos.ipynb`](notebooks/generate_random_walk_
 
 ### Fig. 15
 
-See [`notebooks/plot_unfied_mu_n.ipynb`](notebooks/plot_unfied_mu_n.ipynb). This depends on EOS draws from "GP2".
+See [`notebooks/plot_unified_mu_n.ipynb`](notebooks/plot_unified_mu_n.ipynb). This depends on EOS draws from "GP2".
 
 ### Fig. 16
 
