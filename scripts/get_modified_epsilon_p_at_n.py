@@ -8,6 +8,7 @@ from scipy.interpolate import interp1d
 from pqcd.utils import (
     to_GeV_per_cubic_femtometre,
     to_nucleons_per_cubic_femtometre,
+    nsat
 )
 
 gp_number = 2
@@ -33,7 +34,8 @@ for n, eos in collated_eos.iterrows():
 
     pressure = to_GeV_per_cubic_femtometre(df.pressurec2).values
     energy_density = to_GeV_per_cubic_femtometre(df.energy_densityc2).values
-    number_density = to_nucleons_per_cubic_femtometre(df.baryon_density).values
+    number_density = \
+        to_nucleons_per_cubic_femtometre(df.baryon_density).values/nsat
 
     # Build an interpolant over number density
     pressure_interp = interp1d(number_density, pressure, bounds_error=False)
