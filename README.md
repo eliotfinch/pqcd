@@ -1,6 +1,6 @@
 # pqcd
 
-Investigations into incorporating constraints from perturbative quantum chromodynamics (pQCD) into neutron-star equation-of-state (EOS) inference.
+Investigations into incorporating constraints from perturbative quantum chromodynamics (pQCD) into neutron-star equation-of-state (EOS) inference, used in [Finch et al. (2025)](https://arxiv.org/abs/2505.13691).
 
 ## The `pqcd` package
 
@@ -8,7 +8,7 @@ The `pqcd.pQCD` class is initialised with a value for the dimensionless renormal
 
 The "maximized" pQCD likelihood (from the same data release) is found in `pqcd.likelihood`. This likelihood has minimal assumptions about the EOS behavior above the density at which the likelihood is applied.
 
-In [Komoltsev et al. 2024](https://arxiv.org/abs/2312.14127), an alternative likelihood which explicitly models the EOS up to pQCD densities is proposed (available in this [data release](https://zenodo.org/records/10592568)). In the paper we refer to this as the "modeled" likelihood, but in the code it is referred to as the "marginalised" likelihood for historic reasons (see `pqcd.likelihood`).
+In [Komoltsev et al. 2024](https://arxiv.org/abs/2312.14127), an alternative likelihood which explicitly models the EOS up to pQCD densities is proposed (available in this [data release](https://zenodo.org/records/10592568)). In the paper we refer to this as the "modeled" likelihood, but in the code it is referred to as the "marginalised" likelihood (see `pqcd.likelihood`).
 
 The file `pqcd.constraints` contains a re-implementation of the functions described in [Komoltsev & Kurkela 2022](http://arxiv.org/abs/2111.05350), with some additional functions for visualization of the constraints.
 
@@ -26,9 +26,9 @@ and is a summary of the EOS draws found at
 
 `ldas-grid:/home/philippe.landry/nseos/eos/gp/mrgagn`.
 
-## Figures in *Finch et al. 2025*
+## Figures in [Finch et al. (2025)](https://arxiv.org/abs/2505.13691)
 
-Below I detail the relevant code to generate figures in *Finch et al. 2025*.
+Below I detail the relevant code to generate figures in the work *Unified nonparametric equation-of-state inference from the neutron-star crust to perturbative-QCD densities*.
 
 ### Fig. 1
 
