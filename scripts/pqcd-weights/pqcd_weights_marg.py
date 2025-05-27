@@ -6,7 +6,10 @@ import pandas as pd
 from pqcd.likelihood import marginalized
 from pqcd.utils import to_nucleons_per_cubic_femtometre, nsat
 
-collated_eos_path = '../data/eos-draws-default/collated_np_all_post.csv'
+collated_eos_path = (
+    '/home/eliot.finch/eos/pqcd/data/eos-draws-default/'
+    'collated_np_all_post.csv'
+)
 
 marg_cond = marginalized()
 pQCD_likelihood = marg_cond.likelihood()
