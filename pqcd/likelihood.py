@@ -4,6 +4,7 @@ import pandas
 
 from pqcd import pQCD
 from scipy.stats import gaussian_kde
+from pathlib import Path
 
 
 # The "maximised" pQCD likelihood, https://zenodo.org/records/7781233
@@ -35,14 +36,16 @@ class marginalized:
 
     def __init__(self, flag='conditioned'):
 
+        data_dir = Path(__file__).parent / '../data'
+
         if flag == 'conditioned':
             filename = (
-                '../data/eos-extensions/eos_extensions_'
+                data_dir / 'eos-extensions/eos_extensions_'
                 's-G-1p25-0p25_l-U-1-20_meancs2-G-0.3-0.3_pQCD-25-40.h5'
             )
         elif flag == 'prior':
             filename = (
-                '../data/eps-extensions/eos_extensions_'
+                data_dir / 'eos-extensions/eos_extensions_'
                 's-G-1p25-0p25_l-U-1-20_meancs2-G-0.3-0.3.h5'
             )
         else:
