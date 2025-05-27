@@ -20,7 +20,7 @@ collated_eos = pd.read_csv(collated_eos_path)
 collated_ntov = to_nucleons_per_cubic_femtometre(collated_eos['rhoc(M@Mmax)'])
 
 # Compute the pQCD weights at a particular nterm
-nterm_list = [3, 5, 7, 9]  # [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
+nterm_list = [4, 5, 6, 7, 8]
 qcd_weights = {nterm: [] for nterm in nterm_list}
 
 for nterm in nterm_list:
@@ -49,29 +49,29 @@ for nterm in nterm_list:
 for nterm in nterm_list:
     np.savetxt(
         '../data/eos-draws-default/pqcd-weights/'
-        f'pqcd_weights_{nterm:02}nsat_marg.dat',
+        f'pqcd_weights_{nterm:02}nsat_marg_v2.dat',
         qcd_weights[nterm]
     )
 
 # Compute the pQCD weights at nTOV
-# qcd_weights_ntov = []
+qcd_weights_ntov = []
 
-# energy_density_tov = np.loadtxt(
-#     '../data/eos-draws-default/quantities_at_n/energy_density_ntov.dat'
-# )
-# pressure_tov = np.loadtxt(
-#     '../data/eos-draws-default/quantities_at_n/pressure_ntov.dat'
-# )
+energy_density_tov = np.loadtxt(
+    '../data/eos-draws-default/quantities_at_n/energy_density_ntov.dat'
+)
+pressure_tov = np.loadtxt(
+    '../data/eos-draws-default/quantities_at_n/pressure_ntov.dat'
+)
 
-# for e, p, ntov in zip(energy_density_tov, pressure_tov, collated_ntov):
-#     # Requirement of the marginalized pQCD likelihood
-#     if nsat < ntov < 35*nsat:
-#         qcd_weights_ntov.append(pQCD_likelihood(e0=e, p0=p, n0=ntov))
-#     else:
-#         qcd_weights_ntov.append(0)
+for e, p, ntov in zip(energy_density_tov, pressure_tov, collated_ntov):
+    # Requirement of the marginalized pQCD likelihood
+    if nsat < ntov < 35*nsat:
+        qcd_weights_ntov.append(pQCD_likelihood(e0=e, p0=p, n0=ntov))
+    else:
+        qcd_weights_ntov.append(0)
 
-# np.savetxt(
-#     '../data/eos-draws-default/pqcd-weights/'
-#     'pqcd_weights_ntov_marg.dat',
-#     qcd_weights_ntov
-# )
+np.savetxt(
+    '../data/eos-draws-default/pqcd-weights/'
+    'pqcd_weights_ntov_marg_v2.dat',
+    qcd_weights_ntov
+)
