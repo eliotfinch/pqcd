@@ -1,6 +1,6 @@
 import numpy as np
 
-import pickle
+import pandas
 
 from pqcd import pQCD
 from scipy.stats import gaussian_kde
@@ -28,28 +28,27 @@ def maximised_likelihood(e0, p0, n0, X, muH=2.6, cs2=1):
     return tag
 
 
-# The "marginalised" pQCD likelihood, https://zenodo.org/records/10592568
+# The "marginalised" pQCD likelihood, https://zenodo.org/records/15407795
 # -----------------------------------------------------------------------
 
-class marginalised:
+class marginalized:
 
     def __init__(self, flag='conditioned'):
 
         if flag == 'conditioned':
             filename = (
                 '../data/eos-extensions/eos_extensions_'
-                's-G-1p25-0p25_l-U-1-20_meancs2-G-0.3-0.3_pQCD-25-40.pickle'
+                's-G-1p25-0p25_l-U-1-20_meancs2-G-0.3-0.3_pQCD-25-40.h5'
             )
         elif flag == 'prior':
             filename = (
-                '../data/eos-extensions/eos_extensions_'
-                's-G-1p25-0p25_l-U-1-20_meancs2-G-0.3-0.3.pickle'
+                '../data/eps-extensions/eos_extensions_'
+                's-G-1p25-0p25_l-U-1-20_meancs2-G-0.3-0.3.h5'
             )
         else:
             raise ValueError("Flag must be 'conditioned' or 'prior'")
 
-        with open(filename, "rb") as f:
-            self.eos_extensions = pickle.load(f)
+        self.eos_extensions = pandas.read_hdf(filename)
 
         self.eos_extensions['n'] = (
             self.eos_extensions['p']+self.eos_extensions['e']
@@ -61,12 +60,8 @@ class marginalised:
         eose = self.eos_extensions.e
         eosp = self.eos_extensions.p
 
-        eps_s = [
-            np.interp(n0, nn[::-1], ee[::-1]) for (nn, ee) in zip(eosn, eose)
-        ]
-        p_s = [
-            np.interp(n0, nn[::-1], pp[::-1]) for (nn, pp) in zip(eosn, eosp)
-        ]
+        eps_s = [np.interp(n0, nn, ee) for (nn, ee) in zip(eosn, eose)]
+        p_s = [np.interp(n0, nn, pp) for (nn, pp) in zip(eosn, eosp)]
 
         values = np.array([eps_s, p_s])
 
@@ -94,6 +89,6 @@ class marginalised:
                 n0,
                 [nL_tab[cnt], nL_tab[cnt+1]],
                 [kernelTAB[cnt]([e0, p0])[0], kernelTAB[cnt+1]([e0, p0])[0]]
-                )
+            )
 
         return interp_kernels
