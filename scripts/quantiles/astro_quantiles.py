@@ -21,112 +21,112 @@ eos_posterior = EoSPosterior.from_csv(
 # Radio only
 # ----------
 
-print('Computing radio-only quantiles...', flush=True)
+# print('Computing radio-only quantiles...', flush=True)
 
-weight_columns = [
-    result.WeightColumn(
-        name='logweight_Fonseca_J0740',
-        is_log=True,
-        is_inverted=False
-    ),
-    result.WeightColumn(
-        name='logweight_Antoniadis_J0348',
-        is_log=True,
-        is_inverted=False
-    ),
-]
+# weight_columns = [
+#     result.WeightColumn(
+#         name='logweight_Fonseca_J0740',
+#         is_log=True,
+#         is_inverted=False
+#     ),
+#     result.WeightColumn(
+#         name='logweight_Antoniadis_J0348',
+#         is_log=True,
+#         is_inverted=False
+#     ),
+# ]
 
-print('\nPressure vs energy density', flush=True)
+# print('\nPressure vs energy density', flush=True)
 
-# Pressure vs energy density
-posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-    eos_posterior,
-    eos_data=default_eos_prior,
-    weight_columns=weight_columns,
-    verbose=True,
-    max_num_samples=max_num_samples,
-    x_points=np.linspace(5e13, 3e16, 1000),
-    save_path=(
-        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-        'p_of_eps_quantiles_radio_reduced.csv'
-    )
-)
+# # Pressure vs energy density
+# posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+#     eos_posterior,
+#     eos_data=default_eos_prior,
+#     weight_columns=weight_columns,
+#     verbose=True,
+#     max_num_samples=max_num_samples,
+#     x_points=np.linspace(5e13, 3e16, 1000),
+#     save_path=(
+#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#         'p_of_eps_quantiles_radio_reduced.csv'
+#     )
+# )
 
-print('\nSpeed of sound vs baryon density', flush=True)
+# print('\nSpeed of sound vs baryon density', flush=True)
 
-# Speed of sound vs baryon density
-posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-    eos_posterior,
-    eos_data=default_eos_prior,
-    weight_columns=weight_columns,
-    verbose=True,
-    max_num_samples=max_num_samples,
-    x_points=np.linspace(2.8e13, 1.5e16, 1000),
-    save_path=(
-        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-        'cs2_of_rho_quantiles_radio_reduced.csv'
-    )
-)
+# # Speed of sound vs baryon density
+# posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+#     eos_posterior,
+#     eos_data=default_eos_prior,
+#     weight_columns=weight_columns,
+#     verbose=True,
+#     max_num_samples=max_num_samples,
+#     x_points=np.linspace(2.8e13, 1.5e16, 1000),
+#     save_path=(
+#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#         'cs2_of_rho_quantiles_radio_reduced.csv'
+#     )
+# )
 
 # Radio + pQCD (max)
 # ------------------
 
-for nterm in [2, 4, 6, 8, 10]:
+# for nterm in [2, 4, 6, 8, 10]:
 
-    print(
-        f'Computing radio + pQCD (max, {nterm:02}nsat) quantiles...',
-        flush=True
-    )
+#     print(
+#         f'Computing radio + pQCD (max, {nterm:02}nsat) quantiles...',
+#         flush=True
+#     )
 
-    weight_columns = [
-        result.WeightColumn(
-            name='logweight_Fonseca_J0740',
-            is_log=True,
-            is_inverted=False
-        ),
-        result.WeightColumn(
-            name='logweight_Antoniadis_J0348',
-            is_log=True,
-            is_inverted=False
-        ),
-        result.WeightColumn(
-            name=f'pqcd_weight_{nterm:02}nsat_Xmarg_mu2.6',
-            is_log=False,
-            is_inverted=False
-        ),
-    ]
+#     weight_columns = [
+#         result.WeightColumn(
+#             name='logweight_Fonseca_J0740',
+#             is_log=True,
+#             is_inverted=False
+#         ),
+#         result.WeightColumn(
+#             name='logweight_Antoniadis_J0348',
+#             is_log=True,
+#             is_inverted=False
+#         ),
+#         result.WeightColumn(
+#             name=f'pqcd_weight_{nterm:02}nsat_Xmarg_mu2.6',
+#             is_log=False,
+#             is_inverted=False
+#         ),
+#     ]
 
-    print('\nPressure vs energy density', flush=True)
+#     print('\nPressure vs energy density', flush=True)
 
-    # Pressure vs energy density
-    posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=max_num_samples,
-        x_points=np.linspace(5e13, 3e16, 1000),
-        save_path=(
-            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-            f'p_of_eps_quantiles_radio_pqcd_{nterm:02}nsat_Xmarg_mu2.6.csv'
-        )
-    )
+#     # Pressure vs energy density
+#     posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+#         eos_posterior,
+#         eos_data=default_eos_prior,
+#         weight_columns=weight_columns,
+#         verbose=True,
+#         max_num_samples=max_num_samples,
+#         x_points=np.linspace(5e13, 3e16, 1000),
+#         save_path=(
+#             '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#             f'p_of_eps_quantiles_radio_pqcd_{nterm:02}nsat_Xmarg_mu2.6.csv'
+#         )
+#     )
 
-    print('\nSpeed of sound vs baryon density', flush=True)
+#     print('\nSpeed of sound vs baryon density', flush=True)
 
-    # Speed of sound vs baryon density
-    posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-        eos_posterior,
-        eos_data=default_eos_prior,
-        weight_columns=weight_columns,
-        verbose=True,
-        max_num_samples=max_num_samples,
-        x_points=np.linspace(2.8e13, 1.5e16, 1000),
-        save_path=(
-            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-            f'cs2_of_rho_quantiles_radio_pqcd_{nterm:02}nsat_Xmarg_mu2.6.csv'
-        )
-    )
+#     # Speed of sound vs baryon density
+#     posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+#         eos_posterior,
+#         eos_data=default_eos_prior,
+#         weight_columns=weight_columns,
+#         verbose=True,
+#         max_num_samples=max_num_samples,
+#         x_points=np.linspace(2.8e13, 1.5e16, 1000),
+#         save_path=(
+#             '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+#             f'cs2_of_rho_quantiles_radio_pqcd_{nterm:02}nsat_Xmarg_mu2.6.csv'
+#         )
+#     )
 
 # Radio + pQCD (max, nTOV)
 # ------------------------
@@ -186,7 +186,7 @@ for nterm in [2, 4, 6, 8, 10]:
 # Radio + pQCD (marg)
 # -------------------
 
-for nterm in [2, 4, 6, 8, 10]:
+for nterm in [4, 6, 8, 10]:
 
     print(
         f'Computing radio + pQCD (marg, {nterm:02}nsat) quantiles...',
@@ -246,57 +246,57 @@ for nterm in [2, 4, 6, 8, 10]:
 # Radio + pQCD (marg, nTOV)
 # -------------------------
 
-# print('Computing radio + pQCD (marg, ntov) quantiles...')
+print('Computing radio + pQCD (marg, ntov) quantiles...', flush=True)
 
-# weight_columns = [
-#     result.WeightColumn(
-#         name='logweight_Fonseca_J0740',
-#         is_log=True,
-#         is_inverted=False
-#     ),
-#     result.WeightColumn(
-#         name='logweight_Antoniadis_J0348',
-#         is_log=True,
-#         is_inverted=False
-#     ),
-#     result.WeightColumn(
-#         name='pqcd_weight_ntov_marg',
-#         is_log=False,
-#         is_inverted=False
-#     ),
-# ]
+weight_columns = [
+    result.WeightColumn(
+        name='logweight_Fonseca_J0740',
+        is_log=True,
+        is_inverted=False
+    ),
+    result.WeightColumn(
+        name='logweight_Antoniadis_J0348',
+        is_log=True,
+        is_inverted=False
+    ),
+    result.WeightColumn(
+        name='pqcd_weight_ntov_marg',
+        is_log=False,
+        is_inverted=False
+    ),
+]
 
-# print('\nPressure vs energy density')
+print('\nPressure vs energy density')
 
-# # Pressure vs energy density
-# posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-#     eos_posterior,
-#     eos_data=default_eos_prior,
-#     weight_columns=weight_columns,
-#     verbose=True,
-#     max_num_samples=max_num_samples,
-#     x_points=np.linspace(5e13, 3e16, 1000),
-#     save_path=(
-#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-#         'p_of_eps_quantiles_radio_pqcd_ntov_marg.csv'
-#     )
-# )
+# Pressure vs energy density
+posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+    eos_posterior,
+    eos_data=default_eos_prior,
+    weight_columns=weight_columns,
+    verbose=True,
+    max_num_samples=max_num_samples,
+    x_points=np.linspace(5e13, 3e16, 1000),
+    save_path=(
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+        'p_of_eps_quantiles_radio_pqcd_ntov_marg.csv'
+    )
+)
 
-# print('\nSpeed of sound vs baryon density')
+print('\nSpeed of sound vs baryon density')
 
-# # Speed of sound vs baryon density
-# posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-#     eos_posterior,
-#     eos_data=default_eos_prior,
-#     weight_columns=weight_columns,
-#     verbose=True,
-#     max_num_samples=max_num_samples,
-#     x_points=np.linspace(2.8e13, 1.5e16, 1000),
-#     save_path=(
-#         '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-#         'cs2_of_rho_quantiles_astro_pqcd_ntov_marg.csv'
-#     )
-# )
+# Speed of sound vs baryon density
+posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+    eos_posterior,
+    eos_data=default_eos_prior,
+    weight_columns=weight_columns,
+    verbose=True,
+    max_num_samples=max_num_samples,
+    x_points=np.linspace(2.8e13, 1.5e16, 1000),
+    save_path=(
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+        'cs2_of_rho_quantiles_astro_pqcd_ntov_marg.csv'
+    )
+)
 
 # Astro only
 # ----------
@@ -498,135 +498,135 @@ for nterm in [2, 4, 6, 8, 10]:
 # Astro + pQCD (marg)
 # ------------------
 
-# for nterm in [2, 3, 4, 5, 6, 7, 8, 9]:
+for nterm in [4, 5, 6, 7, 8, 10]:
 
-#     print(
-#         f'Computing astro+pQCD (marg, {nterm:02}nsat) quantiles...',
-#         flush=True
-#     )
+    print(
+        f'Computing astro+pQCD (marg, {nterm:02}nsat) quantiles...',
+        flush=True
+    )
 
-#     weight_columns = [
-#         result.WeightColumn(
-#             name='logweight_total',
-#             is_log=True,
-#             is_inverted=False
-#         ),
-#         result.WeightColumn(
-#             name=f'pqcd_weight_{nterm:02}nsat_marg',
-#             is_log=False,
-#             is_inverted=False
-#         ),
-#     ]
+    weight_columns = [
+        result.WeightColumn(
+            name='logweight_total',
+            is_log=True,
+            is_inverted=False
+        ),
+        result.WeightColumn(
+            name=f'pqcd_weight_{nterm:02}nsat_marg',
+            is_log=False,
+            is_inverted=False
+        ),
+    ]
 
-#     print('\nPressure vs energy density', flush=True)
+    print('\nPressure vs energy density', flush=True)
 
-#     # Pressure vs energy density
-#     posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-#         eos_posterior,
-#         eos_data=default_eos_prior,
-#         weight_columns=weight_columns,
-#         verbose=True,
-#         max_num_samples=max_num_samples,
-#         x_points=np.linspace(5e13, 3e16, 1000),
-#         save_path=(
-#             '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-#             f'p_of_eps_quantiles_astro_pqcd_{nterm:02}nsat_marg.csv'
-#         )
-#     )
+    # Pressure vs energy density
+    posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+        eos_posterior,
+        eos_data=default_eos_prior,
+        weight_columns=weight_columns,
+        verbose=True,
+        max_num_samples=max_num_samples,
+        x_points=np.linspace(5e13, 3e16, 1000),
+        save_path=(
+            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+            f'p_of_eps_quantiles_astro_pqcd_{nterm:02}nsat_marg.csv'
+        )
+    )
 
-#     print('\nSpeed of sound vs baryon density', flush=True)
+    print('\nSpeed of sound vs baryon density', flush=True)
 
-#     # Speed of sound vs baryon density
-#     posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-#         eos_posterior,
-#         eos_data=default_eos_prior,
-#         weight_columns=weight_columns,
-#         verbose=True,
-#         max_num_samples=max_num_samples,
-#         x_points=np.linspace(2.8e13, 1.5e16, 1000),
-#         save_path=(
-#             '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-#             f'cs2_of_rho_quantiles_astro_pqcd_{nterm:02}nsat_marg.csv'
-#         )
-#     )
+    # Speed of sound vs baryon density
+    posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+        eos_posterior,
+        eos_data=default_eos_prior,
+        weight_columns=weight_columns,
+        verbose=True,
+        max_num_samples=max_num_samples,
+        x_points=np.linspace(2.8e13, 1.5e16, 1000),
+        save_path=(
+            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+            f'cs2_of_rho_quantiles_astro_pqcd_{nterm:02}nsat_marg.csv'
+        )
+    )
 
-#     print('\nMass vs radius', flush=True)
+    print('\nMass vs radius', flush=True)
 
-#     # Mass vs radius
-#     posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
-#         eos_posterior,
-#         eos_data=default_eos_prior,
-#         weight_columns=weight_columns,
-#         verbose=True,
-#         max_num_samples=max_num_samples,
-#         x_points=np.linspace(0.5, 2.5, 1000),
-#         save_path=(
-#             '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-#             f'r_of_m_quantiles_astro_pqcd_{nterm:02}nsat_marg.csv'
-#         )
-#     )
+    # Mass vs radius
+    posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+        eos_posterior,
+        eos_data=default_eos_prior,
+        weight_columns=weight_columns,
+        verbose=True,
+        max_num_samples=max_num_samples,
+        x_points=np.linspace(0.5, 2.5, 1000),
+        save_path=(
+            '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
+            f'r_of_m_quantiles_astro_pqcd_{nterm:02}nsat_marg.csv'
+        )
+    )
 
 # ntov
 
-# print('Computing astro+pQCD (marg, ntov) quantiles...')
+print('Computing astro+pQCD (marg, ntov) quantiles...')
 
-# weight_columns = [
-#     result.WeightColumn(
-#         name='logweight_total',
-#         is_log=True,
-#         is_inverted=False
-#     ),
-#     result.WeightColumn(
-#         name='pqcd_weight_ntov_marg',
-#         is_log=False,
-#         is_inverted=False
-#     ),
-# ]
+weight_columns = [
+    result.WeightColumn(
+        name='logweight_total',
+        is_log=True,
+        is_inverted=False
+    ),
+    result.WeightColumn(
+        name='pqcd_weight_ntov_marg',
+        is_log=False,
+        is_inverted=False
+    ),
+]
 
-# print('\nPressure vs energy density')
+print('\nPressure vs energy density')
 
-# # Pressure vs energy density
-# posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
-#     eos_posterior,
-#     eos_data=default_eos_prior,
-#     weight_columns=weight_columns,
-#     verbose=True,
-#     max_num_samples=max_num_samples,
-#     x_points=np.linspace(5e13, 3e16, 1000),
-#     save_path=(
-#         '../data/eos-draws-default/quantiles/'
-#         'p_of_eps_quantiles_astro_pqcd_ntov_marg-alt-xray.csv'
-#     )
-# )
+# Pressure vs energy density
+posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
+    eos_posterior,
+    eos_data=default_eos_prior,
+    weight_columns=weight_columns,
+    verbose=True,
+    max_num_samples=max_num_samples,
+    x_points=np.linspace(5e13, 3e16, 1000),
+    save_path=(
+        '../data/eos-draws-default/quantiles/'
+        'p_of_eps_quantiles_astro_pqcd_ntov_marg.csv'
+    )
+)
 
-# print('\nSpeed of sound vs baryon density')
+print('\nSpeed of sound vs baryon density')
 
-# # Speed of sound vs baryon density
-# posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
-#     eos_posterior,
-#     eos_data=default_eos_prior,
-#     weight_columns=weight_columns,
-#     verbose=True,
-#     max_num_samples=max_num_samples,
-#     x_points=np.linspace(2.8e13, 1.5e16, 1000),
-#     save_path=(
-#         '../data/eos-draws-default/quantiles/'
-#         'cs2_of_rho_quantiles_astro_pqcd_ntov_marg-alt-xray.csv'
-#     )
-# )
+# Speed of sound vs baryon density
+posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
+    eos_posterior,
+    eos_data=default_eos_prior,
+    weight_columns=weight_columns,
+    verbose=True,
+    max_num_samples=max_num_samples,
+    x_points=np.linspace(2.8e13, 1.5e16, 1000),
+    save_path=(
+        '../data/eos-draws-default/quantiles/'
+        'cs2_of_rho_quantiles_astro_pqcd_ntov_marg.csv'
+    )
+)
 
-# print('\nMass vs radius')
+print('\nMass vs radius')
 
-# # Mass vs radius
-# posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
-#     eos_posterior,
-#     eos_data=default_eos_prior,
-#     weight_columns=weight_columns,
-#     verbose=True,
-#     max_num_samples=max_num_samples,
-#     x_points=np.linspace(0.5, 2.5, 1000),
-#     save_path=(
-#         '../data/eos-draws-default/quantiles/'
-#         'r_of_m_quantiles_astro_pqcd_ntov_marg-alt-xray.csv'
-#     )
-# )
+# Mass vs radius
+posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
+    eos_posterior,
+    eos_data=default_eos_prior,
+    weight_columns=weight_columns,
+    verbose=True,
+    max_num_samples=max_num_samples,
+    x_points=np.linspace(0.5, 2.5, 1000),
+    save_path=(
+        '../data/eos-draws-default/quantiles/'
+        'r_of_m_quantiles_astro_pqcd_ntov_marg.csv'
+    )
+)
