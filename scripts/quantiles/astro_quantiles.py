@@ -7,7 +7,7 @@ import temperance.sampling.eos_prior as eos_prior
 
 from temperance.core.result import EoSPosterior
 
-max_num_samples = 10000  # 70000
+max_num_samples = 70000
 
 default_eos_prior = eos_prior.EoSPriorSet.get_default()
 default_eos_prior.eos_dir = '/home/isaac.legred/local_mrgagn_big_with_cs2c2'
@@ -594,7 +594,7 @@ posterior_quantiles = get_quantiles.get_p_of_eps_quantiles(
     max_num_samples=max_num_samples,
     x_points=np.linspace(5e13, 3e16, 1000),
     save_path=(
-        '../data/eos-draws-default/quantiles/'
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
         'p_of_eps_quantiles_astro_pqcd_ntov_marg.csv'
     )
 )
@@ -610,7 +610,7 @@ posterior_quantiles = get_quantiles.get_cs2_of_rho_quantiles(
     max_num_samples=max_num_samples,
     x_points=np.linspace(2.8e13, 1.5e16, 1000),
     save_path=(
-        '../data/eos-draws-default/quantiles/'
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
         'cs2_of_rho_quantiles_astro_pqcd_ntov_marg.csv'
     )
 )
@@ -626,7 +626,7 @@ posterior_quantiles = get_quantiles.get_r_of_m_quantiles(
     max_num_samples=max_num_samples,
     x_points=np.linspace(0.5, 2.5, 1000),
     save_path=(
-        '../data/eos-draws-default/quantiles/'
+        '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
         'r_of_m_quantiles_astro_pqcd_ntov_marg.csv'
     )
 )
