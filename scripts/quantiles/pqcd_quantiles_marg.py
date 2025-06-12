@@ -35,7 +35,7 @@ for nterm in [4, 8, 10]:
         x_points=np.linspace(5e13, 3e16, 1000),
         save_path=(
             '/home/eliot.finch/eos/pqcd/data/eos-draws-default/quantiles/'
-            f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg_v2.csv'
+            f'p_of_eps_quantiles_pqcd_{nterm:02}nsat_marg.csv'
         )
     )
 
