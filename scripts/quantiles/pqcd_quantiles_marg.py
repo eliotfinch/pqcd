@@ -15,7 +15,7 @@ eos_posterior = EoSPosterior.from_csv(
     '/home/eliot.finch/eos/pqcd/data/eos-draws-default/eos-draws-default.csv',
 )
 
-for nterm in [4, 8, 10]:
+for nterm in [5, 6, 7]:
 
     weight_columns = [
         result.WeightColumn(
