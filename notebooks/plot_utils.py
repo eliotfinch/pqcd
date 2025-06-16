@@ -63,7 +63,7 @@ prior_kwargs = dict(
 astro_hist_kwargs = dict(
     histtype='stepfilled',
     edgecolor=astro_c,
-    lw=2,
+    linewidth=2,
     color=list(to_rgba(astro_c))[:3] + [0.1]
 )
 
@@ -89,7 +89,7 @@ gp0_pqcd_kwargs = dict(
 gp0_astro_pqcd_max_hist_kwargs = dict(
     histtype='step',
     color=to_rgba(gp0_astro_pqcd_max_c),
-    lw=2,
+    linewidth=2,
     linestyle=gp0_astro_pqcd_max_ls,
 )
 
@@ -103,7 +103,7 @@ gp0_astro_pqcd_max_kwargs = dict(
 gp0_astro_pqcd_mod_hist_kwargs = dict(
     histtype='step',
     color=to_rgba(gp0_astro_pqcd_mod_c),
-    lw=2,
+    linewidth=2,
     linestyle=gp0_astro_pqcd_mod_ls,
 )
 
