@@ -64,7 +64,7 @@ for i in range(len(x_cn)):
             weighted_quantile(
                 cs2_interp[:, i][~np.isnan(cs2_interp[:, i])],
                 [0.05, 0.5, 0.95],
-                weights=ntov_marg_weights_gp0[
+                weights=(astro_weights_gp0*ntov_marg_weights_gp0)[
                     ~np.isnan(cs2_interp[:, i])
                 ]
             )
@@ -76,6 +76,7 @@ cs2_quantiles = np.array(cs2_quantiles).T
 
 # Save the quantiles
 np.savetxt(
-    '../data/eos-draws-default/cs2_quantiles_test_pqcd_only.dat',
+    '../data/eos-draws-default/quantiles/'
+    'cs2_of_rho_quantiles_astro_pqcd_ntov_marg_truncated.dat',
     cs2_quantiles
 )
